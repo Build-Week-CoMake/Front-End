@@ -20,3 +20,36 @@
 .App-link {
   color: #09d3ac;
 }
+
+
+
+.test{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+
+/* .login-box {
+  backface-visibility: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1px;
+  box-shadow:
+    0 0 20px 0 rgba(0, 0, 0, 0.4),
+    0 0 0 2000px rgba(#0c0d1f, 0.3);
+  transform:
+    translate3d(-50%, -50%, 0)
+    scale(1, 1);
+  width: 90%;
+  max-width: 1000px;
+
+
+} */
+
+
+.login-box{
+    border: 1px solid red;
+}
