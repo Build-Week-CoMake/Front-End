@@ -7,23 +7,20 @@ import PrivateRoute from "./components/PrivateRoute";
 import LoginPage from './components/Login';
 import Dashboard from "./components/Dashboard";
 import Profile from "./components/Profile";
-import Issues from './components/Issues';
-import Searchbar from './components/Searchbar';
-// import NavBar from './components/NavBar';
+import NavBar from "./components/NavBar";
+
+
 
 function App(props) {
   const [state, dispatch] = useReducer(appReducer, initialState)
   return (
     <div>
       <CoMakeContext.Provider value={{ state, dispatch }}>
-        <Route exact path='/Searchbar' render={props => <Searchbar {...props} />} />
-        {/* <Route exact path='/NavBar' render={props => <NavBar {...props} />} /> */}
-        <Route exact path='/IssuesBox' render={props => <Issues {...props} />} />
-        <Route exact path='/LoginPage' render={props => <LoginPage {...props} />} />
+        <Route component={NavBar} />
         <Route path="/login" component={LoginPage} />
-        {/* <PrivateRoute exact path="/" component={Dashboard} /> */}
-
+        <PrivateRoute exact path="/" component={Dashboard} />
         <PrivateRoute path="/profile" component={Profile} />
+        <Modal className={(state.showForm) ? "displayForm" : "hideForm"} setVisible={setVisible} header={data.home.header_songs} body={data.home.body_songs}></Modal>
       </CoMakeContext.Provider>
 
     </div>

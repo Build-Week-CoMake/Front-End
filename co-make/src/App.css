@@ -95,6 +95,16 @@ form{
   margin: 1rem;
 } */
 
+
+
+.hideForm{
+  display:none !important;
+}
+.displayForm{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 .expandDescription{
   max-height:150px !important;
   overflow: auto !important;

@@ -7,15 +7,24 @@ export const INIT_PROFILE = "INIT_PROFILE";  // get all posts for home page dash
 export const UP_VOTE = "UP_VOTE"; // PUT REQUEST plus filter to reorder list of comments
 export const DOWN_VOTE = "DOWN_VOTE"; // PUT REQUEST plus filter to reorder list of comments
 export const LOGOUT = "LOGOUT"
+export const TOGGLE_FORM = "TOGGLE_FORM";
+
 export const GET_BY_LOCATION = "GET_BY_LOCATION";
 
 
 const initialState = {
     issues: [], // state for main dashboard
-    profile: [] //state for profile page
+    profile: [], //state for profile page
+    showForm: false  //change to true to display modal to create a new issue/complaint
 };
 const appReducer = (state, action) => {
     switch (action.type) {
+        case TOGGLE_FORM:
+            return {
+                ...state,
+                showForm: !state.showForm
+            }
+            break;
         case GET_BY_LOCATION:
             axiosWithAuth()
                 .get(`/issues/${action.payload}`)
@@ -37,7 +46,8 @@ const appReducer = (state, action) => {
                     console.log(res, "response from ADD_POST function");
                     return {
                         ...state,
-                        issues: res.data
+                        issues: res.data,
+                        showForm: false
                     }
                 })
                 .catch(err => {
