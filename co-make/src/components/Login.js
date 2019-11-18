@@ -105,7 +105,7 @@ export default function Login() {
             .then(res => {
                 console.log(res);
 
-                setSignupData(({
+                setSignUpData(({
                     username: '',
                     password: '',
                     location: ''

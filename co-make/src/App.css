@@ -88,17 +88,15 @@ form{
   display: flex;
 } */
 
-.IssuesRightSide{
-  border: red 1px dashed; 
-  margin: 1rem;
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  
-}
+
 
 /* .voteButton{
   width: 10%;
   margin: 1rem;
 } */
 
+.expandDescription{
+  max-height:150px !important;
+  overflow: auto !important;
+  background: none !important;
+}
