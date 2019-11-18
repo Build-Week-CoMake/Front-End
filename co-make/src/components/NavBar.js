@@ -2,7 +2,6 @@ import Searchbar from './Searchbar'
 import React, { useState, useContext } from 'react'
 import styled from 'styled-components';
 
-import Searchbar from "./Searchbar";
 import Menu from "./Menu";
 import { LogoutButton, MenuButton } from "./Buttons";
 
