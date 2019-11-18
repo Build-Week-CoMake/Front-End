@@ -86,7 +86,7 @@ export default function Login() {
             .post('/login', loginData)
             .then(res => {
                 console.log(res);
-
+                localStorage.setItem("token", res.data)
                 setLoginData(({
                     username: '',
                     password: ''
@@ -104,7 +104,7 @@ export default function Login() {
             .post('/login/new', signupData)
             .then(res => {
                 console.log(res);
-
+                localStorage.setItem("token", res.data)
                 setSignUpData(({
                     username: '',
                     password: '',
