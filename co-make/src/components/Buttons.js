@@ -17,6 +17,13 @@ const StyledADDButton = styled.button`
     background-color:#39b128;
     color: black;
 `;
+const StyledLogoutButton = styled.button`
+    height:20px;
+    width:50px;
+    border-radius:45px;
+    background-color:#DCDCDC;
+    color: black;
+`;
 function VoteButton(props) {
     const [voted, setVoted] = useState((props.didVote) ? true : false)
     const { dispatch } = useContext(CoMakeContext);
@@ -57,10 +64,12 @@ function MenuButton() {
 
 
 function LogoutButton() {
+    const { dispatch } = useContext(CoMakeContext);
     return (
-        <div>
 
-        </div>
+        <StyledLogoutButton>
+
+        </StyledLogoutButton>
     )
 }
 
