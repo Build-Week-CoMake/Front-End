@@ -9,7 +9,7 @@ import Dashboard from "./components/Dashboard";
 import Profile from "./components/Profile";
 import Issues from './components/Issues';
 import Searchbar from './components/Searchbar';
-
+// import NavBar from './components/NavBar';
 
 function App(props) {
   const [state, dispatch] = useReducer(appReducer, initialState)
@@ -17,6 +17,7 @@ function App(props) {
     <div>
       <CoMakeContext.Provider value={{ state, dispatch }}>
         <Route exact path='/Searchbar' render={props => <Searchbar {...props} />} />
+        {/* <Route exact path='/NavBar' render={props => <NavBar {...props} />} /> */}
         <Route exact path='/IssuesBox' render={props => <Issues {...props} />} />
         <Route exact path='/LoginPage' render={props => <LoginPage {...props} />} />
         <Route path="/login" component={LoginPage} />
