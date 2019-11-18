@@ -15,12 +15,13 @@ function App(props) {
   const [state, dispatch] = useReducer(appReducer, initialState)
   return (
     <div>
-      <CoMakeContext.Provider value={state, dispatch}>
-        <Route exact path='/' render={props => <Searchbar {...props} />} />
+      <CoMakeContext.Provider value={{ state, dispatch }}>
+        <Route exact path='/Searchbar' render={props => <Searchbar {...props} />} />
         <Route exact path='/IssuesBox' render={props => <Issues {...props} />} />
         <Route exact path='/LoginPage' render={props => <LoginPage {...props} />} />
         <Route path="/login" component={LoginPage} />
         {/* <PrivateRoute exact path="/" component={Dashboard} /> */}
+
         <PrivateRoute path="/profile" component={Profile} />
       </CoMakeContext.Provider>
 

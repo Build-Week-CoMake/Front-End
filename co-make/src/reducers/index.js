@@ -7,7 +7,7 @@ export const INIT_PROFILE = "INIT_PROFILE";  // get all posts for home page dash
 export const UP_VOTE = "UP_VOTE"; // PUT REQUEST plus filter to reorder list of comments
 export const DOWN_VOTE = "DOWN_VOTE"; // PUT REQUEST plus filter to reorder list of comments
 export const LOGOUT = "LOGOUT"
-
+export const GET_BY_LOCATION = "GET_BY_LOCATION";
 
 
 const initialState = {
@@ -16,6 +16,20 @@ const initialState = {
 };
 const appReducer = (state, action) => {
     switch (action.type) {
+        case GET_BY_LOCATION:
+            axiosWithAuth()
+                .get(`/issues/${action.payload}`)
+                .then(res => {
+                    console.log(res, "response from searchbar");
+                    return {
+                        ...state,
+                        issues: res.data
+                    }
+                })
+                .catch(err => {
+                    console.log(err, "error from searchbar")
+                })
+            break;
         case ADD_POST:
             axiosWithAuth()
                 .post("/issues", action.payload)
@@ -29,6 +43,7 @@ const appReducer = (state, action) => {
                 .catch(err => {
                     console.log(err, "error from ADD_POST function");
                 });
+            break;
         case DELETE_POST:
             axiosWithAuth()
                 .delete(`/issues/${action.payload}`)
@@ -42,6 +57,7 @@ const appReducer = (state, action) => {
                 .catch(err => {
                     console.log(err, "error from DELETE_POST function");
                 });
+            break;
         case UPDATE_POST:
             axiosWithAuth()
                 .put(`/issues/${action.payload.id}`, action.payload)
@@ -55,11 +71,13 @@ const appReducer = (state, action) => {
                 .catch(err => {
                     console.log(err, "error from UPDATE_POST function");
                 });
+            break;
         case INIT_HOME:
             return {
                 ...state,
                 issues: action.payload
             }
+            break;
         case INIT_PROFILE:
             axiosWithAuth()
                 .post("/issues", action.payload)
@@ -73,6 +91,7 @@ const appReducer = (state, action) => {
                 .catch(err => {
                     console.log(err, "error from ADD_POST function");
                 });
+            break;
         case UP_VOTE:
             axiosWithAuth()
                 .put(`/voted/${action.payload}`)
@@ -87,6 +106,7 @@ const appReducer = (state, action) => {
                 .catch(err => {
                     console.log(err, "error from UPDATE_POST function");
                 });
+            break;
         case DOWN_VOTE:
             axiosWithAuth()
                 .delete(`/voted/${action.payload}`)
@@ -101,9 +121,11 @@ const appReducer = (state, action) => {
                 .catch(err => {
                     console.log(err, "error from UPDATE_POST function");
                 });
+            break;
         case LOGOUT:
             localStorage.clear("token");
             action.payload.history.push("/login");
+            break;
         default:
             return state
     }
