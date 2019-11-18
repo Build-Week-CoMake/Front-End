@@ -66,10 +66,36 @@
 }
 
 .Form{
+
   width: 50%;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
 }
+form{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .issuesBox{
+  border: red 1px dashed; 
+  margin: 1rem;
+  display: flex;
+} */
+
+
+
+/* .voteButton{
+  width: 10%;
+  margin: 1rem;
+} */
+
+
 
 .hideForm{
   display:none !important;
@@ -78,4 +104,9 @@
   display:flex;
   justify-content:center;
   align-items:center;
+}
+.expandDescription{
+  max-height:150px !important;
+  overflow: auto !important;
+  background: none !important;
 }

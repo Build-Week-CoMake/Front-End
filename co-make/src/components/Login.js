@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 
@@ -123,7 +123,7 @@ export default function Login() {
                 <div className="login-box">
 
                     <div className='Form'>
-                        <form  >
+                        <form>
                             <label>
                                 <input id="username" type="text" placeholder="Username" value={loginData.username} onChange={handleChangeForm1} />
                             </label>
@@ -136,7 +136,7 @@ export default function Login() {
                         </form>
 
                     </div>
-                    <div className='formPic'> test </div>
+                    <div className='formPic'></div>
                 </div>
             </LoginBG>
         )
@@ -145,7 +145,7 @@ export default function Login() {
         return (
             <LoginBG>
                 <div className="login-box">
-                    <div className='formPic'> test </div>
+                    <div className='formPic'></div>
                     <div className='Form'>
                         <form>
                             <label>

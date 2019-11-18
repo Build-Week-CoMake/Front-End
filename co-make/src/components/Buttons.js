@@ -26,13 +26,13 @@ function VoteButton(props) {
     if (voted) {
         return (
             <div>
-                <StyledVoteButton onClick={voteHandler}>9 "\U+1F44D"</StyledVoteButton>
+                <StyledVoteButton onClick={voteHandler}>&#128077;</StyledVoteButton>
             </div>
         )
     } else {
         return (
             <div>
-                <StyledVoteButton onClick={voteHandler}>8 "\U+1F44D"</StyledVoteButton>
+                <StyledVoteButton onClick={voteHandler}>&#128077;</StyledVoteButton>
             </div>
         )
     }

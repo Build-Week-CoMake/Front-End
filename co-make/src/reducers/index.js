@@ -1,5 +1,4 @@
 import axiosWithAuth from "../utils/axiosWithAuth";
-
 export const ADD_POST = "ADD";  //create a post
 export const DELETE_POST = "DELETE_POST";  //delete a post
 export const UPDATE_POST = "UDATE_POST";  //update a post
@@ -17,7 +16,6 @@ const initialState = {
     profile: [], //state for profile page
     showForm: false  //change to true to display modal to create a new issue/complaint
 };
-
 const appReducer = (state, action) => {
     switch (action.type) {
         case TOGGLE_FORM:
@@ -118,5 +116,4 @@ const appReducer = (state, action) => {
             return state
     }
 }
-
 export { appReducer, initialState }

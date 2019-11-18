@@ -7,6 +7,8 @@ import PrivateRoute from "./components/PrivateRoute";
 import LoginPage from './components/Login';
 import Dashboard from "./components/Dashboard";
 import Profile from "./components/Profile";
+import Issues from './components/Issues';
+import Searchbar from './components/Searchbar';
 
 
 function App(props) {
@@ -14,8 +16,11 @@ function App(props) {
   return (
     <div>
       <CoMakeContext.Provider value={state, dispatch}>
+        <Route exact path='/' render={props => <Searchbar {...props} />} />
+        <Route exact path='/IssuesBox' render={props => <Issues {...props} />} />
+        <Route exact path='/LoginPage' render={props => <LoginPage {...props} />} />
         <Route path="/login" component={LoginPage} />
-        <PrivateRoute exact path="/" component={Dashboard} />
+        {/* <PrivateRoute exact path="/" component={Dashboard} /> */}
         <PrivateRoute path="/profile" component={Profile} />
         <Modal className={(state.showForm) ? "displayForm" : "hideForm"} setVisible={setVisible} header={data.home.header_songs} body={data.home.body_songs}></Modal>
       </CoMakeContext.Provider>
