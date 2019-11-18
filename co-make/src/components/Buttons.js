@@ -10,6 +10,13 @@ const StyledVoteButton = styled.button`
     background-color:#DCDCDC;
     color: black;
 `;
+const StyledADDButton = styled.button`
+    height:35px;
+    width:35px;
+    border-radius:45px;
+    background-color:#39b128;
+    color: black;
+`;
 function VoteButton(props) {
     const [voted, setVoted] = useState((props.didVote) ? true : false)
     const { dispatch } = useContext(CoMakeContext);
@@ -59,9 +66,7 @@ function LogoutButton() {
 
 function AddButton() {
     return (
-        <div>
-
-        </div>
+        <StyledADDButton>&#9421;</StyledADDButton>
     )
 }
 export { LogoutButton, MenuButton, VoteButton, AddButton };
