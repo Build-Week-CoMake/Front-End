@@ -7,6 +7,9 @@ export const INIT_PROFILE = "INIT_PROFILE";  // get all posts for home page dash
 export const UP_VOTE = "UP_VOTE"; // PUT REQUEST plus filter to reorder list of comments
 export const DOWN_VOTE = "DOWN_VOTE"; // PUT REQUEST plus filter to reorder list of comments
 export const LOGOUT = "LOGOUT"
+
+
+
 const initialState = {
     issues: [], // state for main dashboard
     profile: [] //state for profile page

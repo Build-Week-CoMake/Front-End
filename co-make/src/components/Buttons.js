@@ -49,7 +49,6 @@ function MenuButton() {
 }
 
 
-
 function LogoutButton() {
     return (
         <div>

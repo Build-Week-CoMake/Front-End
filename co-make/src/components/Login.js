@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 
+
 const LoginBG = styled.div`
 
 background-image: url(https://static.pexels.com/photos/4827/nature-forest-trees-fog.jpeg);
@@ -85,6 +86,11 @@ export default function Login() {
             .post('/login', loginData)
             .then(res => {
                 console.log(res);
+
+                setLoginData(({
+                    username: '',
+                    password: ''
+                }))
             })
             .catch(error => {
                 console.log(`there is a error ${error}`, error);
@@ -98,6 +104,12 @@ export default function Login() {
             .post('/login/new', signupData)
             .then(res => {
                 console.log(res);
+
+                setSignupData(({
+                    username: '',
+                    password: '',
+                    location: ''
+                }))
             })
             .catch(error => {
                 console.log(`there is a error ${error}`, error);
