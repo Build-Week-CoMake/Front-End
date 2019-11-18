@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import styled from "styled-components";
-import CoMakeContext from "../context/CoMakeContext";
+import { CoMakeContext } from "../context/CoMakeContext";
 import { ADD_POST, TOGGLE_FORM } from "../reducers"
 
 const ModalDiv = styled.div`
@@ -78,8 +78,8 @@ export default function Modal(props) {
                         <label htmlFor="description">Description:</label>
                         <input id="description" type="text" placeholder="Concern details here" value={formData.location} onChange={handleChange} />
 
-                        <Button type="submit" onClick={handleAdd}>Create New Post</Button>
-                        <Button type="submit" onClick={handleQuit}>Cancel</Button>
+                        <button type="submit" onClick={handleAdd}>Create New Post</button>
+                        <button type="submit" onClick={handleQuit}>Cancel</button>
                     </form>
                 </div>
                 <span onClick={handleQuit}>

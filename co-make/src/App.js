@@ -8,6 +8,7 @@ import LoginPage from './components/Login';
 import Dashboard from "./components/Dashboard";
 import Profile from "./components/Profile";
 import NavBar from "./components/NavBar";
+import Modal from "./components/Modal";
 
 
 
@@ -20,7 +21,7 @@ function App(props) {
         <Route path="/login" component={LoginPage} />
         <PrivateRoute exact path="/" component={Dashboard} />
         <PrivateRoute path="/profile" component={Profile} />
-        <Modal className={(state.showForm) ? "displayForm" : "hideForm"} setVisible={setVisible} header={data.home.header_songs} body={data.home.body_songs}></Modal>
+        <Modal className={(state.showForm) ? "displayForm" : "hideForm"}></Modal>
       </CoMakeContext.Provider>
 
     </div>

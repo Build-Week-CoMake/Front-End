@@ -49,7 +49,7 @@ outline: none;
 // `
 
 
-export default function Login() {
+export default function Login(props) {
 
     const [login, setLogin] = useState(true);
     const [loginData, setLoginData] = useState({
@@ -87,10 +87,11 @@ export default function Login() {
             .then(res => {
                 console.log(res);
                 localStorage.setItem("token", res.data)
-                setLoginData(({
+                setLoginData({
                     username: '',
                     password: ''
-                }))
+                });
+                props.history.push("/")
             })
             .catch(error => {
                 console.log(`there is a error ${error}`, error);
@@ -105,11 +106,12 @@ export default function Login() {
             .then(res => {
                 console.log(res);
                 localStorage.setItem("token", res.data)
-                setSignUpData(({
+                setSignUpData({
                     username: '',
                     password: '',
                     location: ''
-                }))
+                });
+                props.history.push("/")
             })
             .catch(error => {
                 console.log(`there is a error ${error}`, error);
