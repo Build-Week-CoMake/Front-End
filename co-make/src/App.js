@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import './App.css';
-import CoMakeContext from "./context/CoMakeContext";
+import { CoMakeContext } from "./context/CoMakeContext";
 import { initialState, appReducer } from "./reducers";
 import { Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
@@ -13,12 +13,12 @@ function App(props) {
   const [state, dispatch] = useReducer(appReducer, initialState)
   return (
     <div>
-      <CoMakeContext value={state, dispatch}>
+      <CoMakeContext.Provider value={state, dispatch}>
         <Route path="/login" component={LoginPage} />
         <PrivateRoute exact path="/" component={Dashboard} />
         <PrivateRoute path="/profile" component={Profile} />
-      </CoMakeContext>
-      <Modal className={(visible) ? "dodisplayflex" : "dontdisplay"} setVisible={setVisible} header={data.home.header_songs} body={data.home.body_songs}></Modal>
+        <Modal className={(state.showForm) ? "displayForm" : "hideForm"} setVisible={setVisible} header={data.home.header_songs} body={data.home.body_songs}></Modal>
+      </CoMakeContext.Provider>
 
     </div>
   );

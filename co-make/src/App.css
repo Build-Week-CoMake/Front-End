@@ -70,3 +70,12 @@
   display: flex;
 
 }
+
+.hideForm{
+  display:none !important;
+}
+.displayForm{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}

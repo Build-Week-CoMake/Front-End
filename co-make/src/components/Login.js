@@ -105,7 +105,7 @@ export default function Login() {
             .then(res => {
                 console.log(res);
 
-                setSignupData(({
+                setSignUpData(({
                     username: '',
                     password: '',
                     location: ''
@@ -147,7 +147,7 @@ export default function Login() {
                 <div className="login-box">
                     <div className='formPic'> test </div>
                     <div className='Form'>
-                        <form action="" method="POST" >
+                        <form>
                             <label>
                                 <input id="username" type="text" placeholder="Username" value={signupData.username} onChange={handleChangeForm2} />
                             </label>

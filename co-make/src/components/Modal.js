@@ -1,7 +1,7 @@
-import React from 'react';
-import CloseIcon from '@material-ui/icons/Close';
-
+import React, { useContext, useState } from 'react';
 import styled from "styled-components";
+import CoMakeContext from "../context/CoMakeContext";
+import { ADD_POST, TOGGLE_FORM } from "../reducers"
 
 const ModalDiv = styled.div`
     position: fixed;
@@ -15,8 +15,8 @@ const ModalDiv = styled.div`
     justify-content:center;
     align-items:center;
     main{
-        width: 400px;
-        height:400px;
+        width: 500px;
+        height:500px;
         border: 2px solid #000;
         border-radius:10px;
         background: snow;
@@ -37,19 +37,53 @@ const ModalDiv = styled.div`
 `;
 
 export default function Modal(props) {
-    const handleClose = () => {
-        props.setVisible(false);
+    const { dispatch } = useContext(CoMakeContext);
+    const [formData, setFormData] = useState({
+        title: "",
+        img: "",
+        location: "",
+        description: ""
+    })
+    const handleChange = (e) => {
+        e.persist();
+        setFormData({
+            ...formData,
+            [e.target.id]: e.target.value
+        })
+    }
+
+    const handleAdd = (e) => {
+        e.preventDefault();
+        dispatch({ type: ADD_POST, payload: formData })
+    };
+    const handleQuit = (e) => {
+        e.preventDefault();
+        dispatch({ type: TOGGLE_FORM })
     };
 
     return (
         <ModalDiv className={props.className}>
             <main>
                 <div>
-                    <h2>{props.header}</h2>
-                    <p>{props.body}</p>
+                    <form>
+                        <label htmlFor="title">Title:</label>
+                        <input id="title" type="text" placeholder="Title of Post" value={formData.username} onChange={handleChange} />
+
+                        <label htmlFor="img">URL</label>
+                        <input id="img" type="text" placeholder="Image URL (Optional)" value={formData.password} onChange={handleChange} />
+
+                        <label htmlFor="location">Location:</label>
+                        <input id="location" type="text" placeholder="ex: Boston, MA or Miami, FL" value={formData.location} onChange={handleChange} />
+
+                        <label htmlFor="description">Description:</label>
+                        <input id="description" type="text" placeholder="Concern details here" value={formData.location} onChange={handleChange} />
+
+                        <Button type="submit" onClick={handleAdd}>Create New Post</Button>
+                        <Button type="submit" onClick={handleQuit}>Cancel</Button>
+                    </form>
                 </div>
-                <span onClick={handleClose}>
-                    <CloseIcon></CloseIcon>
+                <span onClick={handleQuit}>
+                    &#9421;
                 </span>
             </main>
         </ModalDiv>
