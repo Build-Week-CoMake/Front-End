@@ -1,3 +1,3 @@
 import React from "react";
 
-const CoMakeContext = React.createContext();
+export const CoMakeContext = React.createContext();

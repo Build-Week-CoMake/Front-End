@@ -52,4 +52,21 @@
 
 .login-box{
     border: 1px solid red;
+    display: flex;
+    align-items: center;
+    width: 80%;
+    height: 80vh;
+}
+
+.formPic{
+  background-image: url(./img/photo-1554976326-348a0ecbb9d9.jpg);
+  width: 50%;
+  height: 100%;
+
+}
+
+.Form{
+  width: 50%;
+  display: flex;
+
 }

@@ -1,4 +1,3 @@
-import { useHistory } from "react-router-dom";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 export const ADD_POST = "ADD";  //create a post
@@ -18,7 +17,6 @@ const initialState = {
 };
 
 const appReducer = (state, action) => {
-    let history = useHistory();
     switch (action.type) {
         case ADD_POST:
             axiosWithAuth()
@@ -79,7 +77,7 @@ const appReducer = (state, action) => {
                 });
         case UP_VOTE:
             axiosWithAuth()
-                .put(`/voted/${action.payload.id}`)
+                .put(`/voted/${action.payload}`)
                 .then(res => {
                     console.log(res, "response from UPDATE_POST function");
                     return {
@@ -93,7 +91,7 @@ const appReducer = (state, action) => {
                 });
         case DOWN_VOTE:
             axiosWithAuth()
-                .put(`/voted/${action.payload.id}`)
+                .delete(`/voted/${action.payload}`)
                 .then(res => {
                     console.log(res, "response from UPDATE_POST function");
                     return {
@@ -107,7 +105,7 @@ const appReducer = (state, action) => {
                 });
         case LOGOUT:
             localStorage.clear("token");
-            history.push("/login");
+            action.payload.history.push("/login");
         default:
             return state
     }
