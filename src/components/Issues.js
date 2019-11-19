@@ -48,7 +48,7 @@ border: red 1px solid;
 width: 8%;
 margin: .3rem;
 `
-export default function Issues() {
+export default function Issues(props) {
     const [expanded, setExpanded] = useState(false)
     return (
         <IssuesBox>
@@ -56,26 +56,12 @@ export default function Issues() {
             <ImageIcon>image Icon</ImageIcon>
             <IssuesRightSide>
                 <Top>
-                    <div className='title'>New street light needed for 30th Av</div>
-                    <div className='location'>New York</div>
+                    <div className='title'>{props.eachIssue.title}</div>
+                    <div className='location'>{props.eachIssue.location}</div>
                 </Top>
                 <Description className={(expanded) ? "expandDescription" : "null"} onClick={() => { setExpanded(!expanded) }}>
                     <p>
-                        Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            IpsumLoremLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            IpsumLoremLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            IpsumLoremLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
+                        {props.eachIssue.description}
                     </p>
                 </Description>
                 <div className='GaryOut'></div>

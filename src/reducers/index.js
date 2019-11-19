@@ -13,8 +13,55 @@ export const GET_BY_LOCATION = "GET_BY_LOCATION";
 
 
 const initialState = {
-    issues: [], // state for main dashboard
-    profile: [], //state for profile page
+    issues: [
+        {
+            title: 'Lots of good stuff',
+            location: 'New York',
+            description: 'nice nice nice very nice nice nice nice verery nice nice nice nice verery nice nice nice nice verery nice nice nice nice very nice nice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nice'
+        },
+        {
+            title: 'Lots of good stuff',
+            location: 'New York',
+            description: 'nice nice nice very nice'
+        },
+        {
+            title: 'Lots of good stuff',
+            location: 'New York',
+            description: 'nice nice nice very nice'
+        },
+        {
+            title: 'Lots of good stuff',
+            location: 'New York',
+            description: 'nice nice nice very nice'
+        }
+    ], // state for main dashboard
+    profileIssues: [
+        {
+            title: 'Lots of good stuff',
+            location: 'New York',
+            description: 'nice nice nice very nice nice nice nice verery nice nice nice nice verery nice nice nice nice verery nice nice nice nice very nice nice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nice'
+        },
+        {
+            title: 'Lots of good stuff',
+            location: 'New York',
+            description: 'nice nice nice very nice'
+        },
+        {
+            title: 'Lots of good stuff',
+            location: 'New York',
+            description: 'nice nice nice very nice'
+        },
+        {
+            title: 'Lots of good stuff',
+            location: 'New York',
+            description: 'nice nice nice very nice'
+        }
+    ], //state for profile page
+    userProfile: {
+        userName: 'William777',
+        location: 'New York',
+        password: '12345',
+    },
     showForm: false  //change to true to display modal to create a new issue/complaint
 };
 const appReducer = (state, action) => {
