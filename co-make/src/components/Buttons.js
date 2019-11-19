@@ -18,12 +18,39 @@ const StyledADDButton = styled.button`
     color: black;
 `;
 const StyledLogoutButton = styled.button`
-    height:20px;
-    width:50px;
+    height:auto;
+    width:auto;
     border-radius:45px;
     background-color:#DCDCDC;
     color: black;
+    margin:  0 .5rem;
 `;
+
+const Bar1 = styled.div
+    `  width: 35px;
+height: 3px;
+background-color: #333;
+margin: 3px 0;
+transition: 0.4s;`
+
+const Bar2 = styled.div
+    `  width: 35px;
+height: 3px;
+background-color: #333;
+margin: 6px 0;
+transition: 0.4s;`
+
+const Bar3 = styled.div
+    `  width: 35px;
+height: 3px;
+background-color: #333;
+margin: 3px 0;
+transition: 0.4s;`
+
+const BurgerButton = styled.div
+    `
+`
+
 function VoteButton(props) {
     const [voted, setVoted] = useState((props.didVote) ? true : false)
     const { dispatch } = useContext(CoMakeContext);
@@ -56,9 +83,11 @@ function VoteButton(props) {
 
 function MenuButton() {
     return (
-        <div>
-
-        </div>
+        <BurgerButton>
+            <Bar1></Bar1>
+            <Bar2></Bar2>
+            <Bar3></Bar3>
+        </BurgerButton>
     )
 }
 
@@ -68,7 +97,7 @@ function LogoutButton() {
     return (
 
         <StyledLogoutButton>
-
+            Logout
         </StyledLogoutButton>
     )
 }

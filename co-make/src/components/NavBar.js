@@ -8,12 +8,13 @@ import { LogoutButton, MenuButton } from "./Buttons";
 export default function NavBar() {
 
     return (
-        <div>
-            <MenuButton></MenuButton>
-            <Searchbar></Searchbar>
-            <LogoutButton></LogoutButton>
-            <Menu></Menu>
-
-        </div>
+        <>
+            <div className="NavBar">
+                <MenuButton className='menuButton'></MenuButton>
+                <Searchbar className='Searchbar'></Searchbar>
+                <LogoutButton className="logoutButton"></LogoutButton>
+            </div>
+            <Menu className="menu" ></Menu>
+        </>
     )
 }
