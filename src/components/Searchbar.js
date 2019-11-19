@@ -8,10 +8,7 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 
 const FormStyle = styled.form
     `
-width: 90%;
-input{
-    width:50%;
-}
+width: 50%;
 `
 
 
@@ -25,7 +22,6 @@ export default function Searchbar() {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
         e.persist();
         axiosWithAuth()
             .get(`/issues/?location=${searchResult}`)
@@ -38,11 +34,21 @@ export default function Searchbar() {
                 console.log(err, "error from searchbar")
             })
 
+        if (e.key === "Enter") {
+
+
+
+            e.preventDefault(e)
+            console.log(e.cancelable)
+            dispatch({ type: GET_BY_LOCATION, payload: searchResult })
+
+        }
     }
     return (
 
-        <FormStyle onSubmit={handleSubmit}>
-            <input id="search" type='text' placeholder='&#128269; Search' value={searchResult} onChange={handleChangeSearch} />
+        <FormStyle  >
+            <input id="search" type='text' placeholder='&#128269; Search' value={searchResult} onChange={handleChangeSearch} onKeyPress={handleSubmit} />
+
         </FormStyle>
     )
 }

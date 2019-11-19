@@ -6,7 +6,7 @@ import { AddButton } from "./Buttons";
 import Issues from "./Issues";
 
 export default function Dashboard() {
-    const { dispatch } = useContext(CoMakeContext);
+    const { dispatch, state } = useContext(CoMakeContext);
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -15,7 +15,9 @@ export default function Dashboard() {
 
     return (
         <div>
-            <Issues></Issues>
+            {state.issues.map((eachIssue, index) => {
+                return <Issues key={index} eachIssue={eachIssue} />
+            })}
             <AddButton onClick={handleClick}></AddButton>
         </div>
     )

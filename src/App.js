@@ -13,8 +13,7 @@ import Modal from "./components/Modal";
 
 
 function App(props) {
-  let [state, dispatch] = useReducer(appReducer, initialState)
-
+  const [state, dispatch] = useReducer(appReducer, initialState)
   return (
     <div>
       <CoMakeContext.Provider value={{ state, dispatch }}>
@@ -22,8 +21,7 @@ function App(props) {
         <Route path="/login" component={LoginPage} />
         <PrivateRoute exact path="/" component={Dashboard} />
         <PrivateRoute path="/profile" component={Profile} />
-        <Modal className={(!state.showForm) ? "hideForm" : "displayForm"} ></Modal>
-
+        <Modal className={(state.showForm) ? "displayForm" : "hideForm"}></Modal>
       </CoMakeContext.Provider>
     </div>
   );
