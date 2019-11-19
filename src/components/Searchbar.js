@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import styled from 'styled-components';
 import { CoMakeContext } from '../context/CoMakeContext';
 import { GET_BY_LOCATION } from '../reducers';
+import axiosWithAuth from "../utils/axiosWithAuth";
 
 
 
@@ -23,11 +24,19 @@ export default function Searchbar() {
         setSearchResult(e.target.value);
     }
 
-    //console.log(dispatch)
     const handleSubmit = (e) => {
         e.preventDefault();
         e.persist();
-        dispatch({ type: GET_BY_LOCATION, payload: searchResult })
+        axiosWithAuth()
+            .get(`/issues/?location=${searchResult}`)
+            .then(res => {
+                console.log(res, "response from searchbar");
+                dispatch({ type: GET_BY_LOCATION, payload: res.data })
+
+            })
+            .catch(err => {
+                console.log(err, "error from searchbar")
+            })
 
     }
     return (

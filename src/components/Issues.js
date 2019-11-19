@@ -48,6 +48,7 @@ border: red 1px solid;
 width: 8%;
 margin: .3rem;
 `
+
 export default function Issues() {
     const [expanded, setExpanded] = useState(false)
     return (

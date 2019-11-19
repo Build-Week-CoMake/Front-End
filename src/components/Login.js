@@ -115,8 +115,7 @@ export default function Login(props) {
             })
             .catch(error => {
                 console.log(`there is a error ${error}`, error);
-            }
-            )
+            })
     }
 
     if (login === true) {

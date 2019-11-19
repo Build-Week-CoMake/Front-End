@@ -1,6 +1,9 @@
 import axiosWithAuth from "../utils/axiosWithAuth";
+import axios from "axios";
 export const ADD_POST = "ADD";  //create a post
 export const DELETE_POST = "DELETE_POST";  //delete a post
+export const SELECT_ITEM_TO_DELETE = "SELECT_ITEM_TO_DELETE"
+export const UNSELECT_ITEM_TO_DELETE = "UNSELECT_ITEM_TO_DELETE"
 export const UPDATE_POST = "UDATE_POST";  //update a post
 export const INIT_HOME = "INIT_HOME";  // get all posts for home page dashboard
 export const INIT_PROFILE = "INIT_PROFILE";  // get all posts for home page dashboard  ie: upvoted posts and created posts
@@ -8,68 +11,61 @@ export const UP_VOTE = "UP_VOTE"; // PUT REQUEST plus filter to reorder list of 
 export const DOWN_VOTE = "DOWN_VOTE"; // PUT REQUEST plus filter to reorder list of comments
 export const LOGOUT = "LOGOUT"
 export const TOGGLE_FORM = "TOGGLE_FORM";
-
+export const EDIT_THIS_ISSUE = "EDIT_THIS_ISSUE";
+export const RESET_ISSUE_TO_EDIT = "RESET_ISSUE_TO_EDIT"
 export const GET_BY_LOCATION = "GET_BY_LOCATION";
 
 
 const initialState = {
     issues: [], // state for main dashboard
-    profile: [], //state for profile page
-    showForm: false  //change to true to display modal to create a new issue/complaint
+    profileIssues: [], //state for profile page
+    userProfile: {
+        username: "William777",
+        location: "New York",
+        password: "12345"
+    },
+    showForm: false,  //change to true to display modal to create a new issue/complaint
+    issueToEdit: {},
+    deleteQueue: {}
 };
 const appReducer = (state, action) => {
     switch (action.type) {
+        case SELECT_ITEM_TO_DELETE:
+            return {
+                ...state,
+                deleteQueue: action.payload
+            }
+        case UNSELECT_ITEM_TO_DELETE:
+            return {
+                ...state,
+                deleteQueue: {}
+            }
+        case EDIT_THIS_ISSUE:
+            return {
+                ...state,
+                issueToEdit: action.payload
+            }
+        case RESET_ISSUE_TO_EDIT:
+            return {
+                ...state,
+                issueToEdit: {}
+            }
         case TOGGLE_FORM:
             return {
                 ...state,
                 showForm: !state.showForm
             }
-            break;
         case GET_BY_LOCATION:
-            // return {
-            //     ...state,
-            //     showForm: true
-            // }
-
-            // let res = await axiosWithAuth().get(`/issues/${action.payload}`)
-            // return {
-            //     ...state,
-            //     issues: res.data
-            // }
-
-            axiosWithAuth()
-                .get(`/issues/${action.payload}`)
-                .then(res => {
-                    console.log(res, "response from searchbar");
-                    return {
-                        ...state,
-                        issues: res.data
-                    }
-                })
-                .catch(err => {
-                    console.log(err, "error from searchbar")
-                    console.log(state, "state")
-                    console.dir(state, "state")
-                    return {
-                        ...state
-                    }
-                })
-            break;
+            return {
+                ...state,
+                issues: action.payload
+            }
         case ADD_POST:
-            axiosWithAuth()
-                .post("/issues", action.payload)
-                .then(res => {
-                    console.log(res, "response from ADD_POST function");
-                    return {
-                        ...state,
-                        issues: res.data,
-                        showForm: false
-                    }
-                })
-                .catch(err => {
-                    console.log(err, "error from ADD_POST function");
-                });
-            break;
+            return {
+                ...state,
+                issues: action.payload,
+                showForm: false
+            }
         case DELETE_POST:
             axiosWithAuth()
                 .delete(`/issues/${action.payload}`)
