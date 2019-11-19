@@ -126,6 +126,11 @@ background-color: rgb(26, 192, 68);
 .menuButton{
   border: green 1px solid; 
   margin: .1rem;
-  
- 
+  }
+  .showMenu{
+    display: flex !important;
+  }
+
+  .navLinkStyle{
+    text-decoration: none;
   }

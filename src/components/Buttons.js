@@ -81,9 +81,9 @@ function VoteButton(props) {
 }
 
 
-function MenuButton() {
+function MenuButton(props) {
     return (
-        <BurgerButton>
+        <BurgerButton onClick={props.onClick}>
             <Bar1></Bar1>
             <Bar2></Bar2>
             <Bar3></Bar3>
