@@ -7,7 +7,7 @@ import { GET_BY_LOCATION } from '../reducers';
 
 const FormStyle = styled.form
     `
-width: 100%;
+width: 50%;
 `
 
 

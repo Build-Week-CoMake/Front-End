@@ -9,6 +9,7 @@ margin: 1rem;
 display: flex;
 align-items: center;
 
+
   `
 
 const IssuesRightSide = styled.div
