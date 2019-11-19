@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import styled from "styled-components";
 import { CoMakeContext } from "../context/CoMakeContext";
-import { UP_VOTE, DOWN_VOTE, TOGGLE_FORM } from "../reducers";
+import { UP_VOTE, DOWN_VOTE, TOGGLE_FORM, EDIT_THIS_ISSUE } from "../reducers";
 
 const StyledVoteButton = styled.button`
     height:20px;
@@ -17,13 +17,12 @@ const StyledADDButton = styled.button`
     background-color:#39b128;
     color: black;
 `;
-const StyledLogoutButton = styled.button`
-    height:auto;
-    width:auto;
+const StyledEditButton = styled.button`
+    height:20px;
+    width:50px;
     border-radius:45px;
     background-color:#DCDCDC;
     color: black;
-    margin:  0 .5rem;
 `;
 
 const Bar1 = styled.div
@@ -91,17 +90,6 @@ function MenuButton(props) {
     )
 }
 
-
-function LogoutButton() {
-    const { dispatch } = useContext(CoMakeContext);
-    return (
-
-        <StyledLogoutButton>
-            Logout
-        </StyledLogoutButton>
-    )
-}
-
 function AddButton() {
     const { dispatch } = useContext(CoMakeContext);
     const displayForm = () => {
@@ -111,4 +99,15 @@ function AddButton() {
         <StyledADDButton onClick={displayForm}>&#8853;</StyledADDButton>
     )
 }
-export { LogoutButton, MenuButton, VoteButton, AddButton };
+
+const EditButton = (props) => {
+    const { dispatch } = useContext(CoMakeContext);
+    const displayForm = () => {
+        dispatch({ type: EDIT_THIS_ISSUE, payload: props.eachIssue });
+        dispatch({ type: TOGGLE_FORM });
+    }
+    return (
+        <StyledEditButton onClick={displayForm}>Edit</StyledEditButton>
+    )
+}
+export { MenuButton, VoteButton, AddButton, EditButton, DeleteButton };
