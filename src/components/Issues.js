@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { VoteButton } from './Buttons';
+import { VoteButton, DeleteButton } from './Buttons';
 
 const IssuesBox = styled.div
     ` 
@@ -52,7 +52,10 @@ export default function Issues(props) {
     const [expanded, setExpanded] = useState(false)
     return (
         <IssuesBox>
-            <VoteButtonStyle><VoteButton /></VoteButtonStyle>
+            <VoteButtonStyle>
+                <VoteButton />
+                <DeleteButton eachIssue={props.eachIssue} />
+            </VoteButtonStyle>
             <ImageIcon>image Icon</ImageIcon>
             <IssuesRightSide>
                 <Top>

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import styled from "styled-components";
 import { CoMakeContext } from "../context/CoMakeContext";
-import { UP_VOTE, DOWN_VOTE, TOGGLE_FORM } from "../reducers";
+import { UP_VOTE, DOWN_VOTE, TOGGLE_FORM, SELECT_ITEM_TO_DELETE } from "../reducers";
 
 const StyledVoteButton = styled.button`
     height:20px;
@@ -24,6 +24,15 @@ const StyledLogoutButton = styled.button`
     background-color:#DCDCDC;
     color: black;
     margin:  0 .5rem;
+`;
+
+const StyledDeleteButton = styled.button`
+    height:35px;
+    width:35px;
+    border-radius:45px;
+    background-color:red;
+    color: black;
+
 `;
 
 const Bar1 = styled.div
@@ -111,4 +120,16 @@ function AddButton() {
         <StyledADDButton onClick={displayForm}>&#8853;</StyledADDButton>
     )
 }
-export { LogoutButton, MenuButton, VoteButton, AddButton };
+
+function DeleteButton(props) {
+    const { dispatch } = useContext(CoMakeContext);
+    const deletePost = () => {
+        dispatch({ type: SELECT_ITEM_TO_DELETE, payload: props.eachIssue })
+        dispatch({ type: TOGGLE_FORM })
+    }
+    return (
+        <StyledDeleteButton onClick={deletePost}>DELETE Post</StyledDeleteButton>
+    )
+}
+
+export { LogoutButton, MenuButton, VoteButton, AddButton, DeleteButton };
