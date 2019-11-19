@@ -12,7 +12,7 @@ export default function NavBar() {
             <div className="NavBar">
                 <MenuButton className='menuButton' onClick={() => { setShowMenu(!showMenu) }} ></MenuButton>
                 <Searchbar className='Searchbar'></Searchbar>
-                <LogoutButton className="logoutButton"></LogoutButton>
+
             </div>
             <Menu className={(showMenu) ? "menu showMenu" : "menu"} onClick={() => { setShowMenu(!showMenu) }}  ></Menu>
         </>
