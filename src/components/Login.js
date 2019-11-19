@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import axiosWithAuth from '../utils/axiosWithAuth';
+
 
 
 const LoginBG = styled.div`
@@ -48,7 +49,7 @@ outline: none;
 // `
 
 
-export default function Login() {
+export default function Login(props) {
 
     const [login, setLogin] = useState(true);
     const [loginData, setLoginData] = useState({
@@ -85,6 +86,12 @@ export default function Login() {
             .post('/login', loginData)
             .then(res => {
                 console.log(res);
+                localStorage.setItem("token", res.data)
+                setLoginData({
+                    username: '',
+                    password: ''
+                });
+                props.history.push("/")
             })
             .catch(error => {
                 console.log(`there is a error ${error}`, error);
@@ -98,6 +105,13 @@ export default function Login() {
             .post('/login/new', signupData)
             .then(res => {
                 console.log(res);
+                localStorage.setItem("token", res.data)
+                setSignUpData({
+                    username: '',
+                    password: '',
+                    location: ''
+                });
+                props.history.push("/")
             })
             .catch(error => {
                 console.log(`there is a error ${error}`, error);
@@ -111,7 +125,7 @@ export default function Login() {
                 <div className="login-box">
 
                     <div className='Form'>
-                        <form  >
+                        <form>
                             <label>
                                 <input id="username" type="text" placeholder="Username" value={loginData.username} onChange={handleChangeForm1} />
                             </label>
@@ -124,7 +138,7 @@ export default function Login() {
                         </form>
 
                     </div>
-                    <div className='formPic'> test </div>
+                    <div className='formPic'></div>
                 </div>
             </LoginBG>
         )
@@ -133,9 +147,9 @@ export default function Login() {
         return (
             <LoginBG>
                 <div className="login-box">
-                    <div className='formPic'> test </div>
+                    <div className='formPic'></div>
                     <div className='Form'>
-                        <form action="" method="POST" >
+                        <form>
                             <label>
                                 <input id="username" type="text" placeholder="Username" value={signupData.username} onChange={handleChangeForm2} />
                             </label>
