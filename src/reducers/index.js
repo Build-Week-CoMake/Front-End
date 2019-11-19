@@ -26,6 +26,17 @@ const appReducer = (state, action) => {
             }
             break;
         case GET_BY_LOCATION:
+            // return {
+            //     ...state,
+            //     showForm: true
+            // }
+
+            // let res = await axiosWithAuth().get(`/issues/${action.payload}`)
+            // return {
+            //     ...state,
+            //     issues: res.data
+            // }
+
             axiosWithAuth()
                 .get(`/issues/${action.payload}`)
                 .then(res => {
@@ -37,6 +48,11 @@ const appReducer = (state, action) => {
                 })
                 .catch(err => {
                     console.log(err, "error from searchbar")
+                    console.log(state, "state")
+                    console.dir(state, "state")
+                    return {
+                        ...state
+                    }
                 })
             break;
         case ADD_POST:

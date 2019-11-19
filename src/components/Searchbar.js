@@ -7,7 +7,10 @@ import { GET_BY_LOCATION } from '../reducers';
 
 const FormStyle = styled.form
     `
-width: 50%;
+width: 90%;
+input{
+    width:50%;
+}
 `
 
 
@@ -22,18 +25,15 @@ export default function Searchbar() {
 
     //console.log(dispatch)
     const handleSubmit = (e) => {
+        e.preventDefault();
         e.persist();
-        if (e.key === "Enter") {
-            e.preventDefault();
-            dispatch({ type: GET_BY_LOCATION, payload: searchResult })
+        dispatch({ type: GET_BY_LOCATION, payload: searchResult })
 
-        }
     }
     return (
 
-        <FormStyle>
-            <input id="search" type='text' placeholder='&#128269; Search' value={searchResult} onChange={handleChangeSearch} onKeyPress={handleSubmit} />
-
+        <FormStyle onSubmit={handleSubmit}>
+            <input id="search" type='text' placeholder='&#128269; Search' value={searchResult} onChange={handleChangeSearch} />
         </FormStyle>
     )
 }
