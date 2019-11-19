@@ -20,18 +20,28 @@ export default function Searchbar() {
         setSearchResult(e.target.value);
     }
 
+
+
+
+
+
     //console.log(dispatch)
     const handleSubmit = (e) => {
         e.persist();
+
         if (e.key === "Enter") {
-            e.preventDefault();
+
+
+
+            e.preventDefault(e)
+            console.log(e.cancelable)
             dispatch({ type: GET_BY_LOCATION, payload: searchResult })
 
         }
     }
     return (
 
-        <FormStyle>
+        <FormStyle  >
             <input id="search" type='text' placeholder='&#128269; Search' value={searchResult} onChange={handleChangeSearch} onKeyPress={handleSubmit} />
 
         </FormStyle>
