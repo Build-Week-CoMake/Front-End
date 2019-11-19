@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import styled from "styled-components";
 import { CoMakeContext } from "../context/CoMakeContext";
-import { UP_VOTE, DOWN_VOTE } from "../reducers";
+import { UP_VOTE, DOWN_VOTE, TOGGLE_FORM } from "../reducers";
 
 const StyledVoteButton = styled.button`
     height:20px;
@@ -67,15 +67,17 @@ function LogoutButton() {
     const { dispatch } = useContext(CoMakeContext);
     return (
 
-        <StyledLogoutButton>
-
-        </StyledLogoutButton>
+        <StyledLogoutButton>Logout;</StyledLogoutButton>
     )
 }
 
 function AddButton() {
+    const { dispatch } = useContext(CoMakeContext);
+    const displayForm = () => {
+        dispatch({ type: TOGGLE_FORM })
+    }
     return (
-        <StyledADDButton>&#9421;</StyledADDButton>
+        <StyledADDButton onClick={displayForm}>&#8853;</StyledADDButton>
     )
 }
 export { LogoutButton, MenuButton, VoteButton, AddButton };

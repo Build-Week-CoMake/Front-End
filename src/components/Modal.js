@@ -15,8 +15,8 @@ const ModalDiv = styled.div`
     justify-content:center;
     align-items:center;
     main{
-        width: 500px;
-        height:500px;
+        width: 400px;
+        height:400px;
         border: 2px solid #000;
         border-radius:10px;
         background: snow;
@@ -29,7 +29,27 @@ const ModalDiv = styled.div`
             display:flex;
             flex-direction:column;
             width:85%;
+            height:100%
             overflow:auto;
+        }
+    }
+    form{
+        width: 100%;
+        height: 100%;
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        input{
+            width:65%;
+        }
+        label{
+            width: 25%;
+        }
+        textarea{
+            overflow: auto;
+            margin: 0px;
+            width: 65%;
+            height: 35%;
         }
     }
 
@@ -76,7 +96,7 @@ export default function Modal(props) {
                         <input id="location" type="text" placeholder="ex: Boston, MA or Miami, FL" value={formData.location} onChange={handleChange} />
 
                         <label htmlFor="description">Description:</label>
-                        <input id="description" type="text" placeholder="Concern details here" value={formData.location} onChange={handleChange} />
+                        <textarea id="description" type="text" placeholder="Concern details here" value={formData.description} onChange={handleChange} />
 
                         <button type="submit" onClick={handleAdd}>Create New Post</button>
                         <button type="submit" onClick={handleQuit}>Cancel</button>
