@@ -55,6 +55,7 @@ export default function Issues(props) {
             <VoteButtonStyle>
                 <VoteButton />
                 <EditButton eachIssue={props.eachIssue} />
+                <DeleteButton eachIssue={props.eachIssue} />
             </VoteButtonStyle>
             <ImageIcon>image Icon</ImageIcon>
             <IssuesRightSide>
