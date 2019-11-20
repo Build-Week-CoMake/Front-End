@@ -9,12 +9,13 @@ const ManuBar = styled.div
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 2rem;
     
     a{
         text-decoration: none;
         color: #FFF;
         text-decoration: none;
-        font: .6rem Raleway;
+        font-size: .6rem;
         margin: 0px 10px;
         padding: 10px 10px;
         position: relative;

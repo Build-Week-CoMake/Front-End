@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font: 400 15px 'Didact Gothic', sans-serif;
+  font-family: 'Alata', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
@@ -12,4 +12,8 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+h3,h2,h1,p{
+  font-family: 'Alata', sans-serif;
 }
