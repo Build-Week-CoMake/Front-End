@@ -157,35 +157,20 @@ const appReducer = (state, action) => {
                 });
             break;
         case UP_VOTE:
-            axiosWithAuth()
-                .put(`/voted/${action.payload}`)
-                .then(res => {
-                    console.log(res, "response from UPDATE_POST function");
-                    return {
-                        ...state,
-                        issues: res.data,
-                        profile: res.data
-                    }
-                })
-                .catch(err => {
-                    console.log(err, "error from UPDATE_POST function");
-                });
-            break;
+            return {
+                ...state,
+                issues: action.payload,
+                profile: action.payload
+            }
+
         case DOWN_VOTE:
-            axiosWithAuth()
-                .delete(`/voted/${action.payload}`)
-                .then(res => {
-                    console.log(res, "response from UPDATE_POST function");
-                    return {
-                        ...state,
-                        issues: res.data,
-                        profile: res.data
-                    }
-                })
-                .catch(err => {
-                    console.log(err, "error from UPDATE_POST function");
-                });
-            break;
+            return {
+                ...state,
+                issues: action.payload,
+                profile: action.payload
+            }
+
+
         case LOGOUT:
             localStorage.clear("token");
             action.payload.history.push("/login");
