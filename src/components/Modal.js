@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styled from "styled-components";
 import { CoMakeContext } from "../context/CoMakeContext";
 import { ADD_POST, TOGGLE_FORM, RESET_ISSUE_TO_EDIT, UNSELECT_ITEM_TO_DELETE } from "../reducers"
@@ -88,14 +88,26 @@ const ModalDivDelete = styled.div`
 
 export default function Modal(props) {
     const { dispatch, state } = useContext(CoMakeContext);
-    const [formData, setFormData] = useState((state.issueToEdit.hasOwnProperty().length > 0) ? state.issueToEdit : {
+    const [formData, setFormData] = useState((state.issueToEdit.title) ? state.issueToEdit : {
         title: "",
         picture: "",
         location: "",
         description: ""
     })
-    console.log(state.issueToEdit.hasOwnProperty().length, "is this a number?")
-    console.log(state.issueToEdit, "is this being set")
+
+    useEffect(() => {
+        console.log("useEffect is running")
+        if (state.issueToEdit.title) {
+            console.log("edit if statement useEffect is running")
+            setFormData(state.issueToEdit)
+        } else if (state.deleteQueue.title) {
+            console.log("delete if statement in useEffect is running")
+            setFormData(state.deleteQueue)
+        }
+
+    }, [state.issueToEdit, state.deleteQueue])
+    console.log(state.issueToEdit.title, "is this the correct title??")
+    console.log(state.issueToEdit, "is this being set before modal is called?")
 
     const handleChange = (e) => {
         e.persist();
@@ -107,7 +119,7 @@ export default function Modal(props) {
 
     const handleAdd = (e) => {
         e.preventDefault();
-        if (state.issueToEdit.hasOwnProperty().length > 0) {
+        if (state.issueToEdit.title) {
             axiosWithAuth()
                 .put(`/issues${state.issueToEdit.id}`, formData)
                 .then(res => {
@@ -157,7 +169,7 @@ export default function Modal(props) {
             });
     }
 
-    if (state.deleteQueue.hasOwnProperty().length > 0) {
+    if (state.deleteQueue.title) {
         return (<ModalDivDelete className={props.className}>
             <main>
                 <div>
@@ -189,7 +201,7 @@ export default function Modal(props) {
                         <label htmlFor="description">Description:</label>
                         <textarea id="description" type="text" placeholder="Concern details here" value={formData.description} onChange={handleChange} />
 
-                        <button type="submit" onClick={handleAdd}>{(state.issueToEdit.hasOwnProperty().length > 0) ? "Edit Post" : "Create New Post"}</button>
+                        <button type="submit" onClick={handleAdd}>{(state.issueToEdit.title) ? "Edit Post" : "Create New Post"}</button>
                         <button type="submit" onClick={handleQuit}>Cancel</button>
                     </form>
                 </div>
