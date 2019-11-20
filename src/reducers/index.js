@@ -78,7 +78,9 @@ const appReducer = (state, action) => {
                 deleteQueue: action.payload
             }
         case UNSELECT_ITEM_TO_DELETE:
+            console.log("unselect item to delete is firing")
             return {
+
                 ...state,
                 deleteQueue: {}
             }
@@ -88,6 +90,7 @@ const appReducer = (state, action) => {
                 issueToEdit: action.payload
             }
         case RESET_ISSUE_TO_EDIT:
+            console.log("reset issue to edit is firing")
             return {
                 ...state,
                 issueToEdit: {}

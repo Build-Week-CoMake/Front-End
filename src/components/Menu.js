@@ -17,11 +17,16 @@ const ManuBar = styled.div
 
 
 export default function Menu(props) {
+    const logout = () => {
+        props.onClick();
+        localStorage.clear("token");
+    }
+
     return (
         <ManuBar className={props.className}>
             <NavLink onClick={props.onClick} className='navLinkStyle' to="/" >DASHBOARD</NavLink>
             <NavLink onClick={props.onClick} className='navLinkStyle' to="/profile">PROFILE</NavLink>
-            <NavLink onClick={props.onClick} className='navLinkStyle' to="/login">LOGOUT</NavLink>
+            <NavLink onClick={logout} className='navLinkStyle' to="/login">LOGOUT</NavLink>
         </ManuBar>
     )
 }

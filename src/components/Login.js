@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { CoMakeContext } from "../context/CoMakeContext";
 import styled from 'styled-components';
 import axiosWithAuth from '../utils/axiosWithAuth';
+import { INIT_HOME } from '../reducers';
 
 
 
@@ -50,7 +52,7 @@ outline: none;
 
 
 export default function Login(props) {
-
+    const { dispatch } = useContext(CoMakeContext);
     const [login, setLogin] = useState(true);
     const [loginData, setLoginData] = useState({
         username: '',
@@ -79,7 +81,18 @@ export default function Login(props) {
             [e.target.id]: e.target.value
         })
     }
-
+    const getInitialData = () => {
+        axiosWithAuth()
+            .get("/issues")
+            .then(res => {
+                console.log(res, "responseData")
+                dispatch({ type: INIT_HOME, payload: res.data })
+                props.history.push("/")
+            })
+            .catch(err => {
+                console.log(err, "error from init")
+            })
+    }
     const submitForm1 = (e) => {
         e.preventDefault();
         axiosWithAuth()
@@ -91,7 +104,7 @@ export default function Login(props) {
                     username: '',
                     password: ''
                 });
-                props.history.push("/")
+                getInitialData();
             })
             .catch(error => {
                 console.log(`there is a error ${error}`, error);
@@ -111,7 +124,7 @@ export default function Login(props) {
                     password: '',
                     location: ''
                 });
-                props.history.push("/")
+                getInitialData();
             })
             .catch(error => {
                 console.log(`there is a error ${error}`, error);

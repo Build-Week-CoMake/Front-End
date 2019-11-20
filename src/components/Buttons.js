@@ -112,8 +112,8 @@ function AddButton() {
 const EditButton = (props) => {
     const { dispatch } = useContext(CoMakeContext);
     const displayForm = () => {
-        dispatch({ type: EDIT_THIS_ISSUE, payload: props.eachIssue });
         dispatch({ type: TOGGLE_FORM });
+        dispatch({ type: EDIT_THIS_ISSUE, payload: props.eachIssue });
     }
     return (
         <StyledEditButton onClick={displayForm}>Edit</StyledEditButton>

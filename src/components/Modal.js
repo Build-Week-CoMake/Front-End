@@ -90,10 +90,13 @@ export default function Modal(props) {
     const { dispatch, state } = useContext(CoMakeContext);
     const [formData, setFormData] = useState((state.issueToEdit.hasOwnProperty().length > 0) ? state.issueToEdit : {
         title: "",
-        img: "",
+        picture: "",
         location: "",
         description: ""
     })
+    console.log(state.issueToEdit.hasOwnProperty().length, "is this a number?")
+    console.log(state.issueToEdit, "is this being set")
+
     const handleChange = (e) => {
         e.persist();
         setFormData({
@@ -104,19 +107,38 @@ export default function Modal(props) {
 
     const handleAdd = (e) => {
         e.preventDefault();
-        axiosWithAuth()
-            .post("/issues", formData)
-            .then(res => {
-                console.log(res, "response from ADD_POST function");
-                dispatch({ type: ADD_POST, payload: res.data })
-                dispatch({ type: TOGGLE_FORM });
-            })
-            .catch(err => {
-                console.log(err, "error from ADD_POST function");
-            });
+        if (state.issueToEdit.hasOwnProperty().length > 0) {
+            axiosWithAuth()
+                .put(`/issues${state.issueToEdit.id}`, formData)
+                .then(res => {
+                    console.log(res, "response from ADD_POST function");
+                    dispatch({ type: TOGGLE_FORM });
+                    dispatch({ type: ADD_POST, payload: res.data })
+                })
+                .catch(err => {
+                    console.log(err, "error from ADD_POST function");
+                });
+        } else {
+            axiosWithAuth()
+                .post("/issues", formData)
+                .then(res => {
+                    console.log(res, "response from ADD_POST function");
+                    dispatch({ type: TOGGLE_FORM });
+                    dispatch({ type: ADD_POST, payload: res.data })
+                })
+                .catch(err => {
+                    console.log(err, "error from ADD_POST function");
+                });
+        }
     };
     const handleQuit = (e) => {
         e.preventDefault();
+        setFormData({
+            title: "",
+            picture: "",
+            location: "",
+            description: ""
+        });
         dispatch({ type: TOGGLE_FORM });
         dispatch({ type: RESET_ISSUE_TO_EDIT });
         dispatch({ type: UNSELECT_ITEM_TO_DELETE });
@@ -156,10 +178,10 @@ export default function Modal(props) {
                 <div>
                     <form>
                         <label htmlFor="title">Title:</label>
-                        <input id="title" type="text" placeholder="Title of Post" value={formData.username} onChange={handleChange} />
+                        <input id="title" type="text" placeholder="Title of Post" value={formData.title} onChange={handleChange} />
 
-                        <label htmlFor="img">URL</label>
-                        <input id="img" type="text" placeholder="Image URL (Optional)" value={formData.password} onChange={handleChange} />
+                        <label htmlFor="picture">URL</label>
+                        <input id="picture" type="text" placeholder="Image URL (Optional)" value={formData.picture} onChange={handleChange} />
 
                         <label htmlFor="location">Location:</label>
                         <input id="location" type="text" placeholder="ex: Boston, MA or Miami, FL" value={formData.location} onChange={handleChange} />
