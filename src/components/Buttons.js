@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import styled from "styled-components";
 import { CoMakeContext } from "../context/CoMakeContext";
 import { UP_VOTE, DOWN_VOTE, TOGGLE_FORM, SELECT_ITEM_TO_DELETE, EDIT_THIS_ISSUE } from "../reducers";
+import axiosWithAuth from "../utils/axiosWithAuth";
 
 const StyledVoteButton = styled.button`
     height:20px;
@@ -31,6 +32,7 @@ const StyledDeleteButton = styled.button`
     border-radius:45px;
     background-color:red;
     color: black;
+    font-size: .4 rem;
 
 `;
 
@@ -62,12 +64,22 @@ const BurgerButton = styled.div
 function VoteButton(props) {
     const [voted, setVoted] = useState((props.didVote) ? true : false)
     const { dispatch } = useContext(CoMakeContext);
-    const voteHandler = (e) => {
+    const voteHandler = async (e) => {
         e.preventDefault();
         if (voted) {
-            dispatch({ type: DOWN_VOTE, payload: props.id })
+            let data = await axiosWithAuth()
+                .delete(`/upvote/${props.eachIssue.id}`)
+            dispatch({
+                type: "DOWN_VOTE",
+                payload: data
+            })
         } else {
-            dispatch({ type: UP_VOTE, payload: props.id })
+            let data = await axiosWithAuth()
+                .post(`/upvote/$${props.eachIssue.id}`)
+            dispatch({
+                type: "UP_VOTE",
+                payload: data
+            })
         }
         setVoted(!setVoted);
     }

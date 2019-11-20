@@ -4,17 +4,18 @@ import { VoteButton, DeleteButton, EditButton } from './Buttons';
 
 const IssuesBox = styled.div
     ` 
-border: red 1px solid; 
+
 margin: 1rem;
 display: flex;
 align-items: center;
+background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
 
 
   `
 
 const IssuesRightSide = styled.div
     `
-border: red 1px solid; 
+border: white .5px solid; 
 margin: .5rem;
 display: flex;
 flex-direction: column;
@@ -53,7 +54,7 @@ export default function Issues(props) {
     return (
         <IssuesBox>
             <VoteButtonStyle>
-                <VoteButton />
+                <VoteButton eachIssue={props.eachIssue} />
                 <EditButton eachIssue={props.eachIssue} />
                 <DeleteButton eachIssue={props.eachIssue} />
             </VoteButtonStyle>
