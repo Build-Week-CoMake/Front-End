@@ -14,6 +14,7 @@ export const TOGGLE_FORM = "TOGGLE_FORM";
 export const UNSELECT_ITEM_TO_DELETE = "UNSELECT_ITEM_TO_DELETE"
 export const UP_VOTE = "UP_VOTE"; // PUT REQUEST plus filter to reorder list of comments
 export const UPDATE_POST = "UDATE_POST";  //update a post
+export const UPDATE_USER_PROFILE = "UPDATE_USER_PROFILE";
 
 
 const initialState = {
@@ -166,6 +167,11 @@ const appReducer = (state, action) => {
                     console.log(err, "error from UPDATE_POST function");
                 });
             break;
+        case UPDATE_USER_PROFILE:
+            return {
+                ...state,
+                userProfile: { ...state.userProfile, ...action.payload }
+            }
         default:
             return state;
     };

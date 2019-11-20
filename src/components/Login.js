@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { CoMakeContext } from "../context/CoMakeContext";
 import styled from 'styled-components';
 import axiosWithAuth from '../utils/axiosWithAuth';
-import { INIT_HOME } from '../reducers';
+import { INIT_HOME, UPDATE_USER_PROFILE } from '../reducers';
 
 
 
@@ -85,7 +85,10 @@ export default function Login(props) {
         axiosWithAuth()
             .get("/issues")
             .then(res => {
+                let formInfo = (signupData.location.length > 3) ? signupData : loginData;
                 console.log(res, "responseData")
+                dispatch({ type: UPDATE_USER_PROFILE, payload: formInfo })
+                dispatch({ type: UPDATE_USER_PROFILE, payload: res.data.location })
                 dispatch({ type: INIT_HOME, payload: res.data })
                 props.history.push("/")
             })
@@ -99,7 +102,7 @@ export default function Login(props) {
             .post('/login', loginData)
             .then(res => {
                 console.log(res);
-                localStorage.setItem("token", res.data)
+                localStorage.setItem("token", res.data.token)
                 setLoginData({
                     username: '',
                     password: ''
@@ -118,7 +121,7 @@ export default function Login(props) {
             .post('/login/new', signupData)
             .then(res => {
                 console.log(res);
-                localStorage.setItem("token", res.data)
+                localStorage.setItem("token", res.data.token)
                 setSignUpData({
                     username: '',
                     password: '',
