@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import styled from "styled-components";
 import { CoMakeContext } from "../context/CoMakeContext";
 import { UP_VOTE, DOWN_VOTE, TOGGLE_FORM, SELECT_ITEM_TO_DELETE, EDIT_THIS_ISSUE } from "../reducers";
+import axiosWithAuth from "../utils/axiosWithAuth";
 
 const StyledVoteButton = styled.button`
     height:20px;
@@ -67,14 +68,14 @@ function VoteButton(props) {
         e.preventDefault();
         if (voted) {
             let data = await axiosWithAuth()
-                .delete(`/upvote/${action.payload}`)
+                .delete(`/upvote/${props.eachIssue.id}`)
             dispatch({
                 type: "DOWN_VOTE",
                 payload: data
             })
         } else {
             let data = await axiosWithAuth()
-                .post(`/upvote/${action.payload}`)
+                .post(`/upvote/$${props.eachIssue.id}`)
             dispatch({
                 type: "UP_VOTE",
                 payload: data

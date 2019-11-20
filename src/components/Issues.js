@@ -53,7 +53,7 @@ export default function Issues(props) {
     return (
         <IssuesBox>
             <VoteButtonStyle>
-                <VoteButton />
+                <VoteButton eachIssue={props.eachIssue} />
                 <EditButton eachIssue={props.eachIssue} />
                 <DeleteButton eachIssue={props.eachIssue} />
             </VoteButtonStyle>
