@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { VoteButton } from './Buttons';
+import { VoteButton, DeleteButton, EditButton } from './Buttons';
 
 const IssuesBox = styled.div
     ` 
-border: red 1px solid; 
+
 margin: 1rem;
 display: flex;
 align-items: center;
+background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+
 
   `
 
 const IssuesRightSide = styled.div
     `
-border: red 1px solid; 
+border: white .5px solid; 
 margin: .5rem;
 display: flex;
 flex-direction: column;
@@ -47,34 +49,24 @@ border: red 1px solid;
 width: 8%;
 margin: .3rem;
 `
-export default function Issues() {
+export default function Issues(props) {
     const [expanded, setExpanded] = useState(false)
     return (
         <IssuesBox>
-            <VoteButtonStyle><VoteButton /></VoteButtonStyle>
+            <VoteButtonStyle>
+                <VoteButton eachIssue={props.eachIssue} />
+                <EditButton eachIssue={props.eachIssue} />
+                <DeleteButton eachIssue={props.eachIssue} />
+            </VoteButtonStyle>
             <ImageIcon>image Icon</ImageIcon>
             <IssuesRightSide>
                 <Top>
-                    <div className='title'>New street light needed for 30th Av</div>
-                    <div className='location'>New York</div>
+                    <div className='title'>{props.eachIssue.title}</div>
+                    <div className='location'>{props.eachIssue.location}</div>
                 </Top>
                 <Description className={(expanded) ? "expandDescription" : "null"} onClick={() => { setExpanded(!expanded) }}>
                     <p>
-                        Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            IpsumLoremLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            IpsumLoremLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            IpsumLoremLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-                            Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
+                        {props.eachIssue.description}
                     </p>
                 </Description>
                 <div className='GaryOut'></div>

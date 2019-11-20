@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { CoMakeContext } from "../context/CoMakeContext";
 import styled from 'styled-components';
 import axiosWithAuth from '../utils/axiosWithAuth';
+import { INIT_HOME, UPDATE_USER_PROFILE } from '../reducers';
 
 
 
@@ -50,7 +52,7 @@ outline: none;
 
 
 export default function Login(props) {
-
+    const { dispatch } = useContext(CoMakeContext);
     const [login, setLogin] = useState(true);
     const [loginData, setLoginData] = useState({
         username: '',
@@ -79,19 +81,33 @@ export default function Login(props) {
             [e.target.id]: e.target.value
         })
     }
-
+    const getInitialData = () => {
+        axiosWithAuth()
+            .get("/issues")
+            .then(res => {
+                let formInfo = (signupData.location.length > 3) ? signupData : loginData;
+                console.log(res, "responseData")
+                dispatch({ type: UPDATE_USER_PROFILE, payload: formInfo })
+                dispatch({ type: UPDATE_USER_PROFILE, payload: res.data.location })
+                dispatch({ type: INIT_HOME, payload: res.data })
+                props.history.push("/")
+            })
+            .catch(err => {
+                console.log(err, "error from init")
+            })
+    }
     const submitForm1 = (e) => {
         e.preventDefault();
         axiosWithAuth()
             .post('/login', loginData)
             .then(res => {
                 console.log(res);
-                localStorage.setItem("token", res.data)
+                localStorage.setItem("token", res.data.token)
                 setLoginData({
                     username: '',
                     password: ''
                 });
-                props.history.push("/")
+                getInitialData();
             })
             .catch(error => {
                 console.log(`there is a error ${error}`, error);
@@ -105,18 +121,17 @@ export default function Login(props) {
             .post('/login/new', signupData)
             .then(res => {
                 console.log(res);
-                localStorage.setItem("token", res.data)
+                localStorage.setItem("token", res.data.token)
                 setSignUpData({
                     username: '',
                     password: '',
                     location: ''
                 });
-                props.history.push("/")
+                getInitialData();
             })
             .catch(error => {
                 console.log(`there is a error ${error}`, error);
-            }
-            )
+            })
     }
 
     if (login === true) {

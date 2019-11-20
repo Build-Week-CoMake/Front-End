@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Alata&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Yellowtail&display=swap');
 .App {
   text-align: center;
 }
@@ -110,3 +112,27 @@ form{
   overflow: auto !important;
   background: none !important;
 }
+
+
+
+
+
+.menuButton{
+  border: green 1px solid; 
+  margin: .1rem;
+  }
+  .showMenu{
+    display: flex !important;
+  }
+
+  .navLinkStyle{
+    text-decoration: none;
+    color: #FFF;
+    text-decoration: none;
+    font: .6rem Raleway;
+    margin: 0px 10px;
+    padding: 10px 10px;
+    position: relative;
+    z-index: 0;
+    cursor: pointer;
+  }
