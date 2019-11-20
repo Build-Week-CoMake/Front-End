@@ -18,26 +18,26 @@ export const UPDATE_POST = "UDATE_POST";  //update a post
 
 const initialState = {
     issues: [
-        {
-            title: 'Lots of good stuff',
-            location: 'New York',
-            description: 'nice nice nice very nice nice nice nice verery nice nice nice nice verery nice nice nice nice verery nice nice nice nice very nice nice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nice'
-        },
-        {
-            title: 'Lots of good stuff',
-            location: 'New York',
-            description: 'nice nice nice very nice'
-        },
-        {
-            title: 'Lots of good stuff',
-            location: 'New York',
-            description: 'nice nice nice very nice'
-        },
-        {
-            title: 'Lots of good stuff',
-            location: 'New York',
-            description: 'nice nice nice very nice'
-        }
+        // {
+        //     title: 'Lots of good stuff',
+        //     location: 'New York',
+        //     description: 'nice nice nice very nice nice nice nice verery nice nice nice nice verery nice nice nice nice verery nice nice nice nice very nice nice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nice'
+        // },
+        // {
+        //     title: 'Lots of good stuff',
+        //     location: 'New York',
+        //     description: 'nice nice nice very nice'
+        // },
+        // {
+        //     title: 'Lots of good stuff',
+        //     location: 'New York',
+        //     description: 'nice nice nice very nice'
+        // },
+        // {
+        //     title: 'Lots of good stuff',
+        //     location: 'New York',
+        //     description: 'nice nice nice very nice'
+        // }
     ], // state for main dashboard
     profileIssues: [
         {
@@ -79,19 +79,10 @@ const appReducer = (state, action) => {
                 showForm: false
             };
         case DELETE_POST:
-            axiosWithAuth()
-                .delete(`/issues/${action.payload}`)
-                .then(res => {
-                    console.log(res, "response from DELETE_POST function");
-                    return {
-                        ...state,
-                        issues: res.data
-                    }
-                })
-                .catch(err => {
-                    console.log(err, "error from DELETE_POST function");
-                });
-            break;
+            return {
+                ...state,
+                issues: action.payload
+            }
         case DOWN_VOTE:
             return {
                 ...state,

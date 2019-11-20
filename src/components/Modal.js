@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import styled from "styled-components";
 import { CoMakeContext } from "../context/CoMakeContext";
-import { ADD_POST, TOGGLE_FORM, RESET_ISSUE_TO_EDIT, UNSELECT_ITEM_TO_DELETE } from "../reducers"
+import { ADD_POST, TOGGLE_FORM, RESET_ISSUE_TO_EDIT, UNSELECT_ITEM_TO_DELETE, DELETE_POST } from "../reducers"
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 const ModalDiv = styled.div`
@@ -96,7 +96,7 @@ export default function Modal(props) {
     })
 
     useEffect(() => {
-        console.log("useEffect is running")
+        console.log("useEffect in MODAL is running")
         if (state.issueToEdit.title) {
             console.log("edit if statement useEffect is running")
             setFormData(state.issueToEdit)
@@ -121,25 +121,25 @@ export default function Modal(props) {
         e.preventDefault();
         if (state.issueToEdit.title) {
             axiosWithAuth()
-                .put(`/issues${state.issueToEdit.id}`, formData)
+                .put(`/issues/${state.issueToEdit.id}`, formData)
                 .then(res => {
-                    console.log(res, "response from ADD_POST function");
+                    console.log(res, "response from put request");
                     dispatch({ type: TOGGLE_FORM });
                     dispatch({ type: ADD_POST, payload: res.data })
                 })
                 .catch(err => {
-                    console.log(err, "error from ADD_POST function");
+                    console.log(err, "error from put request");
                 });
         } else {
             axiosWithAuth()
                 .post("/issues", formData)
                 .then(res => {
-                    console.log(res, "response from ADD_POST function");
+                    console.log(res, "response from POST request");
                     dispatch({ type: TOGGLE_FORM });
                     dispatch({ type: ADD_POST, payload: res.data })
                 })
                 .catch(err => {
-                    console.log(err, "error from ADD_POST function");
+                    console.log(err, "error from POST request");
                 });
         }
     };
@@ -158,10 +158,10 @@ export default function Modal(props) {
     const handleDelete = (e) => {
         e.preventDefault();
         axiosWithAuth()
-            .delete(`/issues/${state.deleteQueue}`)
+            .delete(`/issues/${state.deleteQueue.id}`)
             .then(res => {
-                console.log(res, "response from ADD_POST function");
-                dispatch({ type: ADD_POST, payload: res.data })
+                console.log(res, "response from delete function");
+                dispatch({ type: DELETE_POST, payload: res.data })
                 dispatch({ type: TOGGLE_FORM });
             })
             .catch(err => {
