@@ -178,13 +178,13 @@ form{
   }
 
 
-
+/* Like Button  */
 
   .button-like {
     border: 2px solid #8a8a8a;
     background-color: transparent;
     text-decoration: none;
-    padding: 1rem;
+    padding: .6rem;
     position: relative;
     vertical-align: middle;
     text-align: center;
@@ -192,6 +192,9 @@ form{
     border-radius: 3rem;
     color: #8a8a8a;
     transition: all ease 0.4s;
+    margin: .5rem 0;
+    font-family: 'Alata', sans-serif;
+
   }
   
   .button-like span {
@@ -225,6 +228,7 @@ form{
   .liked {
     background-color: #cc4b37;
     border-color: #cc4b37;
+    color: rgb(255, 255, 255);
   }
   
   .liked .fa,
@@ -250,4 +254,157 @@ form{
   .liked:hover span {
     color: #fefefe;
   }
+  
+
+/* Edit Button  */
+
+  .button-Edit {
+    border: 2px solid #8a8a8a;
+    background-color: transparent;
+    text-decoration: none;
+    padding: .6rem 1.4rem;
+    position: relative;
+    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
+    border-radius: 3rem;
+    color: #8a8a8a;
+    transition: all ease 0.4s;
+    margin: .5rem 0;
+  }
+  
+  .button-Edit span {
+    margin-left: 0.5rem;
+  }
+  
+  .button-Edit .fa,
+  .button-like span {
+    transition: all ease 0.4s;
+  }
+  
+  .button-Edit:focus {
+    background-color: transparent;
+  }
+  
+  .button-Edit:focus .fa,
+  .button-like:focus span {
+    color: #8a8a8a;
+  }
+  
+  .button-Edit:hover {
+    border-color: #cc4b37;
+    background-color: transparent;
+  }
+  
+  .button-Edit:hover .fa,
+  .button-like:hover span {
+    color: #cc4b37;
+  }
+  
+  .Edit {
+    background-color: #cc4b37;
+    border-color: #cc4b37;
+    color: rgb(255, 255, 255);
+  }
+
+
+
+  /* Delete Button  */
+
+  .button-Delete {
+    border: 2px solid #8a8a8a;
+    background-color: transparent;
+    text-decoration: none;
+    padding: .6rem 1rem;
+    position: relative;
+    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
+    border-radius: 3rem;
+    color: #8a8a8a;
+    transition: all ease 0.4s;
+    margin: .5rem 0;
+  }
+  
+  .button-Delete span {
+    margin-left: 0.5rem;
+  }
+  
+  .button-Delete .fa,
+  .button-like span {
+    transition: all ease 0.4s;
+  }
+  
+  .button-Delete:focus {
+    background-color: transparent;
+  }
+  
+  .button-Delete:focus .fa,
+  .button-like:focus span {
+    color: #8a8a8a;
+  }
+  
+  .button-Delete:hover {
+    border-color: #cc4b37;
+    background-color: transparent;
+  }
+  
+  .button-Delete:hover .fa,
+  .button-like:hover span {
+    color: #cc4b37;
+  }
+  
+  .Delete {
+    background-color: #cc4b37;
+    border-color: #cc4b37;
+    color: rgb(255, 255, 255);
+  }
+
+
+
+    /* StyledSideNavButton Button  */
+
+    .styledSideNavButton {
+      border: 2px solid #FFF;;
+      background-color: transparent;
+      text-decoration: none;
+      padding: .6rem 1rem;
+      position: relative;
+      vertical-align: middle;
+      text-align: center;
+      display: inline-block;
+      border-radius: 3rem;
+      color: #FFF;
+      transition: all ease 0.4s;
+      margin: .5rem 0;
+    }
+    
+    .styledSideNavButton span {
+      margin-left: 0.5rem;
+    }
+    
+    .styledSideNavButton .fa,
+    .button-like span {
+      transition: all ease 0.4s;
+    }
+    
+    .styledSideNavButton:focus {
+      background-color: transparent;
+    }
+    
+    .styledSideNavButton .fa,
+    .button-like:focus span {
+      color: #8a8a8a;
+    }
+    
+    .styledSideNavButton:hover {
+      border-color: linear-gradient(90deg, #9af0de 35%, #60d6ab 100%);
+      background: linear-gradient(90deg, #9af0de 35%, #60d6ab 100%);
+    }
+    
+    .styledSideNavButton:hover .fa,
+    .styledSideNavButton:hover span {
+      color: linear-gradient(90deg, #9af0de 35%, #60d6ab 100%);
+    }
+    
   
