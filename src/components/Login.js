@@ -8,13 +8,13 @@ import * as Yup from 'yup';
 
 
 const LoginBG = styled.div`
-padding-top: 3rem;
-background-image: url(https://static.pexels.com/photos/4827/nature-forest-trees-fog.jpeg);
+padding-top: 3vh;
+background: linear-gradient(90deg, rgba(61,96,152,1) 0%, rgba(0,212,255,1) 100%);
 background-position: center;
 background-repeat: no-repeat;
 background-size: cover;
 color: #0c0d1f;
-height: 100vh; 
+height: 97vh; 
 display: flex;
 justify-content: center;
 align-items: center;
@@ -24,16 +24,18 @@ align-items: center;
 
 
 const Button = styled.button`
-height: 40px;
-width: 180px;
+height: 3rem;
+width: 14rem;
 border: none;
 border-radius: 20px;
-background: linear-gradient(to left, #ab68ca, #de67a3); 
+background: linear-gradient(90deg, rgba(61,96,152,1) 0%, rgba(0,212,255,1) 100%);
+
 color: #fff;
 font-weight: bolder;
-margin-top: 30px;
+margin: 1rem 2rem;
 cursor: pointer;
 outline: none;
+
 `
 // const LabelLoginPasswd = styled.label`
 // position: relative;
@@ -51,7 +53,42 @@ outline: none;
 
 // `
 
+const LoginBox = styled.div`
+display: flex;
+align-items: center;
+width: 700px;
+margin: 4rem;
+height: 450px;
+background: white;
+box-shadow: 5px 5px 30px 10px rgba(0,0,0,0.10), -5px 30px 30px 10px rgba(0,0,0,0.10);
 
+input{
+
+    border: none;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    text-indent: 0px;
+    text-align: start;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    box-sizing: border-box;
+    overflow: visible;
+    border-radius: 7px;
+    height: 62px;
+    padding: 0 20px 0 23px;
+    display: block;
+    background: transparent;
+    font-family: SourceSansPro-Bold;
+    font-size: 16px;
+    margin: 1.5rem 1rem;
+    background-color: white;
+    box-shadow: 5px 5px 25px 10px rgba(0,0,0,0.10), -5px -5px 25px 10px rgba(0,0,0,0.10);
+    
+
+}
+
+
+`
 
 export default function Login(props) {
     const { dispatch } = useContext(CoMakeContext);
@@ -169,7 +206,7 @@ export default function Login(props) {
     if (login === true) {
         return (
             <LoginBG>
-                <div className="login-box">
+                <LoginBox>
 
                     <div className='Form'>
                         <form>
@@ -186,15 +223,15 @@ export default function Login(props) {
 
                     </div>
                     <div className='formPic'></div>
-                </div>
+                </LoginBox>
             </LoginBG>
         )
 
     } else {
         return (
             <LoginBG>
-                <div className="login-box">
-                    <div className='formPic'></div>
+                <LoginBox>
+                    <div className='signUpformPic'></div>
                     <div className='Form'>
                         <form>
                             <label>
@@ -212,7 +249,7 @@ export default function Login(props) {
 
                     </div>
 
-                </div>
+                </LoginBox>
             </LoginBG>
         )
     }

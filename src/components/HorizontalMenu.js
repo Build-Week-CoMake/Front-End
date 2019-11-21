@@ -17,14 +17,13 @@ const ManuBar = styled.div
         text-decoration: none;
         color: #FFF;
         
-        font-size: .6rem;
+        font-size: 1rem;
         margin: 0px 10px;
         padding: 10px 10px;
         position: relative;
         z-index: 0;
         cursor: pointer;
       }
-
         a:before,a:after
         {
             position:absolute;
@@ -36,25 +35,21 @@ const ManuBar = styled.div
             opacity: 0;
             transition: all 0.3s;
         }
-
         a:before
         {
             top: 0px;
             transform: translateY(10px);
         }
-
         a:after
         {
             bottom: 0px;
             transform: translateY(-10px);
         }
-
         a:hover:before,a:hover:after
         {
             opacity: 1;
             transform: translateY(0px);
         }
-
         ul{
             
             list-style-type: none;
@@ -67,25 +62,19 @@ const ManuBar = styled.div
             align-items: center;
             align-content: space-between;
           }
-
           li{
             display: flex;
             align-items: center;
             align-content: center;
           }
-
 `
-
-
 const SearchButton = styled.div
     `
 width: 40%;
-
 color: #fff;
 font-size: 1rem;
 transition: .3s;
 padding: 0 0 0 1.5rem;
-
 &::before{
     content: '';
   }
@@ -93,15 +82,10 @@ padding: 0 0 0 1.5rem;
   &:hover{
     transform: scale(1.5);
   }
-
   
-
 `
-
 export default function Menu() {
-
     const [showSearch, setshowSearch] = useState(false)
-
     return (
         <ManuBar >
             <ul>

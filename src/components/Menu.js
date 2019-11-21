@@ -13,6 +13,8 @@ const ManuBar = styled.div
     position:fixed;
     top:30;
     left:0;
+   
+
 `
 
 
