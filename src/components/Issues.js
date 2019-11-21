@@ -10,9 +10,7 @@ margin: 3rem;
 display: flex;
 align-items: center;
 background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
-min-margin: 2rem;
-
-
+margin: 2rem;
 border-radius: 25px;
 box-shadow: 5px 5px 10px 3px rgba(0,0,0,0.10), -5px -5px 10px 3px rgba(0,0,0,0.10);
 cursor: pointer;

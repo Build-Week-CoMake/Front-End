@@ -8,13 +8,13 @@ import * as Yup from 'yup';
 
 
 const LoginBG = styled.div`
-padding-top: 3rem;
-background-image: url(https://static.pexels.com/photos/4827/nature-forest-trees-fog.jpeg);
+padding-top: 3vh;
+background: linear-gradient(90deg, rgba(61,96,152,1) 0%, rgba(0,212,255,1) 100%);
 background-position: center;
 background-repeat: no-repeat;
 background-size: cover;
 color: #0c0d1f;
-height: 100vh; 
+height: 97vh; 
 display: flex;
 justify-content: center;
 align-items: center;
@@ -24,8 +24,8 @@ align-items: center;
 
 
 const Button = styled.button`
-height: 40px;
-width: 180px;
+height: 2rem;
+width: 8rem;
 border: none;
 border-radius: 20px;
 background: linear-gradient(to left, #ab68ca, #de67a3); 
@@ -51,7 +51,17 @@ outline: none;
 
 // `
 
+const LoginBox = styled.div`
+display: flex;
+align-items: center;
+min-width: 350px;
+margin: 5rem;
+height: 250px;
 
+
+background: linear-gradient(90deg, #9af0de 35%, #60d6ab 100%);
+box-shadow: 5px 5px 30px 10px rgba(0,0,0,0.10), -5px 30px 30px 10px rgba(0,0,0,0.10);
+`
 
 export default function Login(props) {
     const { dispatch } = useContext(CoMakeContext);
@@ -169,7 +179,7 @@ export default function Login(props) {
     if (login === true) {
         return (
             <LoginBG>
-                <div className="login-box">
+                <LoginBox>
 
                     <div className='Form'>
                         <form>
@@ -186,19 +196,19 @@ export default function Login(props) {
 
                     </div>
                     <div className='formPic'></div>
-                </div>
+                </LoginBox>
             </LoginBG>
         )
 
     } else {
         return (
             <LoginBG>
-                <div className="login-box">
+                <LoginBox>
                     <div className='formPic'></div>
                     <div className='Form'>
                         <form>
                             <label>
-                            <input id="username" type="text" placeholder="Username" value={signupData.username} onChange={handleChangeForm2} />
+                                <input id="username" type="text" placeholder="Username" value={signupData.username} onChange={handleChangeForm2} />
                             </label>
                             <label htmlFor="passwd" className="passwd" >
                                 <input id="password" type="password" placeholder="Password" value={signupData.password} onChange={handleChangeForm2} />
@@ -212,7 +222,7 @@ export default function Login(props) {
 
                     </div>
 
-                </div>
+                </LoginBox>
             </LoginBG>
         )
     }

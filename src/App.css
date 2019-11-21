@@ -53,18 +53,24 @@
 
 
 .login-box{
-    border: 1px solid red;
+    
     display: flex;
     align-items: center;
     width: 80%;
+    margin: 2rem;
     height: 80vh;
+
+    box-shadow: 5px 5px 30px 10px rgba(0,0,0,0.10), -5px 0px 30px 10px rgba(0,0,0,0.10);
 }
 
 .formPic{
   background-image: url(./img/photo-1554976326-348a0ecbb9d9.jpg);
   width: 50%;
   height: 100%;
-
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
 }
 
 .Form{
