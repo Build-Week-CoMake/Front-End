@@ -9,6 +9,7 @@ import LogoIcon from './logoIcon';
 const NavBarStyle = styled.div
     `
 position: fixed;
+
 top: 0px;
 margin: .01rem;
 width: 100vw;

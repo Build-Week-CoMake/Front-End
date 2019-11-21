@@ -17,7 +17,7 @@ const ManuBar = styled.div
         text-decoration: none;
         color: #FFF;
         
-        font-size: .6rem;
+        font-size: 1rem;
         margin: 0px 10px;
         padding: 10px 10px;
         position: relative;
