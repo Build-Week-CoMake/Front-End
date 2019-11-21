@@ -37,17 +37,17 @@ export default function Dashboard() {
         e.preventDefault();
         dispatch({ type: TOGGLE_FORM })
     };
-    let sorted = state.issues.sort((a, b) => b.count - a.count);
     return (
         <StyledDiv>
             <section className="left">
                 <SideNavButton body={"See All Issues"}>See All Issues</SideNavButton>
+                <SideNavButton body={"Sort By Votes"}>See All Issues</SideNavButton>
                 <AddButton onClick={handleClick}></AddButton>
             </section>
             <section className="right">
                 <DivStyle>
 
-                    {sorted.map((eachIssue, index) => {
+                    {state.issues.map((eachIssue, index) => {
                         return <Issues key={index} eachIssue={eachIssue} />
                     })}
                 </DivStyle>

@@ -96,13 +96,13 @@ export default function Login(props) {
     const [loginData, setLoginData] = useState({
         username: '',
         password: ''
-    })
+    });
 
     const [signupData, setSignUpData] = useState({
         username: '',
         password: '',
         location: ''
-    })
+    });
 
 
     const handleChangeForm1 = (e) => {
@@ -110,20 +110,17 @@ export default function Login(props) {
         setLoginData({
             ...loginData,
             [e.target.id]: e.target.value
-        })
-    }
+        });
+    };
 
     const handleChangeForm2 = (e) => {
         e.persist();
-
-
-
-
         setSignUpData({
             ...signupData,
             [e.target.id]: e.target.value
-        })
-    }
+        });
+    };
+
     const getInitialData = (locationData, usernameData) => {
         let formInfo = (signupData.location) ? signupData : loginData;
         dispatch({ type: UPDATE_USER_PROFILE, payload: formInfo })
@@ -132,7 +129,7 @@ export default function Login(props) {
             .then(res => {
                 console.log(res, "responseData")
                 dispatch({ type: UPDATE_USER_PROFILE, payload: { location: locationData } })
-                dispatch({ type: INIT_HOME, payload: res.data })
+                dispatch({ type: INIT_HOME, payload: res.data.sort((a, b) => b.count - a.count) })
                 setLoginData({
                     username: '',
                     password: ''
@@ -151,7 +148,7 @@ export default function Login(props) {
             .get("/upvote/")
             .then(res => {
                 console.log("this is my voting data login.js", res)
-                dispatch({ type: UP_VOTE, payload: res.data }) // === []
+                dispatch({ type: UP_VOTE, payload: res.data.sort((a, b) => b.count - a.count) }) // === []
             })
             .catch(err => {
                 console.log(err, "error from upvote get inside of login.js")
@@ -160,7 +157,7 @@ export default function Login(props) {
             .get(`/issues?user_id=${usernameData}`)
             .then(res => {
                 console.log("get issues by username", res.data);
-                dispatch({ type: SET_PROFILE_ISSUES, payload: res.data });
+                dispatch({ type: SET_PROFILE_ISSUES, payload: res.data.sort((a, b) => b.count - a.count) });
             })
     }
     const submitForm1 = (e) => {

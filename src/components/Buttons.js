@@ -169,17 +169,28 @@ function DeleteButton(props) {
 }
 
 function SideNavButton(props) {
+    const [clicked, setClicked] = useState(false);
+    const { dispatch, state } = useContext(CoMakeContext);
 
-    const { dispatch } = useContext(CoMakeContext);
     const clickHandler = () => {
-        axiosWithAuth()
-            .get("/issues")
-            .then(res => {
-                dispatch({ type: ADD_POST, payload: res.data.sort((a, b) => b.count - a.count) });
-            })
-            .catch(err => {
-                console.log("error from clicking the show all button, visit the button.js page", err);
-            })
+        setClicked(!clicked);
+        if (props.body === "See All Issues") {
+            axiosWithAuth()
+                .get("/issues")
+                .then(res => {
+                    dispatch({ type: ADD_POST, payload: res.data.sort((a, b) => b.count - a.count) });
+                    setClicked(!clicked);
+                })
+                .catch(err => {
+                    console.log("error from clicking the show all button, visit the button.js page", err);
+                })
+        } else if (props.body === "Sort By Votes") {
+            if (!clicked)
+                dispatch({ type: ADD_POST, payload: state.issues.sort((a, b) => a.count - b.count) });
+            setClicked(!clicked);
+        } else {
+            dispatch({ type: ADD_POST, payload: state.issues.sort((a, b) => b.count - a.count) });
+        }
     }
     return (
         <StyledSideNavButton onClick={clickHandler}>{props.body}</StyledSideNavButton>
