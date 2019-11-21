@@ -2,18 +2,19 @@ import React, { useState, useContext } from 'react';
 import { CoMakeContext } from "../context/CoMakeContext";
 import styled from 'styled-components';
 import axiosWithAuth from '../utils/axiosWithAuth';
-import { INIT_HOME, UPDATE_USER_PROFILE } from '../reducers';
+import { INIT_HOME, UPDATE_USER_PROFILE, UP_VOTE, SET_PROFILE_ISSUES } from '../reducers';
+import * as Yup from 'yup';
 
 
 
 const LoginBG = styled.div`
-
-background-image: url(https://static.pexels.com/photos/4827/nature-forest-trees-fog.jpeg);
+padding-top: 3vh;
+background: linear-gradient(90deg, rgba(61,96,152,1) 0%, rgba(0,212,255,1) 100%);
 background-position: center;
 background-repeat: no-repeat;
 background-size: cover;
 color: #0c0d1f;
-height: 100vh; 
+height: 97vh; 
 display: flex;
 justify-content: center;
 align-items: center;
@@ -23,16 +24,18 @@ align-items: center;
 
 
 const Button = styled.button`
-height: 40px;
-width: 180px;
+height: 3rem;
+width: 14rem;
 border: none;
 border-radius: 20px;
-background: linear-gradient(to left, #ab68ca, #de67a3); 
+background: linear-gradient(90deg, rgba(61,96,152,1) 0%, rgba(0,212,255,1) 100%);
+
 color: #fff;
 font-weight: bolder;
-margin-top: 30px;
+margin: 1rem 2rem;
 cursor: pointer;
 outline: none;
+
 `
 // const LabelLoginPasswd = styled.label`
 // position: relative;
@@ -50,6 +53,42 @@ outline: none;
 
 // `
 
+const LoginBox = styled.div`
+display: flex;
+align-items: center;
+width: 700px;
+margin: 4rem;
+height: 450px;
+background: white;
+box-shadow: 5px 5px 30px 10px rgba(0,0,0,0.10), -5px 30px 30px 10px rgba(0,0,0,0.10);
+
+input{
+
+    border: none;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    text-indent: 0px;
+    text-align: start;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    box-sizing: border-box;
+    overflow: visible;
+    border-radius: 7px;
+    height: 62px;
+    padding: 0 20px 0 23px;
+    display: block;
+    background: transparent;
+    font-family: SourceSansPro-Bold;
+    font-size: 16px;
+    margin: 1.5rem 1rem;
+    background-color: white;
+    box-shadow: 5px 5px 25px 10px rgba(0,0,0,0.10), -5px -5px 25px 10px rgba(0,0,0,0.10);
+    
+
+}
+
+
+`
 
 export default function Login(props) {
     const { dispatch } = useContext(CoMakeContext);
@@ -57,13 +96,13 @@ export default function Login(props) {
     const [loginData, setLoginData] = useState({
         username: '',
         password: ''
-    })
+    });
 
     const [signupData, setSignUpData] = useState({
         username: '',
         password: '',
         location: ''
-    })
+    });
 
 
     const handleChangeForm1 = (e) => {
@@ -71,73 +110,100 @@ export default function Login(props) {
         setLoginData({
             ...loginData,
             [e.target.id]: e.target.value
-        })
-    }
+        });
+    };
 
     const handleChangeForm2 = (e) => {
         e.persist();
         setSignUpData({
             ...signupData,
             [e.target.id]: e.target.value
-        })
-    }
-    const getInitialData = () => {
+        });
+    };
+
+    const getInitialData = (locationData, usernameData) => {
+        let formInfo = (signupData.location) ? signupData : loginData;
+        dispatch({ type: UPDATE_USER_PROFILE, payload: formInfo })
         axiosWithAuth()
-            .get("/issues")
+            .get(`/issues?location=${locationData}`)
             .then(res => {
-                let formInfo = (signupData.location.length > 3) ? signupData : loginData;
                 console.log(res, "responseData")
-                dispatch({ type: UPDATE_USER_PROFILE, payload: formInfo })
-                dispatch({ type: UPDATE_USER_PROFILE, payload: res.data.location })
-                dispatch({ type: INIT_HOME, payload: res.data })
-                props.history.push("/")
-            })
-            .catch(err => {
-                console.log(err, "error from init")
-            })
-    }
-    const submitForm1 = (e) => {
-        e.preventDefault();
-        axiosWithAuth()
-            .post('/login', loginData)
-            .then(res => {
-                console.log(res);
-                localStorage.setItem("token", res.data.token)
+                dispatch({ type: UPDATE_USER_PROFILE, payload: { location: locationData } })
+                dispatch({ type: INIT_HOME, payload: res.data.sort((a, b) => b.count - a.count) })
                 setLoginData({
                     username: '',
                     password: ''
                 });
-                getInitialData();
-            })
-            .catch(error => {
-                console.log(`there is a error ${error}`, error);
-            }
-            )
-    }
-
-    const submitForm2 = (e) => {
-        e.preventDefault();
-        axiosWithAuth()
-            .post('/login/new', signupData)
-            .then(res => {
-                console.log(res);
-                localStorage.setItem("token", res.data.token)
                 setSignUpData({
                     username: '',
                     password: '',
                     location: ''
                 });
-                getInitialData();
+                props.history.push("/")
+            })
+            .catch(err => {
+                console.log(err, "error from init")
+            });
+        axiosWithAuth()
+            .get("/upvote/")
+            .then(res => {
+                console.log("this is my voting data login.js", res)
+                dispatch({ type: UP_VOTE, payload: res.data.sort((a, b) => b.count - a.count) }) // === []
+            })
+            .catch(err => {
+                console.log(err, "error from upvote get inside of login.js")
+            });
+        axiosWithAuth()
+            .get(`/issues?user_id=${usernameData}`)
+            .then(res => {
+                console.log("get issues by username", res.data);
+                dispatch({ type: SET_PROFILE_ISSUES, payload: res.data.sort((a, b) => b.count - a.count) });
+            })
+    }
+    const submitForm1 = (e) => {
+        e.preventDefault();
+        localStorage.setItem("token", "be here please")
+        axiosWithAuth()
+            .post('/login', loginData)
+            .then(res => {
+                localStorage.setItem("token", res.data.token)
+                getInitialData(res.data.location, res.data.username)
+            })
+            .catch(error => {
+                console.log(`there is a error ${error}`, error);
+            });
+    }
+
+    const submitForm2 = async (e) => {
+        e.preventDefault();
+
+        let isValid = await schema.isValid(
+            signupData
+        )
+        if (!isValid) {
+            alert('input is not valid')
+            return
+
+        }
+
+        axiosWithAuth()
+            .post('/login/new', { ...signupData, location: signupData.location.toLowerCase() })
+            .then(res => {
+                console.log(res);
+                localStorage.setItem("token", res.data.token)
+                getInitialData(res.data.location, res.data.username);
             })
             .catch(error => {
                 console.log(`there is a error ${error}`, error);
             })
     }
 
+
+
     if (login === true) {
         return (
             <LoginBG>
-                <div className="login-box">
+                <LoginBox>
 
                     <div className='Form'>
                         <form>
@@ -154,15 +220,15 @@ export default function Login(props) {
 
                     </div>
                     <div className='formPic'></div>
-                </div>
+                </LoginBox>
             </LoginBG>
         )
 
     } else {
         return (
             <LoginBG>
-                <div className="login-box">
-                    <div className='formPic'></div>
+                <LoginBox>
+                    <div className='signUpformPic'></div>
                     <div className='Form'>
                         <form>
                             <label>
@@ -180,8 +246,17 @@ export default function Login(props) {
 
                     </div>
 
-                </div>
+                </LoginBox>
             </LoginBG>
         )
     }
 }
+
+
+let schema = Yup.object().shape({
+    username: Yup.string().lowercase().min(4),
+    password: Yup.string().required('Password is required')
+
+});
+
+

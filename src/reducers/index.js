@@ -10,6 +10,7 @@ export const INIT_PROFILE = "INIT_PROFILE";  // get all posts for home page dash
 export const LOGOUT = "LOGOUT"
 export const RESET_ISSUE_TO_EDIT = "RESET_ISSUE_TO_EDIT"
 export const SELECT_ITEM_TO_DELETE = "SELECT_ITEM_TO_DELETE"
+export const SET_PROFILE_ISSUES = "SET_PROFILE_ISSUES";
 export const TOGGLE_FORM = "TOGGLE_FORM";
 export const UNSELECT_ITEM_TO_DELETE = "UNSELECT_ITEM_TO_DELETE"
 export const UP_VOTE = "UP_VOTE"; // PUT REQUEST plus filter to reorder list of comments
@@ -18,7 +19,7 @@ export const UPDATE_USER_PROFILE = "UPDATE_USER_PROFILE";
 
 
 const initialState = {
-    issues: [
+    issues: [ //location based on load
         // {
         //     title: 'Lots of good stuff',
         //     location: 'New York',
@@ -41,32 +42,33 @@ const initialState = {
         // }
     ], // state for main dashboard
     profileIssues: [
-        {
-            title: 'Lots of good stuff',
-            location: 'New York',
-            description: 'nice nice nice very nice nice nice nice verery nice nice nice nice verery nice nice nice nice verery nice nice nice nice very nice nice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nice'
-        },
-        {
-            title: 'Lots of good stuff',
-            location: 'New York',
-            description: 'nice nice nice very nice'
-        },
-        {
-            title: 'Lots of good stuff',
-            location: 'New York',
-            description: 'nice nice nice very nice'
-        },
-        {
-            title: 'Lots of good stuff',
-            location: 'New York',
-            description: 'nice nice nice very nice'
-        }
+        // {
+        //     title: 'Lots of good stuff',
+        //     location: 'New York',
+        //     description: 'nice nice nice very nice nice nice nice verery nice nice nice nice verery nice nice nice nice verery nice nice nice nice very nice nice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nice'
+        // },
+        // {
+        //     title: 'Lots of good stuff',
+        //     location: 'New York',
+        //     description: 'nice nice nice very nice'
+        // },
+        // {
+        //     title: 'Lots of good stuff',
+        //     location: 'New York',
+        //     description: 'nice nice nice very nice'
+        // },
+        // {
+        //     title: 'Lots of good stuff',
+        //     location: 'New York',
+        //     description: 'nice nice nice very nice'
+        // }
     ], //state for profile page
     userProfile: {
-        userName: 'William777',
+        username: 'William777',
         location: 'New York',
         password: '12345',
     },
+    voteProfile: [],
     showForm: false,  //change to true to display modal to create a new issue/complaint
     issueToEdit: {},
     deleteQueue: {}
@@ -77,7 +79,9 @@ const appReducer = (state, action) => {
             return {
                 ...state,
                 issues: action.payload,
-                showForm: false
+                showForm: false,
+                issueToEdit: {},
+                deleteQueue: {}
             };
         case DELETE_POST:
             return {
@@ -87,8 +91,7 @@ const appReducer = (state, action) => {
         case DOWN_VOTE:
             return {
                 ...state,
-                issues: action.payload,
-                profile: action.payload
+                voteProfile: action.payload
             }
         case EDIT_THIS_ISSUE:
             return {
@@ -135,6 +138,11 @@ const appReducer = (state, action) => {
                 ...state,
                 deleteQueue: action.payload
             };
+        case SET_PROFILE_ISSUES:
+            return {
+                ...state,
+                profileIssues: action.payload
+            }
         case TOGGLE_FORM:
             return {
                 ...state,
@@ -150,8 +158,7 @@ const appReducer = (state, action) => {
         case UP_VOTE:
             return {
                 ...state,
-                issues: action.payload,
-                profile: action.payload
+                voteProfile: action.payload
             };
         case UPDATE_POST:
             axiosWithAuth()

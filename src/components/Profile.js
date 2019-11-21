@@ -4,7 +4,7 @@ import { CoMakeContext } from "../context/CoMakeContext";
 import Issues from "./Issues";
 const ProfilePage = styled.div
     `
-    
+    padding-top: 3rem;   
 display: flex;
 flex-direction: column;
 
@@ -22,6 +22,9 @@ flex-direction: column;
 align-items:center;
 background: white;
 padding-top: 1rem;
+.issues-container{
+    width:95%;
+}
 
 
 `;
@@ -53,13 +56,13 @@ export default function Profile() {
     return (
         <ProfilePage>
             <EditBoxStyle>
-                <div>Username :{state.userProfile.userName}</div>
+                <div>Username :{state.userProfile.username}</div>
                 <div>Default Location:{state.userProfile.location}</div>
                 <div>Password: {password()}</div>
             </EditBoxStyle>
             <BoxStyle>
                 <div >All Created Posts</div>
-                <div>
+                <div className="issues-container">
                     {
                         state.profileIssues.map((eachIssue, index) => {
                             return <Issues key={index} eachIssue={eachIssue} />
@@ -69,9 +72,9 @@ export default function Profile() {
             </BoxStyle>
             <BoxStyle>
                 <div className="title">All Voted On</div>
-                <div>
+                <div className="issues-container">
                     {
-                        state.profileIssues.map((eachIssue, index) => {
+                        state.voteProfile.map((eachIssue, index) => {
                             return <Issues key={index} eachIssue={eachIssue} />
                         })
                     }
@@ -80,3 +83,4 @@ export default function Profile() {
         </ProfilePage>
     )
 }
+

@@ -53,18 +53,34 @@
 
 
 .login-box{
-    border: 1px solid red;
+    
     display: flex;
     align-items: center;
     width: 80%;
+    margin: 2rem;
     height: 80vh;
+
+    box-shadow: 5px 5px 30px 10px rgba(0,0,0,0.10), -5px 0px 30px 10px rgba(0,0,0,0.10);
 }
 
 .formPic{
-  background-image: url(./img/photo-1554976326-348a0ecbb9d9.jpg);
+  background-image: url(./img/handise.jpg);
   width: 50%;
   height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
 
+.signUpformPic{
+  background-image: url(./img/spotLight.jpg);
+  width: 50%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
 }
 
 .Form{
@@ -97,6 +113,12 @@ form{
   margin: 1rem;
 } */
 
+.voted-color{
+  background-color: #39b128 !important;
+}
+.hideButton{
+  display: none !important;
+}
 
 
 .hideForm{
@@ -125,6 +147,24 @@ form{
     display: flex !important;
   }
 
+  .showSearchBar{
+    display: flex !important;
+    animation: appear .5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    opacity: 1 !important;
+  }
+
+  @keyframes appear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
   .navLinkStyle{
     text-decoration: none;
     color: #FFF;
@@ -136,3 +176,78 @@ form{
     z-index: 0;
     cursor: pointer;
   }
+
+
+
+
+  .button-like {
+    border: 2px solid #8a8a8a;
+    background-color: transparent;
+    text-decoration: none;
+    padding: 1rem;
+    position: relative;
+    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
+    border-radius: 3rem;
+    color: #8a8a8a;
+    transition: all ease 0.4s;
+  }
+  
+  .button-like span {
+    margin-left: 0.5rem;
+  }
+  
+  .button-like .fa,
+  .button-like span {
+    transition: all ease 0.4s;
+  }
+  
+  .button-like:focus {
+    background-color: transparent;
+  }
+  
+  .button-like:focus .fa,
+  .button-like:focus span {
+    color: #8a8a8a;
+  }
+  
+  .button-like:hover {
+    border-color: #cc4b37;
+    background-color: transparent;
+  }
+  
+  .button-like:hover .fa,
+  .button-like:hover span {
+    color: #cc4b37;
+  }
+  
+  .liked {
+    background-color: #cc4b37;
+    border-color: #cc4b37;
+  }
+  
+  .liked .fa,
+  .liked span {
+    color: #fefefe;
+  }
+  
+  .liked:focus {
+    background-color: #cc4b37;
+  }
+  
+  .liked:focus .fa,
+  .liked:focus span {
+    color: #fefefe;
+  }
+  
+  .liked:hover {
+    background-color: #cc4b37;
+    border-color: #cc4b37;
+  }
+  
+  .liked:hover .fa,
+  .liked:hover span {
+    color: #fefefe;
+  }
+  
