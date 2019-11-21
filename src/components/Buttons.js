@@ -27,13 +27,19 @@ const StyledEditButton = styled.button`
 `;
 
 const StyledDeleteButton = styled.button`
-    height:35px;
-    width:35px;
-    border-radius:45px;
-    background-color:red;
+    background-color:white;
     color: black;
     font-size: .4 rem;
-
+    width: 100%;
+    margin: 6%;
+    border-color: red;
+    border-radius: 3rem;
+    background-color: none;
+    color: black;
+    padding: .5rem 1rem;
+    font-size: .4 rem;
+    font-family: 'Alata', sans-serif;
+}
 `;
 
 const Bar1 = styled.div
@@ -159,11 +165,11 @@ function DeleteButton(props) {
     const myPost = (props.eachIssue.user_id === state.userProfile.username)
     if (myPost) {
         return (
-            <StyledDeleteButton onClick={deletePost}>DELETE Post</StyledDeleteButton>
+            <StyledDeleteButton onClick={deletePost}>DELETE</StyledDeleteButton>
         )
     } else {
         return (
-            <StyledDeleteButton className="hideButton" onClick={deletePost}>DELETE Post</StyledDeleteButton>
+            <StyledDeleteButton className="hideButton" onClick={deletePost}>DELETE</StyledDeleteButton>
         )
     }
 }

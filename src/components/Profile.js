@@ -9,7 +9,7 @@ display: flex;
 flex-direction: column;
 
 align-items: center;
-background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+background: linear-gradient(90deg, #91fbbf 35%, #8be2db 100%);
 
 `
 
@@ -21,6 +21,7 @@ display: flex;
 flex-direction: column;
 align-items:center;
 background: white;
+border-radius:1rem;
 padding-top: 1rem;
 .issues-container{
     width:95%;
@@ -30,16 +31,23 @@ padding-top: 1rem;
 `;
 
 const EditBoxStyle = styled.div`
-width: 95%;
-max-height: 10rem;
+width: 80%;
+max-height: 25rem;
 
 margin: 1rem;
+border-radius:1rem;
 display: flex;
 flex-direction: column;
-justify-content: space-around;
-background: white;
+align-items: flex-end;
+color:#213159;
+background: #213159;
 div{
-    padding: 1rem;
+    border-radius:1rem;
+    background-color:white;
+    margin: .5rem;
+    text-align:center;
+    padding:1rem;
+    width:40%;
 }
 `;
 
@@ -56,8 +64,8 @@ export default function Profile() {
     return (
         <ProfilePage>
             <EditBoxStyle>
-                <div>Username :{state.userProfile.username}</div>
-                <div>Default Location:{state.userProfile.location}</div>
+                <div>Username: {state.userProfile.username}</div>
+                <div>Default Location: {state.userProfile.location}</div>
                 <div>Password: {password()}</div>
             </EditBoxStyle>
             <BoxStyle>
