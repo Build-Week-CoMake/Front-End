@@ -62,7 +62,10 @@ const BurgerButton = styled.div
 `
 
 function VoteButton(props) {
-    const [voted, setVoted] = useState((props.didVote) ? true : false)
+    const { state } = useContext(CoMakeContext);
+    console.log("this is my voteProfile", state.voteProfile)
+
+    const voted = props.didVote
     const { dispatch } = useContext(CoMakeContext);
     const voteHandler = async (e) => {
         e.preventDefault();
@@ -75,19 +78,18 @@ function VoteButton(props) {
             })
         } else {
             let data = await axiosWithAuth()
-                .post(`/upvote/$${props.eachIssue.id}`)
+                .post(`/upvote/${props.eachIssue.id}`)
             dispatch({
                 type: "UP_VOTE",
                 payload: data
             })
         }
-        setVoted(!setVoted);
     }
 
     if (voted) {
         return (
             <div>
-                <StyledVoteButton onClick={voteHandler}>&#128077;</StyledVoteButton>
+                <StyledVoteButton className="voted-color" onClick={voteHandler}>&#128077;</StyledVoteButton>
             </div>
         )
     } else {
@@ -122,26 +124,40 @@ function AddButton() {
 }
 
 const EditButton = (props) => {
-    const { dispatch } = useContext(CoMakeContext);
+    const { dispatch, state } = useContext(CoMakeContext);
     const displayForm = () => {
-        dispatch({ type: EDIT_THIS_ISSUE, payload: props.eachIssue });
         dispatch({ type: TOGGLE_FORM });
+        dispatch({ type: EDIT_THIS_ISSUE, payload: props.eachIssue });
     }
-    return (
-        <StyledEditButton onClick={displayForm}>Edit</StyledEditButton>
-    )
+    const myPost = (props.eachIssue.user_id === state.userProfile.username)
+    if (myPost) {
+        return (
+            <StyledEditButton onClick={displayForm}>Edit</StyledEditButton>
+        )
+    } else {
+        return (
+            <StyledEditButton className="hideButton" onClick={displayForm}>Edit</StyledEditButton>
+        )
+    }
 }
 
 
 function DeleteButton(props) {
-    const { dispatch } = useContext(CoMakeContext);
+    const { dispatch, state } = useContext(CoMakeContext);
     const deletePost = () => {
-        dispatch({ type: SELECT_ITEM_TO_DELETE, payload: props.eachIssue })
         dispatch({ type: TOGGLE_FORM })
+        dispatch({ type: SELECT_ITEM_TO_DELETE, payload: props.eachIssue })
     }
-    return (
-        <StyledDeleteButton onClick={deletePost}>DELETE Post</StyledDeleteButton>
-    )
+    const myPost = (props.eachIssue.user_id === state.userProfile.username)
+    if (myPost) {
+        return (
+            <StyledDeleteButton onClick={deletePost}>DELETE Post</StyledDeleteButton>
+        )
+    } else {
+        return (
+            <StyledDeleteButton className="hideButton" onClick={deletePost}>DELETE Post</StyledDeleteButton>
+        )
+    }
 }
 
 export { MenuButton, VoteButton, AddButton, EditButton, DeleteButton };

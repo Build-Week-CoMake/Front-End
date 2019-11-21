@@ -22,6 +22,7 @@ export default function Searchbar() {
     }
 
     const handleSubmit = (e) => {
+        e.preventDefault();
         e.persist();
         axiosWithAuth()
             .get(`/issues/?location=${searchResult}`)
@@ -46,8 +47,8 @@ export default function Searchbar() {
     }
     return (
 
-        <FormStyle  >
-            <input id="search" type='text' placeholder='&#128269; Search' value={searchResult} onChange={handleChangeSearch} onKeyPress={handleSubmit} />
+        <FormStyle onSubmit={handleSubmit}>
+            <input id="search" type='text' placeholder='&#128269; Search' value={searchResult} onChange={handleChangeSearch} />
 
         </FormStyle>
     )

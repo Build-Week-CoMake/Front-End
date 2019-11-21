@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { CoMakeContext } from "../context/CoMakeContext";
 import styled from 'styled-components';
 import { VoteButton, DeleteButton, EditButton } from './Buttons';
 
@@ -51,10 +52,20 @@ margin: .3rem;
 `
 export default function Issues(props) {
     const [expanded, setExpanded] = useState(false)
+    const { state } = useContext(CoMakeContext)
+    let didVote = true;
+    console.log(state.voteProfile, "ABOVE 57")
+    if (state.voteProfile.filter(eachObj => eachObj.issue_id === props.eachIssue.id).length > 0) {
+        didVote = true;
+        console.log("did vote true for", props.eachIssue, "and the username ===", state.userProfile.username)
+    } else {
+        didVote = false;
+        console.log("did vote false for", props.eachIssue, "and the username ===", state.userProfile.username)
+    }
     return (
         <IssuesBox>
             <VoteButtonStyle>
-                <VoteButton eachIssue={props.eachIssue} />
+                <VoteButton eachIssue={props.eachIssue} didVote={didVote} />
                 <EditButton eachIssue={props.eachIssue} />
                 <DeleteButton eachIssue={props.eachIssue} />
             </VoteButtonStyle>

@@ -124,7 +124,12 @@ export default function Modal(props) {
                 .put(`/issues/${state.issueToEdit.id}`, formData)
                 .then(res => {
                     console.log(res, "response from put request");
-                    dispatch({ type: TOGGLE_FORM });
+                    setFormData({
+                        title: "",
+                        picture: "",
+                        location: "",
+                        description: ""
+                    });
                     dispatch({ type: ADD_POST, payload: res.data })
                 })
                 .catch(err => {
@@ -135,7 +140,12 @@ export default function Modal(props) {
                 .post("/issues", formData)
                 .then(res => {
                     console.log(res, "response from POST request");
-                    dispatch({ type: TOGGLE_FORM });
+                    setFormData({
+                        title: "",
+                        picture: "",
+                        location: "",
+                        description: ""
+                    });
                     dispatch({ type: ADD_POST, payload: res.data })
                 })
                 .catch(err => {

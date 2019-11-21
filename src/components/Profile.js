@@ -22,6 +22,9 @@ flex-direction: column;
 align-items:center;
 background: white;
 padding-top: 1rem;
+.issues-container{
+    width:95%;
+}
 
 
 `;
@@ -59,7 +62,7 @@ export default function Profile() {
             </EditBoxStyle>
             <BoxStyle>
                 <div >All Created Posts</div>
-                <div>
+                <div className="issues-container">
                     {
                         state.profileIssues.map((eachIssue, index) => {
                             return <Issues key={index} eachIssue={eachIssue} />
@@ -69,9 +72,9 @@ export default function Profile() {
             </BoxStyle>
             <BoxStyle>
                 <div className="title">All Voted On</div>
-                <div>
+                <div className="issues-container">
                     {
-                        state.profileIssues.map((eachIssue, index) => {
+                        state.voteProfile.map((eachIssue, index) => {
                             return <Issues key={index} eachIssue={eachIssue} />
                         })
                     }

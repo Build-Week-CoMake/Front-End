@@ -97,6 +97,12 @@ form{
   margin: 1rem;
 } */
 
+.voted-color{
+  background-color: #39b128;
+}
+.hideButton{
+  display: none !important;
+}
 
 
 .hideForm{

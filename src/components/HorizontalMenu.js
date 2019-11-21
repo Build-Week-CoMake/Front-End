@@ -66,7 +66,7 @@ export default function Menu() {
         <ManuBar >
             <NavLink to="/" >DASHBOARD</NavLink>
             <NavLink to="/profile">PROFILE</NavLink>
-            <NavLink to="/login">LOGOUT</NavLink>
+            <NavLink onClick={() => { localStorage.clear("token") }} to="/login">LOGOUT</NavLink>
         </ManuBar>
     )
 }
