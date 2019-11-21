@@ -24,7 +24,7 @@ const IssuesRightSide = styled.div
 margin: .5rem;
 display: flex;
 flex-direction: column;
-width: 80%;
+width: 70%;
 `
 
 const Top = styled.div
@@ -43,8 +43,11 @@ const Description = styled.div
 
 const VoteButtonStyle = styled.div
     `
-width: 8%;
+width: 15%;
 margin: .3rem;
+display: flex;
+flex-direction: column;
+align-items: center;
 `
 
 

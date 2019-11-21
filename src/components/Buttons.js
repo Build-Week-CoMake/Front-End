@@ -5,34 +5,34 @@ import { UP_VOTE, DOWN_VOTE, TOGGLE_FORM, SELECT_ITEM_TO_DELETE, EDIT_THIS_ISSUE
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 const StyledVoteButton = styled.button`
-    height:20px;
-    width:45px;
-    border-radius:45px;
-    background-color:#DCDCDC;
-    color: black;
+    // height:20px;
+    // width:45px;
+    // border-radius:45px;
+    // background-color:#DCDCDC;
+    // color: black;
 `;
 const StyledADDButton = styled.button`
-    height:35px;
-    width:100px;
-    border-radius:45px;
-    background-color:#39b128;
-    color: black;
+    // height:35px;
+    // width:100px;
+    // border-radius:45px;
+    // background-color:red;
+    // color: black;
 `;
 const StyledEditButton = styled.button`
-    height:20px;
-    width:50px;
-    border-radius:45px;
-    background-color:#DCDCDC;
-    color: black;
+    // height:20px;
+    // width:50px;
+    // border-radius:45px;
+    // background-color:#DCDCDC;
+    // color: black;
 `;
 
 const StyledDeleteButton = styled.button`
-    height:35px;
-    width:35px;
-    border-radius:45px;
-    background-color:red;
-    color: black;
-    font-size: .4 rem;
+    // height:35px;
+    // width:35px;
+    // border-radius:45px;
+    // background-color:red;
+    // color: black;
+    // font-size: .4 rem;
 
 `;
 
@@ -61,11 +61,12 @@ const BurgerButton = styled.div
     `
 `
 const StyledSideNavButton = styled.button`
-height:35px;
-width:100px;
-border-radius:45px;
-background-color:#DCDCDC;
-color: black;
+padding: .6rem 1.6rem;
+// height:35px;
+// width:100px;
+// border-radius:45px;
+// background-color:#DCDCDC;
+// color: black;
 `;
 
 function VoteButton(props) {
@@ -96,13 +97,13 @@ function VoteButton(props) {
     if (voted) {
         return (
             <div>
-                <StyledVoteButton className="voted-color" onClick={voteHandler}>{`${props.eachIssue.count}`}&#128077;</StyledVoteButton>
+                <StyledVoteButton className="button-like liked" onClick={voteHandler}><i class="fa fa-heart"></i>{` ${props.eachIssue.count}`} Like</StyledVoteButton>
             </div>
         )
     } else {
         return (
             <div>
-                <StyledVoteButton onClick={voteHandler}>{`${props.eachIssue.count}`}&#128077;</StyledVoteButton>
+                <StyledVoteButton className='button-like' onClick={voteHandler}><i class="fa fa-heart"></i>{` ${props.eachIssue.count}`} Like</StyledVoteButton>
             </div>
         )
     }
@@ -126,7 +127,7 @@ function AddButton() {
         dispatch({ type: TOGGLE_FORM })
     }
     return (
-        <StyledADDButton onClick={displayForm}>&#8853;</StyledADDButton>
+        <StyledSideNavButton className='styledSideNavButton' onClick={displayForm}>Add Post</StyledSideNavButton>
     )
 }
 
@@ -140,7 +141,7 @@ const EditButton = (props) => {
     console.log(state.userProfile.username, "!@#!@#!@#@~#!#!@#~#$$$$$ASDASDASDASDASD")
     if (myPost) {
         return (
-            <StyledEditButton onClick={displayForm}>Edit</StyledEditButton>
+            <StyledEditButton className="button-Edit" onClick={displayForm}>Edit</StyledEditButton>
         )
     } else {
         return (
@@ -159,11 +160,11 @@ function DeleteButton(props) {
     const myPost = (props.eachIssue.user_id === state.userProfile.username)
     if (myPost) {
         return (
-            <StyledDeleteButton onClick={deletePost}>DELETE Post</StyledDeleteButton>
+            <StyledDeleteButton className="button-Delete" onClick={deletePost}>Delete</StyledDeleteButton>
         )
     } else {
         return (
-            <StyledDeleteButton className="hideButton" onClick={deletePost}>DELETE Post</StyledDeleteButton>
+            <StyledDeleteButton className="hideButton" onClick={deletePost}>Deletet</StyledDeleteButton>
         )
     }
 }
@@ -193,7 +194,7 @@ function SideNavButton(props) {
         }
     }
     return (
-        <StyledSideNavButton onClick={clickHandler}>{props.body}</StyledSideNavButton>
+        <button className="styledSideNavButton" onClick={clickHandler}>{props.body}</button>
     )
 }
 export { MenuButton, VoteButton, AddButton, EditButton, DeleteButton, SideNavButton };

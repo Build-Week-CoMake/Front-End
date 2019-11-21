@@ -12,12 +12,20 @@ const StyledDiv = styled.div`
     padding-top: 48px;
     background-color: #f2e7e6;
     display: flex;
+
     justify-content: space-between;
     overflow:hidden;
     .left{
         width: 15%;
         height: 100%;
         background-color: #339dce;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        button{
+            margin: 3rem 0;
+        }
+        
     }
     .right{
         width:65%;

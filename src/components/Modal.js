@@ -15,16 +15,22 @@ const ModalDiv = styled.div`
     display:flex;
     justify-content:center;
     align-items:center;
+    
     main{
-        width: 400px;
-        height:400px;
-        border: 2px solid #000;
-        border-radius:10px;
+        width: 600px;
+        height:600px;
+        
+        border-radius:7px;
         background: snow;
         padding:2%;
         display:flex;
         align-items:flex-start;
-        justify-content:space-between
+        justify-content: center;
+        background: white;
+        box-shadow: 5px 5px 30px 10px rgba(0,0,0,0.10), -5px 30px 30px 10px rgba(0,0,0,0.10);
+
+
+
         div{
             padding-left:20px;
             display:flex;
@@ -42,6 +48,44 @@ const ModalDiv = styled.div`
         flex-wrap: wrap;
         input{
             width:65%;
+            border: none;
+            -webkit-writing-mode: horizontal-tb !important;
+            text-rendering: auto;
+            text-indent: 0px;
+            text-align: start;
+            -webkit-rtl-ordering: logical;
+            cursor: text;
+            box-sizing: border-box;
+            overflow: visible;
+            border-radius: 7px;
+            height: 62px;
+            padding: 0 20px 0 23px;
+            display: block;
+            background: transparent;
+            font-family: SourceSansPro-Bold;
+            font-size: 16px;
+            margin: 1.5rem 1rem;
+            background-color: white;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+
+           
+
+            }
+
+
+            button{
+                height: 3rem;
+                width: 14rem;
+                border: none;
+                border-radius: 20px;
+                background: linear-gradient(90deg, rgba(61,96,152,1) 0%, rgba(0,212,255,1) 100%);
+
+                color: #fff;
+                font-weight: bolder;
+                margin: 1rem 2rem;
+                cursor: pointer;
+                outline: none;
+
         }
         label{
             width: 25%;
@@ -51,6 +95,25 @@ const ModalDiv = styled.div`
             margin: 0px;
             width: 65%;
             height: 35%;
+            border: none;
+            -webkit-writing-mode: horizontal-tb !important;
+            text-rendering: auto;
+            text-indent: 0px;
+            text-align: start;
+            -webkit-rtl-ordering: logical;
+            cursor: text;
+            box-sizing: border-box;
+            overflow: visible;
+            border-radius: 7px;
+            height: 62px;
+            padding: 0 20px 0 23px;
+            display: block;
+            background: transparent;
+            font-family: SourceSansPro-Bold;
+            font-size: 16px;
+            margin: 1.5rem 1rem;
+            background-color: white;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
         }
     }
 `;
@@ -204,7 +267,7 @@ export default function Modal(props) {
                         <label htmlFor="title">Title:</label>
                         <input spellCheck="true" id="title" type="text" placeholder="Title of Post" value={formData.title} onChange={handleChange} />
 
-                        <label htmlFor="picture">URL</label>
+                        <label htmlFor="picture">URL:</label>
                         <input spellCheck="true" id="picture" type="text" placeholder="Image URL (Optional)" value={formData.picture} onChange={handleChange} />
 
                         <label htmlFor="location">Location:</label>
@@ -217,9 +280,9 @@ export default function Modal(props) {
                         <button type="submit" onClick={handleQuit}>Cancel</button>
                     </form>
                 </div>
-                <span onClick={handleQuit}>
+                {/* <span onClick={handleQuit}>
                     &#9421;
-                </span>
+                </span> */}
             </main>
         </ModalDiv>
     );
