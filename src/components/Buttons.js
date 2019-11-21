@@ -1,19 +1,19 @@
 import React, { useState, useContext } from 'react'
 import styled from "styled-components";
 import { CoMakeContext } from "../context/CoMakeContext";
-import { UP_VOTE, DOWN_VOTE, TOGGLE_FORM, SELECT_ITEM_TO_DELETE, EDIT_THIS_ISSUE } from "../reducers";
+import { UP_VOTE, DOWN_VOTE, TOGGLE_FORM, SELECT_ITEM_TO_DELETE, EDIT_THIS_ISSUE, ADD_POST } from "../reducers";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 const StyledVoteButton = styled.button`
     height:20px;
-    width:35px;
+    width:45px;
     border-radius:45px;
     background-color:#DCDCDC;
     color: black;
 `;
 const StyledADDButton = styled.button`
     height:35px;
-    width:35px;
+    width:100px;
     border-radius:45px;
     background-color:#39b128;
     color: black;
@@ -60,6 +60,13 @@ transition: 0.4s;`
 const BurgerButton = styled.div
     `
 `
+const StyledSideNavButton = styled.button`
+height:35px;
+width:100px;
+border-radius:45px;
+background-color:#DCDCDC;
+color: black;
+`;
 
 function VoteButton(props) {
     const { state } = useContext(CoMakeContext);
@@ -74,14 +81,14 @@ function VoteButton(props) {
                 .delete(`/upvote/${props.eachIssue.id}`)
             dispatch({
                 type: "DOWN_VOTE",
-                payload: data
+                payload: data.data
             })
         } else {
             let data = await axiosWithAuth()
                 .post(`/upvote/${props.eachIssue.id}`)
             dispatch({
                 type: "UP_VOTE",
-                payload: data
+                payload: data.data
             })
         }
     }
@@ -89,13 +96,13 @@ function VoteButton(props) {
     if (voted) {
         return (
             <div>
-                <StyledVoteButton className="voted-color" onClick={voteHandler}>&#128077;</StyledVoteButton>
+                <StyledVoteButton className="voted-color" onClick={voteHandler}>{`${props.eachIssue.count}`}&#128077;</StyledVoteButton>
             </div>
         )
     } else {
         return (
             <div>
-                <StyledVoteButton onClick={voteHandler}>&#128077;</StyledVoteButton>
+                <StyledVoteButton onClick={voteHandler}>{`${props.eachIssue.count}`}&#128077;</StyledVoteButton>
             </div>
         )
     }
@@ -130,6 +137,7 @@ const EditButton = (props) => {
         dispatch({ type: EDIT_THIS_ISSUE, payload: props.eachIssue });
     }
     const myPost = (props.eachIssue.user_id === state.userProfile.username)
+    console.log(state.userProfile.username, "!@#!@#!@#@~#!#!@#~#$$$$$ASDASDASDASDASD")
     if (myPost) {
         return (
             <StyledEditButton onClick={displayForm}>Edit</StyledEditButton>
@@ -160,4 +168,21 @@ function DeleteButton(props) {
     }
 }
 
-export { MenuButton, VoteButton, AddButton, EditButton, DeleteButton };
+function SideNavButton(props) {
+
+    const { dispatch } = useContext(CoMakeContext);
+    const clickHandler = () => {
+        axiosWithAuth()
+            .get("/issues")
+            .then(res => {
+                dispatch({ type: ADD_POST, payload: res.data.sort((a, b) => b.count - a.count) });
+            })
+            .catch(err => {
+                console.log("error from clicking the show all button, visit the button.js page", err);
+            })
+    }
+    return (
+        <StyledSideNavButton onClick={clickHandler}>{props.body}</StyledSideNavButton>
+    )
+}
+export { MenuButton, VoteButton, AddButton, EditButton, DeleteButton, SideNavButton };

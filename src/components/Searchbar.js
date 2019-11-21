@@ -56,7 +56,7 @@ export default function Searchbar(props) {
         e.preventDefault();
         e.persist();
         axiosWithAuth()
-            .get(`/issues/?location=${searchResult}`)
+            .get(`/issues/?location=${searchResult.toLowerCase()}`)
             .then(res => {
                 console.log(res, "response from searchbar");
                 dispatch({ type: GET_BY_LOCATION, payload: res.data })
@@ -78,9 +78,8 @@ export default function Searchbar(props) {
     }
     return (
 
-        <FormStyle onSubmit={handleSubmit}>
-            <input id="search" type='text' placeholder='&#128269; Search' value={searchResult} onChange={handleChangeSearch} />
-
+        <FormStyle onSubmit={handleSubmit} className={props.className}>
+            <input id="search" type='text' placeholder='Search' value={searchResult} onChange={handleChangeSearch} />
         </FormStyle>
     )
 }

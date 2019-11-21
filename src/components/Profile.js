@@ -56,7 +56,7 @@ export default function Profile() {
     return (
         <ProfilePage>
             <EditBoxStyle>
-                <div>Username :{state.userProfile.userName}</div>
+                <div>Username :{state.userProfile.username}</div>
                 <div>Default Location:{state.userProfile.location}</div>
                 <div>Password: {password()}</div>
             </EditBoxStyle>
@@ -83,3 +83,4 @@ export default function Profile() {
         </ProfilePage>
     )
 }
+

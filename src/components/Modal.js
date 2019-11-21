@@ -120,8 +120,10 @@ export default function Modal(props) {
     const handleAdd = (e) => {
         e.preventDefault();
         if (state.issueToEdit.title) {
+            let { title, picture, location, description } = formData
+            location = location.toLowerCase();
             axiosWithAuth()
-                .put(`/issues/${state.issueToEdit.id}`, formData)
+                .put(`/issues/${state.issueToEdit.id}`, { title, picture, location, description })
                 .then(res => {
                     console.log(res, "response from put request");
                     setFormData({
@@ -137,7 +139,7 @@ export default function Modal(props) {
                 });
         } else {
             axiosWithAuth()
-                .post("/issues", formData)
+                .post("/issues", { ...formData, location: formData.location.toLowerCase() })
                 .then(res => {
                     console.log(res, "response from POST request");
                     setFormData({
@@ -168,7 +170,7 @@ export default function Modal(props) {
     const handleDelete = (e) => {
         e.preventDefault();
         axiosWithAuth()
-            .delete(`/issues/${state.deleteQueue.id}`)
+            .delete(`/issues/${state.deleteQueue.id}`, { location: state.deleteQueue.location.toLowerCase() })
             .then(res => {
                 console.log(res, "response from delete function");
                 dispatch({ type: DELETE_POST, payload: res.data })
@@ -200,16 +202,16 @@ export default function Modal(props) {
                 <div>
                     <form>
                         <label htmlFor="title">Title:</label>
-                        <input id="title" type="text" placeholder="Title of Post" value={formData.title} onChange={handleChange} />
+                        <input spellCheck="true" id="title" type="text" placeholder="Title of Post" value={formData.title} onChange={handleChange} />
 
                         <label htmlFor="picture">URL</label>
-                        <input id="picture" type="text" placeholder="Image URL (Optional)" value={formData.picture} onChange={handleChange} />
+                        <input spellCheck="true" id="picture" type="text" placeholder="Image URL (Optional)" value={formData.picture} onChange={handleChange} />
 
                         <label htmlFor="location">Location:</label>
-                        <input id="location" type="text" placeholder="ex: Boston, MA or Miami, FL" value={formData.location} onChange={handleChange} />
+                        <input spellCheck="true" id="location" type="text" placeholder="ex: Boston, MA or Miami, FL" value={formData.location} onChange={handleChange} />
 
                         <label htmlFor="description">Description:</label>
-                        <textarea id="description" type="text" placeholder="Concern details here" value={formData.description} onChange={handleChange} />
+                        <textarea spellCheck="true" id="description" type="text" placeholder="Concern details here" value={formData.description} onChange={handleChange} />
 
                         <button type="submit" onClick={handleAdd}>{(state.issueToEdit.title) ? "Edit Post" : "Create New Post"}</button>
                         <button type="submit" onClick={handleQuit}>Cancel</button>

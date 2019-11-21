@@ -98,7 +98,7 @@ form{
 } */
 
 .voted-color{
-  background-color: #39b128;
+  background-color: #39b128 !important;
 }
 .hideButton{
   display: none !important;

@@ -20,14 +20,14 @@ const ManuBar = styled.div
         font-size: .6rem;
         margin: 0px 10px;
         padding: 10px 10px;
-        
+        position: relative;
         z-index: 0;
         cursor: pointer;
       }
 
         a:before,a:after
         {
-            
+            position:absolute;
             left: 0px;
             width: 100%;
             height: 2px;

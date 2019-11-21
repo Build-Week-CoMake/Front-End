@@ -153,7 +153,7 @@ export default function Login(props) {
         }
 
         axiosWithAuth()
-            .post('/login/new', signupData)
+            .post('/login/new', { ...signupData, location: signupData.location.toLowerCase() })
             .then(res => {
                 console.log(res);
                 localStorage.setItem("token", res.data.token)
@@ -198,7 +198,7 @@ export default function Login(props) {
                     <div className='Form'>
                         <form>
                             <label>
-                            <input id="username" type="text" placeholder="Username" value={signupData.username} onChange={handleChangeForm2} />
+                                <input id="username" type="text" placeholder="Username" value={signupData.username} onChange={handleChangeForm2} />
                             </label>
                             <label htmlFor="passwd" className="passwd" >
                                 <input id="password" type="password" placeholder="Password" value={signupData.password} onChange={handleChangeForm2} />
