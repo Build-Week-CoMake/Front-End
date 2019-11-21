@@ -99,8 +99,6 @@ export default function Menu() {
                 className="animated bounce slow delay-1s"
                 onClick={() => {
                     setshowSearch(!showSearch)
-                    console.log('clicked')
-                    console.log({ showSearch })
                 }}>
                 <i className="fa fa-search"></i>
             </SearchButton>

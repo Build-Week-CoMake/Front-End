@@ -70,9 +70,7 @@ color: black;
 
 function VoteButton(props) {
     const { state } = useContext(CoMakeContext);
-    console.log("this is my voteProfile", state.voteProfile)
-
-    const voted = props.didVote
+    const voted = props.didVote;
     const { dispatch } = useContext(CoMakeContext);
     const voteHandler = async (e) => {
         e.preventDefault();
@@ -90,8 +88,8 @@ function VoteButton(props) {
                 type: "UP_VOTE",
                 payload: data.data
             })
-        }
-    }
+        };
+    };
 
     if (voted) {
         return (
@@ -105,9 +103,9 @@ function VoteButton(props) {
                 <StyledVoteButton onClick={voteHandler}>{`${props.eachIssue.count}`}&#128077;</StyledVoteButton>
             </div>
         )
-    }
+    };
 
-}
+};
 
 
 function MenuButton(props) {
@@ -117,18 +115,18 @@ function MenuButton(props) {
             <Bar2></Bar2>
             <Bar3></Bar3>
         </BurgerButton>
-    )
-}
+    );
+};
 
 function AddButton() {
     const { dispatch } = useContext(CoMakeContext);
     const displayForm = () => {
         dispatch({ type: TOGGLE_FORM })
-    }
+    };
     return (
         <StyledADDButton onClick={displayForm}>&#8853;</StyledADDButton>
-    )
-}
+    );
+};
 
 const EditButton = (props) => {
     const { dispatch, state } = useContext(CoMakeContext);
@@ -136,8 +134,7 @@ const EditButton = (props) => {
         dispatch({ type: TOGGLE_FORM });
         dispatch({ type: EDIT_THIS_ISSUE, payload: props.eachIssue });
     }
-    const myPost = (props.eachIssue.user_id === state.userProfile.username)
-    console.log(state.userProfile.username, "!@#!@#!@#@~#!#!@#~#$$$$$ASDASDASDASDASD")
+    const myPost = (props.eachIssue.user_id === state.userProfile.username);
     if (myPost) {
         return (
             <StyledEditButton onClick={displayForm}>Edit</StyledEditButton>
@@ -146,8 +143,8 @@ const EditButton = (props) => {
         return (
             <StyledEditButton className="hideButton" onClick={displayForm}>Edit</StyledEditButton>
         )
-    }
-}
+    };
+};
 
 
 function DeleteButton(props) {
@@ -166,34 +163,37 @@ function DeleteButton(props) {
             <StyledDeleteButton className="hideButton" onClick={deletePost}>DELETE Post</StyledDeleteButton>
         )
     }
-}
+};
 
 function SideNavButton(props) {
-    const [clicked, setClicked] = useState(false);
     const { dispatch, state } = useContext(CoMakeContext);
+    const [clicked, setClicked] = useState(false)
 
-    const clickHandler = () => {
-        setClicked(!clicked);
+    const clickHandler = (e) => {
+        e.preventDefault();
         if (props.body === "See All Issues") {
             axiosWithAuth()
                 .get("/issues")
                 .then(res => {
                     dispatch({ type: ADD_POST, payload: res.data.sort((a, b) => b.count - a.count) });
-                    setClicked(!clicked);
                 })
                 .catch(err => {
                     console.log("error from clicking the show all button, visit the button.js page", err);
-                })
+                });
         } else if (props.body === "Sort By Votes") {
-            if (!clicked)
+            if (!clicked) {
+                alert("11111false => to true");
+                setClicked(true);
                 dispatch({ type: ADD_POST, payload: state.issues.sort((a, b) => a.count - b.count) });
-            setClicked(!clicked);
-        } else {
-            dispatch({ type: ADD_POST, payload: state.issues.sort((a, b) => b.count - a.count) });
-        }
-    }
+            } else {
+                alert("true => to false");
+                setClicked(false);
+                dispatch({ type: ADD_POST, payload: state.issues.sort((a, b) => b.count - a.count) });
+            }
+        };
+    };
     return (
         <StyledSideNavButton onClick={clickHandler}>{props.body}</StyledSideNavButton>
-    )
+    );
 }
-export { MenuButton, VoteButton, AddButton, EditButton, DeleteButton, SideNavButton };
+export { MenuButton, VoteButton, AddButton, EditButton, DeleteButton, SideNavButton }

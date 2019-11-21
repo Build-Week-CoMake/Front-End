@@ -59,22 +59,22 @@ export default function Searchbar(props) {
             .get(`/issues/?location=${searchResult.toLowerCase()}`)
             .then(res => {
                 console.log(res, "response from searchbar");
-                dispatch({ type: GET_BY_LOCATION, payload: res.data })
+                dispatch({ type: GET_BY_LOCATION, payload: res.data.sort((a, b) => b.count - a.count) })
 
             })
             .catch(err => {
                 console.log(err, "error from searchbar")
             })
 
-        if (e.key === "Enter") {
+        // if (e.key === "Enter") {
 
 
 
-            e.preventDefault(e)
-            console.log(e.cancelable)
-            dispatch({ type: GET_BY_LOCATION, payload: searchResult })
+        //     e.preventDefault(e)
+        //     console.log(e.cancelable)
+        //     dispatch({ type: GET_BY_LOCATION, payload: searchResult })
 
-        }
+        // }
     }
     return (
 

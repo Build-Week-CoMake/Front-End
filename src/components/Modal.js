@@ -96,18 +96,13 @@ export default function Modal(props) {
     })
 
     useEffect(() => {
-        console.log("useEffect in MODAL is running")
         if (state.issueToEdit.title) {
-            console.log("edit if statement useEffect is running")
             setFormData(state.issueToEdit)
         } else if (state.deleteQueue.title) {
-            console.log("delete if statement in useEffect is running")
             setFormData(state.deleteQueue)
         }
 
     }, [state.issueToEdit, state.deleteQueue])
-    console.log(state.issueToEdit.title, "is this the correct title??")
-    console.log(state.issueToEdit, "is this being set before modal is called?")
 
     const handleChange = (e) => {
         e.persist();
@@ -125,7 +120,6 @@ export default function Modal(props) {
             axiosWithAuth()
                 .put(`/issues/${state.issueToEdit.id}`, { title, picture, location, description })
                 .then(res => {
-                    console.log(res, "response from put request");
                     setFormData({
                         title: "",
                         picture: "",
@@ -141,7 +135,6 @@ export default function Modal(props) {
             axiosWithAuth()
                 .post("/issues", { ...formData, location: formData.location.toLowerCase() })
                 .then(res => {
-                    console.log(res, "response from POST request");
                     setFormData({
                         title: "",
                         picture: "",
@@ -172,7 +165,6 @@ export default function Modal(props) {
         axiosWithAuth()
             .delete(`/issues/${state.deleteQueue.id}`, { location: state.deleteQueue.location.toLowerCase() })
             .then(res => {
-                console.log(res, "response from delete function");
                 dispatch({ type: DELETE_POST, payload: res.data })
                 dispatch({ type: TOGGLE_FORM });
             })

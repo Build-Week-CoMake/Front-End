@@ -162,7 +162,6 @@ export default function Login(props) {
     }
     const submitForm1 = (e) => {
         e.preventDefault();
-        localStorage.setItem("token", "be here please")
         axiosWithAuth()
             .post('/login', loginData)
             .then(res => {
@@ -176,7 +175,6 @@ export default function Login(props) {
 
     const submitForm2 = async (e) => {
         e.preventDefault();
-
         let isValid = await schema.isValid(
             signupData
         )

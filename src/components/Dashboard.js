@@ -20,14 +20,15 @@ const StyledDiv = styled.div`
         background-color: #339dce;
     }
     .right{
-        width:65%;
-        height:100%;
+        width: 81%;
+        height: 100%;
     }
 
 `;
 const DivStyle = styled.div
     `
-    padding-top: 2.5rem;
+    height: 100%;
+    overflow: auto;
 `
 
 export default function Dashboard() {
