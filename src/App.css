@@ -131,6 +131,24 @@ form{
     display: flex !important;
   }
 
+  .showSearchBar{
+    display: flex !important;
+    animation: appear .5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    opacity: 1 !important;
+  }
+
+  @keyframes appear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
   .navLinkStyle{
     text-decoration: none;
     color: #FFF;

@@ -3,11 +3,12 @@ import { CoMakeContext } from "../context/CoMakeContext";
 import styled from 'styled-components';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { INIT_HOME, UPDATE_USER_PROFILE, UP_VOTE, SET_PROFILE_ISSUES } from '../reducers';
+import * as Yup from 'yup';
 
 
 
 const LoginBG = styled.div`
-
+padding-top: 3rem;
 background-image: url(https://static.pexels.com/photos/4827/nature-forest-trees-fog.jpeg);
 background-position: center;
 background-repeat: no-repeat;
@@ -51,6 +52,7 @@ outline: none;
 // `
 
 
+
 export default function Login(props) {
     const { dispatch } = useContext(CoMakeContext);
     const [login, setLogin] = useState(true);
@@ -76,6 +78,10 @@ export default function Login(props) {
 
     const handleChangeForm2 = (e) => {
         e.persist();
+
+
+
+
         setSignUpData({
             ...signupData,
             [e.target.id]: e.target.value
@@ -127,7 +133,6 @@ export default function Login(props) {
             .post('/login', loginData)
             .then(res => {
                 localStorage.setItem("token", res.data.token)
-                localStorage.setItem("this thing", "here???")
                 getInitialData(res.data.location, res.data.username)
             })
             .catch(error => {
@@ -135,8 +140,18 @@ export default function Login(props) {
             });
     }
 
-    const submitForm2 = (e) => {
+    const submitForm2 = async (e) => {
         e.preventDefault();
+
+        let isValid = await schema.isValid(
+            signupData
+        )
+        if (!isValid) {
+            alert('input is not valid')
+            return
+
+        }
+
         axiosWithAuth()
             .post('/login/new', signupData)
             .then(res => {
@@ -148,6 +163,8 @@ export default function Login(props) {
                 console.log(`there is a error ${error}`, error);
             })
     }
+
+
 
     if (login === true) {
         return (
@@ -200,3 +217,12 @@ export default function Login(props) {
         )
     }
 }
+
+
+let schema = Yup.object().shape({
+    username: Yup.string().lowercase().min(4),
+    password: Yup.string().required('Password is required')
+
+});
+
+

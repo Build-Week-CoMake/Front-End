@@ -8,7 +8,8 @@ import LogoIcon from './logoIcon';
 
 const NavBarStyle = styled.div
     `
-
+position: fixed;
+top: 0px;
 margin: .01rem;
 width: 100vw;
 min-height: 3rem;
@@ -24,7 +25,7 @@ background: linear-gradient(90deg, rgba(61,96,152,1) 0%, rgba(0,212,255,1) 100%)
 export default function NavBar() {
     const [showMenu, setShowMenu] = useState(false)
     return (
-        <>
+        <div>
             <NavBarStyle>
                 {/* <MenuButton className='menuButton' onClick={() => { setShowMenu(!showMenu) }} ></MenuButton> */}
                 {/* <Searchbar className='Searchbar'></Searchbar> */}
@@ -33,6 +34,6 @@ export default function NavBar() {
             </NavBarStyle>
 
             {/* <Menu className={(showMenu) ? "menu showMenu" : "menu"} onClick={() => { setShowMenu(!showMenu) }}  ></Menu> */}
-        </>
+        </div>
     )
 }

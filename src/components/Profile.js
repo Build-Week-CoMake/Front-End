@@ -4,7 +4,7 @@ import { CoMakeContext } from "../context/CoMakeContext";
 import Issues from "./Issues";
 const ProfilePage = styled.div
     `
-    
+    padding-top: 3rem;   
 display: flex;
 flex-direction: column;
 

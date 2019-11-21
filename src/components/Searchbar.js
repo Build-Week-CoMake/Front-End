@@ -8,11 +8,42 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 
 const FormStyle = styled.form
     `
-width: 50%;
+width: 100%;
+display: none;
+animation: appear 2s;
+animation-iteration-count: 1;
+animation-fill-mode: forwards;
+opacity: 0;
+
+
+input {
+    
+    font-size: .8rem;
+    color: #fff;
+    transition: all .3s;
+  }  
+
+  input:focus{
+    outline: none;
+  }
+  
+  input::-webkit-input-placeholder {
+    color: #fff;
+  }
+
+  input{
+    background: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  -webkit-appearance: none;
+}
+
 `
 
 
-export default function Searchbar() {
+
+
+export default function Searchbar(props) {
     const { dispatch } = useContext(CoMakeContext);
     const [searchResult, setSearchResult] = useState('')
 

@@ -6,17 +6,23 @@ import { VoteButton, DeleteButton, EditButton } from './Buttons';
 const IssuesBox = styled.div
     ` 
 
-margin: 1rem;
+margin: 3rem;
 display: flex;
 align-items: center;
 background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+min-margin: 2rem;
 
+
+border-radius: 25px;
+box-shadow: 5px 5px 10px 3px rgba(0,0,0,0.10), -5px -5px 10px 3px rgba(0,0,0,0.10);
+cursor: pointer;
+transition: 0.4s;
 
   `
 
 const IssuesRightSide = styled.div
     `
-border: white .5px solid; 
+
 margin: .5rem;
 display: flex;
 flex-direction: column;
@@ -39,14 +45,13 @@ const Description = styled.div
 
 const VoteButtonStyle = styled.div
     `
-border: red 1px solid;
 width: 8%;
 margin: .3rem;
 `
 
 const ImageIcon = styled.div
     `
-border: red 1px solid;
+
 width: 8%;
 margin: .3rem;
 `
