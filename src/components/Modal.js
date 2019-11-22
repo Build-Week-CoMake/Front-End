@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import styled from "styled-components";
 import axios from "axios";
 import { CoMakeContext } from "../context/CoMakeContext";
-import { ADD_POST, TOGGLE_FORM, RESET_ISSUE_TO_EDIT, UNSELECT_ITEM_TO_DELETE, DELETE_POST } from "../reducers"
+import { ADD_POST, TOGGLE_FORM, RESET_ISSUE_TO_EDIT, UNSELECT_ITEM_TO_DELETE, DELETE_POST, SET_PROFILE_ISSUES, UP_VOTE } from "../reducers"
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 const ModalDiv = styled.div`
