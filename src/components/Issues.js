@@ -16,7 +16,7 @@ box-shadow: 5px 5px 10px 3px rgba(0,0,0,0.10), -5px -5px 10px 3px rgba(0,0,0,0.1
 cursor: pointer;
 transition: 0.4s;
 max-width: 900px;
-min-width: 600px;
+min-width: 900px;
   `
 
 const IssuesRightSide = styled.div

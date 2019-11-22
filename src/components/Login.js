@@ -56,7 +56,7 @@ outline: none;
 const LoginBox = styled.div`
 display: flex;
 align-items: center;
-width: 700px;
+width: 900px;
 margin: 4rem;
 height: 600px;
 background: white;

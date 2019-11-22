@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom'
 import Searchbar from './Searchbar'
 import { CoMakeContext } from '../context/CoMakeContext';
-import { ALTER_LOCATION_STATE } from '../reducers';
+import { ALTER_LOCATION_STATE, SET_PROFILE_ISSUES, UP_VOTE } from '../reducers';
+import axiosWithAuth from "../utils/axiosWithAuth"
 const ManuBar = styled.div
     `
     
@@ -88,13 +89,34 @@ padding: 0 0 0 1.5rem;
 `
 export default function Menu() {
     const [showSearch, setshowSearch] = useState(false)
-    const { dispatch } = useContext(CoMakeContext);
+    const { dispatch, state } = useContext(CoMakeContext);
+    const refreshFn = () => {
+        dispatch({ type: ALTER_LOCATION_STATE, payload: true })
+        axiosWithAuth()
+            .get(`/issues?user_id=${state.userProfile.username}`)
+            .then(res => {
+                // console.log("set Profile issues HorizontalMenu.js", res.data);
+                dispatch({ type: SET_PROFILE_ISSUES, payload: res.data.sort((a, b) => b.count - a.count) });
+            })
+            .catch(err => {
+                console.log(err, "err from horizontalMenu.js")
+            });
+        axiosWithAuth()
+            .get("/upvote/")
+            .then(res => {
+                console.log("this is my voting data horizontalmenu.js", res)
+                dispatch({ type: UP_VOTE, payload: res.data.sort((a, b) => b.count - a.count) })
+            })
+            .catch(err => {
+                console.log(err, "error from upvote get inside of horizontalMenu.js")
+            });
+    }
     return (
         <ManuBar >
             <ul>
                 <li><a href="https://co-make-marketing.netlify.com">Home</a></li>
                 <li><NavLink to="/" >Dashboard</NavLink></li>
-                <li><NavLink onClick={() => { dispatch({ type: ALTER_LOCATION_STATE, payload: true }) }} to="/profile">Profile</NavLink></li>
+                <li><NavLink onClick={refreshFn} to="/profile">Profile</NavLink></li>
                 <li><NavLink onClick={() => { localStorage.clear("token") }} to="/login">Logout</NavLink></li>
             </ul>
             <Searchbar className={(showSearch) ? "searchBar showSearchBar" : "searchBar"} />
