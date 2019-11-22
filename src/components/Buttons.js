@@ -244,11 +244,9 @@ function SideNavButton(props) {
                 });
         } else if (props.body === "Sort By Votes") {
             if (!clicked) {
-                alert("11111false => to true");
                 setClicked(true);
                 dispatch({ type: ADD_POST, payload: state.issues.sort((a, b) => a.count - b.count) });
             } else {
-                alert("true => to false");
                 setClicked(false);
                 dispatch({ type: ADD_POST, payload: state.issues.sort((a, b) => b.count - a.count) });
             }
