@@ -9,13 +9,14 @@ const IssuesBox = styled.div
 margin: 3rem;
 display: flex;
 align-items: center;
-background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+background:linear-gradient(0deg, rgba(186,240,228,1) 51%, rgba(96,214,171,1) 100%);
 margin: 2rem;
-border-radius: 25px;
+border-radius: 10px;
 box-shadow: 5px 5px 10px 3px rgba(0,0,0,0.10), -5px -5px 10px 3px rgba(0,0,0,0.10);
 cursor: pointer;
 transition: 0.4s;
-
+max-width: 900px;
+min-width: 600px;
   `
 
 const IssuesRightSide = styled.div

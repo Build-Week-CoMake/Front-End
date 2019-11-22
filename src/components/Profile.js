@@ -4,12 +4,12 @@ import { CoMakeContext } from "../context/CoMakeContext";
 import Issues from "./Issues";
 const ProfilePage = styled.div
     `
-    padding-top: 3rem;   
+padding-top: 3rem;   
 display: flex;
 flex-direction: column;
 
 align-items: center;
-background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+background:linear-gradient(90deg,rgba(61,96,152,1) 0%,rgba(0,212,255,1) 100%);
 
 `
 
@@ -24,6 +24,9 @@ background: white;
 padding-top: 1rem;
 .issues-container{
     width:95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
@@ -56,8 +59,8 @@ export default function Profile() {
     return (
         <ProfilePage>
             <EditBoxStyle>
-                <div>Username :{state.userProfile.username}</div>
-                <div>Default Location:{state.userProfile.location}</div>
+                <div>Username : {state.userProfile.username}</div>
+                <div>Default Location: {state.userProfile.location}</div>
                 <div>Password: {password()}</div>
             </EditBoxStyle>
             <BoxStyle>
