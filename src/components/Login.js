@@ -58,7 +58,7 @@ display: flex;
 align-items: center;
 width: 700px;
 margin: 4rem;
-height: 450px;
+height: 600px;
 background: white;
 box-shadow: 5px 5px 30px 10px rgba(0,0,0,0.10), -5px 30px 30px 10px rgba(0,0,0,0.10);
 
@@ -86,7 +86,6 @@ input{
     
 
 }
-
 
 `
 
