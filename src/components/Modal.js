@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import styled from "styled-components";
+import axios from "axios";
 import { CoMakeContext } from "../context/CoMakeContext";
 import { ADD_POST, TOGGLE_FORM, RESET_ISSUE_TO_EDIT, UNSELECT_ITEM_TO_DELETE, DELETE_POST } from "../reducers"
 import axiosWithAuth from "../utils/axiosWithAuth";
@@ -225,14 +226,20 @@ export default function Modal(props) {
     };
     const handleDelete = (e) => {
         e.preventDefault();
-        axiosWithAuth()
-            .delete(`/issues/${state.deleteQueue.id}`, { location: state.deleteQueue.location.toLowerCase() })
+        const token = localStorage.getItem("token");
+        axios
+            .delete(`https://backend-buildweek.herokuapp.com/issues/${state.deleteQueue.id}`, {
+                headers: {
+                    auth: token,
+                    location: state.deleteQueue.location.toLowerCase()
+                }
+            })
             .then(res => {
                 dispatch({ type: DELETE_POST, payload: res.data })
                 dispatch({ type: TOGGLE_FORM });
             })
             .catch(err => {
-                console.log(err, "error from ADD_POST function");
+                console.log(err, "error from delete function");
             });
     }
 
