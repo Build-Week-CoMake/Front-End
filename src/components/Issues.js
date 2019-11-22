@@ -24,6 +24,7 @@ const IssuesRightSide = styled.div
 
 margin: .5rem;
 display: flex;
+padding: .5rem;
 flex-direction: column;
 width: 70%;
 `
@@ -39,7 +40,8 @@ const Description = styled.div
     `margin: .3rem
     max-height:50px;
     overflow: hidden;
-    background: linear-gradient(0deg, rgba(2,0,36,.5) 0%, rgba(217,217,235,0) 26%); 
+    // background: linear-gradient(0deg, rgba(186,240,228,1) 51%, rgba(96,214,173,0.01) 100%);
+    background-image: linear-gradient(to bottom,transparent,#00000017);
 `;
 
 const VoteButtonStyle = styled.div

@@ -19,7 +19,6 @@ const ModalDiv = styled.div`
     main{
         width: 600px;
         height:600px;
-        
         border-radius:7px;
         background: snow;
         padding:2%;
@@ -131,8 +130,8 @@ const ModalDivDelete = styled.div`
     main{
         width: 300px;
         height:300px;
-        border: 2px solid #000;
-        border-radius:10px;
+        
+        border-radius:7px;
         background: snow;
         padding:2%;
         display:flex;
@@ -244,9 +243,7 @@ export default function Modal(props) {
                     <button onClick={handleDelete}>Delete Post</button>
                     <button onClick={handleQuit}>Cancel</button>
                 </div>
-                <span onClick={handleQuit}>
-                    &#9421;
-                </span>
+
             </main>
         </ModalDivDelete>
         )
