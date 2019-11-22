@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom'
 import Searchbar from './Searchbar'
+import { CoMakeContext } from '../context/CoMakeContext';
+import { ALTER_LOCATION_STATE } from '../reducers';
 const ManuBar = styled.div
     `
     
@@ -86,12 +88,13 @@ padding: 0 0 0 1.5rem;
 `
 export default function Menu() {
     const [showSearch, setshowSearch] = useState(false)
+    const { dispatch } = useContext(CoMakeContext);
     return (
         <ManuBar >
             <ul>
                 <li><a href="https://co-make-marketing.netlify.com">Home</a></li>
                 <li><NavLink to="/" >Dashboard</NavLink></li>
-                <li><NavLink to="/profile">Profile</NavLink></li>
+                <li><NavLink onClick={() => { dispatch({ type: ALTER_LOCATION_STATE, payload: true }) }} to="/profile">Profile</NavLink></li>
                 <li><NavLink onClick={() => { localStorage.clear("token") }} to="/login">Logout</NavLink></li>
             </ul>
             <Searchbar className={(showSearch) ? "searchBar showSearchBar" : "searchBar"} />

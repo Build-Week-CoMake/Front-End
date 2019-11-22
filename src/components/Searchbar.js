@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import styled from 'styled-components';
 import { CoMakeContext } from '../context/CoMakeContext';
-import { GET_BY_LOCATION } from '../reducers';
+import { GET_BY_LOCATION, ALTER_LOCATION_STATE } from '../reducers';
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 
@@ -55,6 +55,7 @@ export default function Searchbar(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         e.persist();
+        dispatch({ type: ALTER_LOCATION_STATE, payload: true });
         axiosWithAuth()
             .get(`/issues/?location=${searchResult.toLowerCase()}`)
             .then(res => {

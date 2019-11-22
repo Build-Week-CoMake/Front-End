@@ -55,12 +55,10 @@ export default function Issues(props) {
     let image = (props.eachIssue.picture.startsWith("http") ? props.eachIssue.picture : "https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80");
 
 
-    const ImageIcon = styled.div`
-    background-image: url(${image});
+    const ImageIcon = styled.img`
     width: 15%;
     height: 100px;
     margin: .3rem;
-    background-size: contain;
     `
     const [expanded, setExpanded] = useState(false)
     const { state } = useContext(CoMakeContext)
@@ -80,7 +78,7 @@ export default function Issues(props) {
                 <EditButton eachIssue={props.eachIssue} />
                 <DeleteButton eachIssue={props.eachIssue} />
             </VoteButtonStyle>
-            <ImageIcon></ImageIcon>
+            <ImageIcon src={image}></ImageIcon>
             <IssuesRightSide>
                 <Top>
                     <div className='title'>{props.eachIssue.title}</div>

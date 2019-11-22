@@ -1,6 +1,6 @@
 import axiosWithAuth from "../utils/axiosWithAuth";
-import axios from "axios";
 export const ADD_POST = "ADD";  //create a post
+export const ALTER_LOCATION_STATE = "ALTER_LOCATION_STATE";
 export const DELETE_POST = "DELETE_POST";  //delete a post
 export const DOWN_VOTE = "DOWN_VOTE"; // PUT REQUEST plus filter to reorder list of comments
 export const EDIT_THIS_ISSUE = "EDIT_THIS_ISSUE";
@@ -29,9 +29,15 @@ const initialState = {
     showForm: false,
     issueToEdit: {},
     deleteQueue: {},
+    location: true
 };
 const appReducer = (state, action) => {
     switch (action.type) {
+        case ALTER_LOCATION_STATE:
+            return {
+                ...state,
+                location: action.payload
+            };
         case ADD_POST:
             return {
                 ...state,

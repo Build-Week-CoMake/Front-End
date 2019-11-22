@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import styled from "styled-components";
 import { CoMakeContext } from "../context/CoMakeContext";
 import { UP_VOTE, DOWN_VOTE, TOGGLE_FORM, SELECT_ITEM_TO_DELETE, EDIT_THIS_ISSUE, ADD_POST } from "../reducers";
+import { ALTER_LOCATION_STATE, SET_PROFILE_ISSUES } from "../reducers";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 const StyledVoteButton = styled.button`
@@ -79,16 +80,74 @@ function VoteButton(props) {
             let data = await axiosWithAuth()
                 .delete(`/upvote/${props.eachIssue.id}`)
             dispatch({
-                type: "DOWN_VOTE",
+                type: DOWN_VOTE,
                 payload: data.data
-            })
+            });
+            axiosWithAuth()
+                .get(`/issues?user_id=${state.userProfile.username}`)
+                .then(res => {
+                    // console.log("get issues by username", res.data);
+                    dispatch({ type: SET_PROFILE_ISSUES, payload: res.data.sort((a, b) => b.count - a.count) });
+                });
+            if (state.location) {
+                let dashboardRefresh = await axiosWithAuth()
+                    .get(`/issues?location=${props.eachIssue.location}`)
+
+                dispatch({
+                    type: ADD_POST,
+                    payload: dashboardRefresh.data.sort((a, b) => b.count - a.count)
+                });
+            } else {
+                axiosWithAuth()
+                    .get("/issues")
+                    .then(res => {
+                        // console.log(res, "res from axios in Edit Button.js")
+                        dispatch({
+                            type: ADD_POST,
+                            payload: res.data.sort((a, b) => b.count - a.count)
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err, "error from axios EditButton.js")
+                    })
+            };
+
         } else {
             let data = await axiosWithAuth()
                 .post(`/upvote/${props.eachIssue.id}`)
             dispatch({
-                type: "UP_VOTE",
+                type: UP_VOTE,
                 payload: data.data
-            })
+            });
+            axiosWithAuth()
+                .get(`/issues?user_id=${state.userProfile.username}`)
+                .then(res => {
+                    // console.log("get issues by username", res.data);
+                    dispatch({ type: SET_PROFILE_ISSUES, payload: res.data.sort((a, b) => b.count - a.count) });
+                });
+            if (state.location) {
+                let dashboardRefresh2 = await axiosWithAuth()
+                    .get(`/issues?location=${props.eachIssue.location}`)
+
+                dispatch({
+                    type: ADD_POST,
+                    payload: dashboardRefresh2.data.sort((a, b) => b.count - a.count)
+                });
+            } else {
+                axiosWithAuth()
+                    .get("/issues")
+                    .then(res => {
+                        // console.log(res, "res from axios in Edit Button.js")
+                        dispatch({
+                            type: ADD_POST,
+                            payload: res.data.sort((a, b) => b.count - a.count)
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err, "error from axios EditButton.js")
+                    })
+            };
+
         };
     };
 
@@ -122,7 +181,8 @@ function MenuButton(props) {
 function AddButton() {
     const { dispatch } = useContext(CoMakeContext);
     const displayForm = () => {
-        dispatch({ type: TOGGLE_FORM })
+        dispatch({ type: TOGGLE_FORM });
+        dispatch({ type: ALTER_LOCATION_STATE, payload: true });
     };
     return (
         <StyledSideNavButton className='styledSideNavButton' onClick={displayForm}>Add Post</StyledSideNavButton>
@@ -172,6 +232,7 @@ function SideNavButton(props) {
 
     const clickHandler = (e) => {
         e.preventDefault();
+        dispatch({ type: ALTER_LOCATION_STATE, payload: false })
         if (props.body === "See All Issues") {
             axiosWithAuth()
                 .get("/issues")
@@ -194,12 +255,7 @@ function SideNavButton(props) {
         };
     };
     return (
-<<<<<<< HEAD
-        <StyledSideNavButton onClick={clickHandler}>{props.body}</StyledSideNavButton>
-    );
-=======
         <button className="styledSideNavButton" onClick={clickHandler}>{props.body}</button>
     )
->>>>>>> e9969b4054f15a9ac7a7fd5866569d24c029cb86
 }
 export { MenuButton, VoteButton, AddButton, EditButton, DeleteButton, SideNavButton }

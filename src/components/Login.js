@@ -148,7 +148,7 @@ export default function Login(props) {
             .get("/upvote/")
             .then(res => {
                 console.log("this is my voting data login.js", res)
-                dispatch({ type: UP_VOTE, payload: res.data.sort((a, b) => b.count - a.count) }) // === []
+                dispatch({ type: UP_VOTE, payload: res.data.sort((a, b) => b.count - a.count) })
             })
             .catch(err => {
                 console.log(err, "error from upvote get inside of login.js")
