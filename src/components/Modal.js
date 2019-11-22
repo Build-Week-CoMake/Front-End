@@ -255,6 +255,24 @@ export default function Modal(props) {
             .catch(err => {
                 console.log(err, "error from delete function");
             });
+        axiosWithAuth()
+            .get(`/issues?user_id=${state.userProfile.username}`)
+            .then(res => {
+                // console.log("set Profile issues HorizontalMenu.js", res.data);
+                dispatch({ type: SET_PROFILE_ISSUES, payload: res.data.sort((a, b) => b.count - a.count) });
+            })
+            .catch(err => {
+                console.log(err, "err from horizontalMenu.js")
+            });
+        axiosWithAuth()
+            .get("/upvote/")
+            .then(res => {
+                console.log("this is my voting data horizontalmenu.js", res)
+                dispatch({ type: UP_VOTE, payload: res.data.sort((a, b) => b.count - a.count) })
+            })
+            .catch(err => {
+                console.log(err, "error from upvote get inside of horizontalMenu.js")
+            });
     }
 
     if (state.deleteQueue.title) {
