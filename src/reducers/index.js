@@ -1,6 +1,6 @@
 import axiosWithAuth from "../utils/axiosWithAuth";
-import axios from "axios";
 export const ADD_POST = "ADD";  //create a post
+export const ALTER_LOCATION_STATE = "ALTER_LOCATION_STATE";
 export const DELETE_POST = "DELETE_POST";  //delete a post
 export const DOWN_VOTE = "DOWN_VOTE"; // PUT REQUEST plus filter to reorder list of comments
 export const EDIT_THIS_ISSUE = "EDIT_THIS_ISSUE";
@@ -14,74 +14,37 @@ export const SET_PROFILE_ISSUES = "SET_PROFILE_ISSUES";
 export const TOGGLE_FORM = "TOGGLE_FORM";
 export const UNSELECT_ITEM_TO_DELETE = "UNSELECT_ITEM_TO_DELETE"
 export const UP_VOTE = "UP_VOTE"; // PUT REQUEST plus filter to reorder list of comments
-export const UPDATE_POST = "UDATE_POST";  //update a post
 export const UPDATE_USER_PROFILE = "UPDATE_USER_PROFILE";
 
 
 const initialState = {
-    issues: [ //location based on load
-        // {
-        //     title: 'Lots of good stuff',
-        //     location: 'New York',
-        //     description: 'nice nice nice very nice nice nice nice verery nice nice nice nice verery nice nice nice nice verery nice nice nice nice very nice nice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nice'
-        // },
-        // {
-        //     title: 'Lots of good stuff',
-        //     location: 'New York',
-        //     description: 'nice nice nice very nice'
-        // },
-        // {
-        //     title: 'Lots of good stuff',
-        //     location: 'New York',
-        //     description: 'nice nice nice very nice'
-        // },
-        // {
-        //     title: 'Lots of good stuff',
-        //     location: 'New York',
-        //     description: 'nice nice nice very nice'
-        // }
-    ], // state for main dashboard
-    profileIssues: [
-        // {
-        //     title: 'Lots of good stuff',
-        //     location: 'New York',
-        //     description: 'nice nice nice very nice nice nice nice verery nice nice nice nice verery nice nice nice nice verery nice nice nice nice very nice nice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nicenice nice nice very nice'
-        // },
-        // {
-        //     title: 'Lots of good stuff',
-        //     location: 'New York',
-        //     description: 'nice nice nice very nice'
-        // },
-        // {
-        //     title: 'Lots of good stuff',
-        //     location: 'New York',
-        //     description: 'nice nice nice very nice'
-        // },
-        // {
-        //     title: 'Lots of good stuff',
-        //     location: 'New York',
-        //     description: 'nice nice nice very nice'
-        // }
-    ], //state for profile page
+    issues: [],
+    profileIssues: [],
     userProfile: {
         username: 'William777',
         location: 'New York',
         password: '12345',
     },
     voteProfile: [],
-    showForm: false,  //change to true to display modal to create a new issue/complaint
+    showForm: false,
     issueToEdit: {},
-    deleteQueue: {}
+    deleteQueue: {},
+    location: true
 };
 const appReducer = (state, action) => {
     switch (action.type) {
+        case ALTER_LOCATION_STATE:
+            return {
+                ...state,
+                location: action.payload
+            };
         case ADD_POST:
             return {
                 ...state,
                 issues: action.payload,
                 showForm: false,
                 issueToEdit: {},
-                deleteQueue: {}
+                deleteQueue: {},
             };
         case DELETE_POST:
             return {
@@ -160,20 +123,6 @@ const appReducer = (state, action) => {
                 ...state,
                 voteProfile: action.payload
             };
-        case UPDATE_POST:
-            axiosWithAuth()
-                .put(`/issues/${action.payload.id}`, action.payload)
-                .then(res => {
-                    console.log(res, "response from UPDATE_POST function");
-                    return {
-                        ...state,
-                        issues: res.data
-                    }
-                })
-                .catch(err => {
-                    console.log(err, "error from UPDATE_POST function");
-                });
-            break;
         case UPDATE_USER_PROFILE:
             return {
                 ...state,

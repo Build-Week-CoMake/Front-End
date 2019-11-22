@@ -15,31 +15,7 @@ import Modal from "./components/Modal";
 
 function App(props) {
   const [state, dispatch] = useReducer(appReducer, initialState)
-  useEffect(() => {
-    if (props.match.path === "/") {
-      // axiosWithAuth()
-      //   .get("/issues")
-      //   .then(res => {
-      //     console.log(res, "responseData")
-      //     dispatch({ type: INIT_HOME, payload: res.data })
-      //   })
-      //   .catch(err => {
-      //     console.log(err, "error from init")
-      //   })
-    }
-    else if (props.match.path === "/profile") {
-      // axiosWithAuth()
-      //     .get("/issues")
-      //     .then(res => {
-      //         console.log(res, "responseData")
-      //         dispatch({ type: INIT_HOME, payload: res.data })
-      //     })
-      //     .catch(err => {
-      //         console.log(err, "error from init")
-      //     })
-    }
 
-  }, [props.match.path])
   return (
     <div>
       <CoMakeContext.Provider value={{ state, dispatch }}>

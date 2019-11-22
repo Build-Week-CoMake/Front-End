@@ -2,37 +2,38 @@ import React, { useState, useContext } from 'react'
 import styled from "styled-components";
 import { CoMakeContext } from "../context/CoMakeContext";
 import { UP_VOTE, DOWN_VOTE, TOGGLE_FORM, SELECT_ITEM_TO_DELETE, EDIT_THIS_ISSUE, ADD_POST } from "../reducers";
+import { ALTER_LOCATION_STATE, SET_PROFILE_ISSUES } from "../reducers";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 const StyledVoteButton = styled.button`
-    height:20px;
-    width:45px;
-    border-radius:45px;
-    background-color:#DCDCDC;
-    color: black;
+    // height:20px;
+    // width:45px;
+    // border-radius:45px;
+    // background-color:#DCDCDC;
+    // color: black;
 `;
 const StyledADDButton = styled.button`
-    height:35px;
-    width:100px;
-    border-radius:45px;
-    background-color:#39b128;
-    color: black;
+    // height:35px;
+    // width:100px;
+    // border-radius:45px;
+    // background-color:red;
+    // color: black;
 `;
 const StyledEditButton = styled.button`
-    height:20px;
-    width:50px;
-    border-radius:45px;
-    background-color:#DCDCDC;
-    color: black;
+    // height:20px;
+    // width:50px;
+    // border-radius:45px;
+    // background-color:#DCDCDC;
+    // color: black;
 `;
 
 const StyledDeleteButton = styled.button`
-    height:35px;
-    width:35px;
-    border-radius:45px;
-    background-color:red;
-    color: black;
-    font-size: .4 rem;
+    // height:35px;
+    // width:35px;
+    // border-radius:45px;
+    // background-color:red;
+    // color: black;
+    // font-size: .4 rem;
 
 `;
 
@@ -61,18 +62,17 @@ const BurgerButton = styled.div
     `
 `
 const StyledSideNavButton = styled.button`
-height:35px;
-width:100px;
-border-radius:45px;
-background-color:#DCDCDC;
-color: black;
+padding: .6rem 1.6rem;
+// height:35px;
+// width:100px;
+// border-radius:45px;
+// background-color:#DCDCDC;
+// color: black;
 `;
 
 function VoteButton(props) {
     const { state } = useContext(CoMakeContext);
-    console.log("this is my voteProfile", state.voteProfile)
-
-    const voted = props.didVote
+    const voted = props.didVote;
     const { dispatch } = useContext(CoMakeContext);
     const voteHandler = async (e) => {
         e.preventDefault();
@@ -80,34 +80,92 @@ function VoteButton(props) {
             let data = await axiosWithAuth()
                 .delete(`/upvote/${props.eachIssue.id}`)
             dispatch({
-                type: "DOWN_VOTE",
+                type: DOWN_VOTE,
                 payload: data.data
-            })
+            });
+            axiosWithAuth()
+                .get(`/issues?user_id=${state.userProfile.username}`)
+                .then(res => {
+                    // console.log("get issues by username", res.data);
+                    dispatch({ type: SET_PROFILE_ISSUES, payload: res.data.sort((a, b) => b.count - a.count) });
+                });
+            if (state.location) {
+                let dashboardRefresh = await axiosWithAuth()
+                    .get(`/issues?location=${props.eachIssue.location}`)
+
+                dispatch({
+                    type: ADD_POST,
+                    payload: dashboardRefresh.data.sort((a, b) => b.count - a.count)
+                });
+            } else {
+                axiosWithAuth()
+                    .get("/issues")
+                    .then(res => {
+                        // console.log(res, "res from axios in Edit Button.js")
+                        dispatch({
+                            type: ADD_POST,
+                            payload: res.data.sort((a, b) => b.count - a.count)
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err, "error from axios EditButton.js")
+                    })
+            };
+
         } else {
             let data = await axiosWithAuth()
                 .post(`/upvote/${props.eachIssue.id}`)
             dispatch({
-                type: "UP_VOTE",
+                type: UP_VOTE,
                 payload: data.data
-            })
-        }
-    }
+            });
+            axiosWithAuth()
+                .get(`/issues?user_id=${state.userProfile.username}`)
+                .then(res => {
+                    // console.log("get issues by username", res.data);
+                    dispatch({ type: SET_PROFILE_ISSUES, payload: res.data.sort((a, b) => b.count - a.count) });
+                });
+            if (state.location) {
+                let dashboardRefresh2 = await axiosWithAuth()
+                    .get(`/issues?location=${props.eachIssue.location}`)
+
+                dispatch({
+                    type: ADD_POST,
+                    payload: dashboardRefresh2.data.sort((a, b) => b.count - a.count)
+                });
+            } else {
+                axiosWithAuth()
+                    .get("/issues")
+                    .then(res => {
+                        // console.log(res, "res from axios in Edit Button.js")
+                        dispatch({
+                            type: ADD_POST,
+                            payload: res.data.sort((a, b) => b.count - a.count)
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err, "error from axios EditButton.js")
+                    })
+            };
+
+        };
+    };
 
     if (voted) {
         return (
             <div>
-                <StyledVoteButton className="voted-color" onClick={voteHandler}>{`${props.eachIssue.count}`}&#128077;</StyledVoteButton>
+                <StyledVoteButton className="button-like liked" onClick={voteHandler}><i class="fa fa-heart"></i>{` ${props.eachIssue.count}`} Like</StyledVoteButton>
             </div>
         )
     } else {
         return (
             <div>
-                <StyledVoteButton onClick={voteHandler}>{`${props.eachIssue.count}`}&#128077;</StyledVoteButton>
+                <StyledVoteButton className='button-like' onClick={voteHandler}><i class="fa fa-heart"></i>{` ${props.eachIssue.count}`} Like</StyledVoteButton>
             </div>
         )
-    }
+    };
 
-}
+};
 
 
 function MenuButton(props) {
@@ -117,16 +175,17 @@ function MenuButton(props) {
             <Bar2></Bar2>
             <Bar3></Bar3>
         </BurgerButton>
-    )
-}
+    );
+};
 
 function AddButton() {
     const { dispatch } = useContext(CoMakeContext);
     const displayForm = () => {
-        dispatch({ type: TOGGLE_FORM })
-    }
+        dispatch({ type: TOGGLE_FORM });
+        dispatch({ type: ALTER_LOCATION_STATE, payload: true });
+    };
     return (
-        <StyledADDButton onClick={displayForm}>&#8853;</StyledADDButton>
+        <StyledSideNavButton className='styledSideNavButton' onClick={displayForm}>Add Post</StyledSideNavButton>
     )
 }
 
@@ -136,18 +195,17 @@ const EditButton = (props) => {
         dispatch({ type: TOGGLE_FORM });
         dispatch({ type: EDIT_THIS_ISSUE, payload: props.eachIssue });
     }
-    const myPost = (props.eachIssue.user_id === state.userProfile.username)
-    console.log(state.userProfile.username, "!@#!@#!@#@~#!#!@#~#$$$$$ASDASDASDASDASD")
+    const myPost = (props.eachIssue.user_id === state.userProfile.username);
     if (myPost) {
         return (
-            <StyledEditButton onClick={displayForm}>Edit</StyledEditButton>
+            <StyledEditButton className="button-Edit" onClick={displayForm}>Edit</StyledEditButton>
         )
     } else {
         return (
             <StyledEditButton className="hideButton" onClick={displayForm}>Edit</StyledEditButton>
         )
-    }
-}
+    };
+};
 
 
 function DeleteButton(props) {
@@ -159,41 +217,45 @@ function DeleteButton(props) {
     const myPost = (props.eachIssue.user_id === state.userProfile.username)
     if (myPost) {
         return (
-            <StyledDeleteButton onClick={deletePost}>DELETE Post</StyledDeleteButton>
+            <StyledDeleteButton className="button-Delete" onClick={deletePost}>Delete</StyledDeleteButton>
         )
     } else {
         return (
-            <StyledDeleteButton className="hideButton" onClick={deletePost}>DELETE Post</StyledDeleteButton>
+            <StyledDeleteButton className="hideButton" onClick={deletePost}>Deletet</StyledDeleteButton>
         )
     }
-}
+};
 
 function SideNavButton(props) {
-    const [clicked, setClicked] = useState(false);
     const { dispatch, state } = useContext(CoMakeContext);
+    const [clicked, setClicked] = useState(false)
 
-    const clickHandler = () => {
-        setClicked(!clicked);
+    const clickHandler = (e) => {
+        e.preventDefault();
+        dispatch({ type: ALTER_LOCATION_STATE, payload: false })
         if (props.body === "See All Issues") {
             axiosWithAuth()
                 .get("/issues")
                 .then(res => {
                     dispatch({ type: ADD_POST, payload: res.data.sort((a, b) => b.count - a.count) });
-                    setClicked(!clicked);
                 })
                 .catch(err => {
                     console.log("error from clicking the show all button, visit the button.js page", err);
-                })
+                });
         } else if (props.body === "Sort By Votes") {
-            if (!clicked)
+            if (!clicked) {
+                alert("11111false => to true");
+                setClicked(true);
                 dispatch({ type: ADD_POST, payload: state.issues.sort((a, b) => a.count - b.count) });
-            setClicked(!clicked);
-        } else {
-            dispatch({ type: ADD_POST, payload: state.issues.sort((a, b) => b.count - a.count) });
-        }
-    }
+            } else {
+                alert("true => to false");
+                setClicked(false);
+                dispatch({ type: ADD_POST, payload: state.issues.sort((a, b) => b.count - a.count) });
+            }
+        };
+    };
     return (
-        <StyledSideNavButton onClick={clickHandler}>{props.body}</StyledSideNavButton>
+        <button className="styledSideNavButton" onClick={clickHandler}>{props.body}</button>
     )
 }
-export { MenuButton, VoteButton, AddButton, EditButton, DeleteButton, SideNavButton };
+export { MenuButton, VoteButton, AddButton, EditButton, DeleteButton, SideNavButton }

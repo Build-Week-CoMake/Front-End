@@ -12,22 +12,36 @@ const StyledDiv = styled.div`
     padding-top: 48px;
     background-color: #f2e7e6;
     display: flex;
+
     justify-content: space-between;
     overflow:hidden;
     .left{
         width: 15%;
+        min-width: 145px;
+        max-width: 200px;
         height: 100%;
-        background-color: #339dce;
+        background:linear-gradient(90deg,rgba(61,96,152,1) 0%,rgba(0,212,255,1) 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        button{
+            margin: 3rem 0;
+        }
+        
     }
     .right{
-        width:65%;
+        width:85%;
         height:100%;
+        display: flex;
+    flex-direction: column;
+    align-items: center;
     }
 
 `;
 const DivStyle = styled.div
     `
-    padding-top: 2.5rem;
+    height: 100%;
+    overflow: auto;
 `
 
 export default function Dashboard() {

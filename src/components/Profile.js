@@ -2,44 +2,72 @@ import React, { useContext } from 'react'
 import styled from 'styled-components';
 import { CoMakeContext } from "../context/CoMakeContext";
 import Issues from "./Issues";
-const ProfilePage = styled.div
-    `
+const ProfilePage = styled.div`
+    min-height:100vh;
     padding-top: 3rem;   
-display: flex;
-flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-align-items: center;
-background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    align-items: center;
 
-`
+    background: linear-gradient(90deg, #91fbbf 35%, #8be2db 100%);
+`;
 
 const BoxStyle = styled.div`
-width: 95%;
-min-height: 10rem;
-margin: 1rem;
-display: flex;
-flex-direction: column;
-align-items:center;
-background: white;
-padding-top: 1rem;
-.issues-container{
-    width:95%;
-}
+    width: 95%;
+    min-height: 10rem;
+    max-height: 15rem;
+    overflow: auto;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    background: white;
+    border-radius:1rem;
+    padding-top: 1rem;
+    .issues-container{
+        width:95%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
 
 `;
 
 const EditBoxStyle = styled.div`
 width: 95%;
-max-height: 10rem;
+max-height: 25rem;
 
 margin: 1rem;
+border-radius:1rem;
 display: flex;
 flex-direction: column;
-justify-content: space-around;
-background: white;
-div{
-    padding: 1rem;
+align-items: center;
+justify-content:space-around;
+color:#213159;
+background: #213159;
+h1{
+    background: linear-gradient(90deg, #91fbbf 35%, #8be2db 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    width:95%;
+    text-align:center;
+}
+.user-info{
+    width:100%;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    text-align:center;
+    margin-bottom: 3%;
+    div{
+        border-radius: 1rem;
+        padding: 2% 0;
+        background-color: white;
+        text-align: center;
+        width: 29%;
+    }
 }
 `;
 
@@ -56,9 +84,12 @@ export default function Profile() {
     return (
         <ProfilePage>
             <EditBoxStyle>
-                <div>Username :{state.userProfile.username}</div>
-                <div>Default Location:{state.userProfile.location}</div>
-                <div>Password: {password()}</div>
+                <h1>Welcome, {state.userProfile.username}.</h1>
+                <div className="user-info">
+                    <div>Username: {state.userProfile.username}</div>
+                    <div>Default Location: {state.userProfile.location}</div>
+                    <div>Password: {password()}</div>
+                </div>
             </EditBoxStyle>
             <BoxStyle>
                 <div >All Created Posts</div>

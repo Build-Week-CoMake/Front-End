@@ -29,7 +29,7 @@ width: 14rem;
 border: none;
 border-radius: 20px;
 background: linear-gradient(90deg, rgba(61,96,152,1) 0%, rgba(0,212,255,1) 100%);
-
+font-size: 17px;
 color: #fff;
 font-weight: bolder;
 margin: 1rem 2rem;
@@ -56,9 +56,9 @@ outline: none;
 const LoginBox = styled.div`
 display: flex;
 align-items: center;
-width: 700px;
+width: 900px;
 margin: 4rem;
-height: 450px;
+height: 600px;
 background: white;
 box-shadow: 5px 5px 30px 10px rgba(0,0,0,0.10), -5px 30px 30px 10px rgba(0,0,0,0.10);
 
@@ -79,14 +79,13 @@ input{
     display: block;
     background: transparent;
     font-family: SourceSansPro-Bold;
-    font-size: 16px;
+    font-size: 20px;
     margin: 1.5rem 1rem;
     background-color: white;
     box-shadow: 5px 5px 25px 10px rgba(0,0,0,0.10), -5px -5px 25px 10px rgba(0,0,0,0.10);
     
 
 }
-
 
 `
 
@@ -148,7 +147,7 @@ export default function Login(props) {
             .get("/upvote/")
             .then(res => {
                 console.log("this is my voting data login.js", res)
-                dispatch({ type: UP_VOTE, payload: res.data.sort((a, b) => b.count - a.count) }) // === []
+                dispatch({ type: UP_VOTE, payload: res.data.sort((a, b) => b.count - a.count) })
             })
             .catch(err => {
                 console.log(err, "error from upvote get inside of login.js")
@@ -162,7 +161,6 @@ export default function Login(props) {
     }
     const submitForm1 = (e) => {
         e.preventDefault();
-        localStorage.setItem("token", "be here please")
         axiosWithAuth()
             .post('/login', loginData)
             .then(res => {
@@ -176,7 +174,6 @@ export default function Login(props) {
 
     const submitForm2 = async (e) => {
         e.preventDefault();
-
         let isValid = await schema.isValid(
             signupData
         )

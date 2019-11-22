@@ -13,6 +13,7 @@ position: fixed;
 top: 0px;
 margin: .01rem;
 width: 100vw;
+z-index: 5;
 min-height: 3rem;
 display: flex;
 align-items: center;
