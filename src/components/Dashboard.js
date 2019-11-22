@@ -17,8 +17,10 @@ const StyledDiv = styled.div`
     overflow:hidden;
     .left{
         width: 15%;
+        min-width: 145px;
+        max-width: 200px;
         height: 100%;
-        background-color: #339dce;
+        background:linear-gradient(90deg,rgba(61,96,152,1) 0%,rgba(0,212,255,1) 100%);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -28,8 +30,11 @@ const StyledDiv = styled.div`
         
     }
     .right{
-        width:65%;
+        width:85%;
         height:100%;
+        display: flex;
+    flex-direction: column;
+    align-items: center;
     }
 
 `;
