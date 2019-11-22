@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import styled from "styled-components";
 import axios from "axios";
 import { CoMakeContext } from "../context/CoMakeContext";
-import { ADD_POST, TOGGLE_FORM, RESET_ISSUE_TO_EDIT, UNSELECT_ITEM_TO_DELETE, DELETE_POST } from "../reducers"
+import { ADD_POST, TOGGLE_FORM, RESET_ISSUE_TO_EDIT, UNSELECT_ITEM_TO_DELETE, DELETE_POST, SET_PROFILE_ISSUES, UP_VOTE } from "../reducers"
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 const ModalDiv = styled.div`
@@ -20,7 +20,6 @@ const ModalDiv = styled.div`
     main{
         width: 600px;
         height:600px;
-        
         border-radius:7px;
         background: snow;
         padding:2%;
@@ -132,8 +131,8 @@ const ModalDivDelete = styled.div`
     main{
         width: 300px;
         height:300px;
-        border: 2px solid #000;
-        border-radius:10px;
+        
+        border-radius:7px;
         background: snow;
         padding:2%;
         display:flex;
@@ -283,9 +282,7 @@ export default function Modal(props) {
                     <button onClick={handleDelete}>Delete Post</button>
                     <button onClick={handleQuit}>Cancel</button>
                 </div>
-                <span onClick={handleQuit}>
-                    &#9421;
-                </span>
+
             </main>
         </ModalDivDelete>
         )
