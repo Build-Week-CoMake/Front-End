@@ -25,22 +25,22 @@ const StyledEditButton = styled.button`
     background-color:#DCDCDC;
     color: black;
 `;
-
-const StyledDeleteButton = styled.button`
-    background-color:white;
-    color: black;
-    font-size: .4 rem;
-    width: 100%;
-    margin: 6%;
-    border-color: red;
-    border-radius: 3rem;
-    background-color: none;
-    color: black;
-    padding: .5rem 1rem;
-    font-size: .4 rem;
-    font-family: 'Alata', sans-serif;
-}
-`;
+//======DO NOT USE==========
+// const StyledDeleteButton = styled.button`
+//     background-color:white;
+//     color: black;
+//     font-size: .4 rem;
+//     width: 100%;
+//     margin: 6%;
+//     border-color: red;
+//     border-radius: 3rem;
+//     background-color: none;
+//     color: black;
+//     padding: .5rem 1rem;
+//     font-size: .4 rem;
+//     font-family: 'Alata', sans-serif;
+// }
+// `;=======================git 
 
 const Bar1 = styled.div
     `  width: 35px;
