@@ -148,6 +148,20 @@ const ModalDivDelete = styled.div`
             overflow:auto;
         }
     }
+    button{
+        height: 3rem;
+        width: 14rem;
+        border: none;
+        border-radius: 20px;
+        background: linear-gradient(90deg, rgba(61,96,152,1) 0%, rgba(0,212,255,1) 100%);
+
+        color: #fff;
+        font-weight: bolder;
+        margin: 1rem 2rem;
+        cursor: pointer;
+        outline: none;
+
+}
 `;
 
 export default function Modal(props) {
