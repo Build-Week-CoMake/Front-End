@@ -31,23 +31,37 @@ padding-top: 1rem;
 `;
 
 const EditBoxStyle = styled.div`
-width: 80%;
+width: 95%;
 max-height: 25rem;
 
 margin: 1rem;
 border-radius:1rem;
 display: flex;
 flex-direction: column;
-align-items: flex-end;
+align-items: center;
 color:#213159;
 background: #213159;
-div{
-    border-radius:1rem;
-    background-color:white;
-    margin: .5rem;
+justify-content:space-around;
+h1{
+    background: linear-gradient(90deg, #91fbbf 35%, #8be2db 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    width:95%;
     text-align:center;
-    padding:1rem;
-    width:40%;
+}
+.user-info{
+justify-content:center;
+align-items:center;
+text-align:center;
+margin-bottom: 3%;
+    div{
+        border-radius:1rem;
+        background-color:white;
+        padding:5% 20%;
+        margin: 3% 0%;
+        text-align:center;
+        width:100%;
+    }
 }
 `;
 
@@ -64,9 +78,12 @@ export default function Profile() {
     return (
         <ProfilePage>
             <EditBoxStyle>
-                <div>Username: {state.userProfile.username}</div>
-                <div>Default Location: {state.userProfile.location}</div>
-                <div>Password: {password()}</div>
+                <h1>Welcome, {state.userProfile.username}.</h1>
+                <div className="user-info">
+                    <div>Username: {state.userProfile.username}</div>
+                    <div>Default Location: {state.userProfile.location}</div>
+                    <div>Password: {password()}</div>
+                </div>
             </EditBoxStyle>
             <BoxStyle>
                 <div >All Created Posts</div>
