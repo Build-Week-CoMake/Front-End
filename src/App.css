@@ -1,0 +1,410 @@
+@import url('https://fonts.googleapis.com/css?family=Alata&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Yellowtail&display=swap');
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+
+
+.test{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+
+/* .login-box {
+  backface-visibility: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1px;
+  box-shadow:
+    0 0 20px 0 rgba(0, 0, 0, 0.4),
+    0 0 0 2000px rgba(#0c0d1f, 0.3);
+  transform:
+    translate3d(-50%, -50%, 0)
+    scale(1, 1);
+  width: 90%;
+  max-width: 1000px;
+
+
+} */
+
+
+.login-box{
+    
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin: 2rem;
+    height: 80vh;
+
+    box-shadow: 5px 5px 30px 10px rgba(0,0,0,0.10), -5px 0px 30px 10px rgba(0,0,0,0.10);
+}
+
+.formPic{
+  background-image: url(./img/handise.jpg);
+  width: 50%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+
+.signUpformPic{
+  background-image: url(./img/spotLight.jpg);
+  width: 50%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+
+.Form{
+
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+form{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .issuesBox{
+  border: red 1px dashed; 
+  margin: 1rem;
+  display: flex;
+} */
+
+
+
+/* .voteButton{
+  width: 10%;
+  margin: 1rem;
+} */
+
+.voted-color{
+  background-color: #39b128 !important;
+}
+.hideButton{
+  display: none !important;
+}
+
+
+.hideForm{
+  display:none !important;
+}
+.displayForm{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.expandDescription{
+  max-height:150px !important;
+  overflow: auto !important;
+  background: none !important;
+}
+
+
+
+
+
+.menuButton{
+  border: green 1px solid; 
+  margin: .1rem;
+  }
+  .showMenu{
+    display: flex !important;
+  }
+
+  .showSearchBar{
+    display: flex !important;
+    animation: appear .5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    opacity: 1 !important;
+  }
+
+  @keyframes appear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+  .navLinkStyle{
+    text-decoration: none;
+    color: #FFF;
+    text-decoration: none;
+    font: .6rem Raleway;
+    margin: 0px 10px;
+    padding: 10px 10px;
+    position: relative;
+    z-index: 0;
+    cursor: pointer;
+  }
+
+
+/* Like Button  */
+
+  .button-like {
+    border: 2px solid #8a8a8a;
+    background-color: transparent;
+    text-decoration: none;
+    padding: .6rem;
+    position: relative;
+    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
+    border-radius: 3rem;
+    color: #8a8a8a;
+    transition: all ease 0.4s;
+    margin: .5rem 0;
+    font-family: 'Alata', sans-serif;
+
+  }
+  
+  .button-like span {
+    margin-left: 0.5rem;
+  }
+  
+  .button-like .fa,
+  .button-like span {
+    transition: all ease 0.4s;
+  }
+  
+  .button-like:focus {
+    background-color: transparent;
+  }
+  
+  .button-like:focus .fa,
+  .button-like:focus span {
+    color: #8a8a8a;
+  }
+  
+  .button-like:hover {
+    border-color: #cc4b37;
+    background-color: transparent;
+  }
+  
+  .button-like:hover .fa,
+  .button-like:hover span {
+    color: #cc4b37;
+  }
+  
+  .liked {
+    background-color: #cc4b37;
+    border-color: #cc4b37;
+    color: rgb(255, 255, 255);
+  }
+  
+  .liked .fa,
+  .liked span {
+    color: #fefefe;
+  }
+  
+  .liked:focus {
+    background-color: #cc4b37;
+  }
+  
+  .liked:focus .fa,
+  .liked:focus span {
+    color: #fefefe;
+  }
+  
+  .liked:hover {
+    background-color: #cc4b37;
+    border-color: #cc4b37;
+  }
+  
+  .liked:hover .fa,
+  .liked:hover span {
+    color: #fefefe;
+  }
+  
+
+/* Edit Button  */
+
+  .button-Edit {
+    border: 2px solid #8a8a8a;
+    background-color: transparent;
+    text-decoration: none;
+    padding: .6rem 1.4rem;
+    position: relative;
+    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
+    border-radius: 3rem;
+    color: #8a8a8a;
+    transition: all ease 0.4s;
+    margin: .5rem 0;
+  }
+  
+  .button-Edit span {
+    margin-left: 0.5rem;
+  }
+  
+  .button-Edit .fa,
+  .button-like span {
+    transition: all ease 0.4s;
+  }
+  
+  .button-Edit:focus {
+    background-color: transparent;
+  }
+  
+  .button-Edit:focus .fa,
+  .button-like:focus span {
+    color: #8a8a8a;
+  }
+  
+  .button-Edit:hover {
+    border-color: #cc4b37;
+    background-color: transparent;
+  }
+  
+  .button-Edit:hover .fa,
+  .button-like:hover span {
+    color: #cc4b37;
+  }
+  
+  .Edit {
+    background-color: #cc4b37;
+    border-color: #cc4b37;
+    color: rgb(255, 255, 255);
+  }
+
+
+
+  /* Delete Button  */
+
+  .button-Delete {
+    border: 2px solid #8a8a8a;
+    background-color: transparent;
+    text-decoration: none;
+    padding: .6rem 1rem;
+    position: relative;
+    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
+    border-radius: 3rem;
+    color: #8a8a8a;
+    transition: all ease 0.4s;
+    margin: .5rem 0;
+  }
+  
+  .button-Delete span {
+    margin-left: 0.5rem;
+  }
+  
+  .button-Delete .fa,
+  .button-like span {
+    transition: all ease 0.4s;
+  }
+  
+  .button-Delete:focus {
+    background-color: transparent;
+  }
+  
+  .button-Delete:focus .fa,
+  .button-like:focus span {
+    color: #8a8a8a;
+  }
+  
+  .button-Delete:hover {
+    border-color: #cc4b37;
+    background-color: transparent;
+  }
+  
+  .button-Delete:hover .fa,
+  .button-like:hover span {
+    color: #cc4b37;
+  }
+  
+  .Delete {
+    background-color: #cc4b37;
+    border-color: #cc4b37;
+    color: rgb(255, 255, 255);
+  }
+
+
+
+    /* StyledSideNavButton Button  */
+
+    .styledSideNavButton {
+      border: 2px solid #FFF;;
+      background-color: transparent;
+      text-decoration: none;
+      padding: .6rem 1rem;
+      position: relative;
+      vertical-align: middle;
+      text-align: center;
+      display: inline-block;
+      border-radius: 3rem;
+      color: #FFF;
+      transition: all ease 0.4s;
+      margin: .5rem 0;
+    }
+    
+    .styledSideNavButton span {
+      margin-left: 0.5rem;
+    }
+    
+    .styledSideNavButton .fa,
+    .button-like span {
+      transition: all ease 0.4s;
+    }
+    
+    .styledSideNavButton:focus {
+      background-color: transparent;
+    }
+    
+    .styledSideNavButton .fa,
+    .button-like:focus span {
+      color: #8a8a8a;
+    }
+    
+    .styledSideNavButton:hover {
+      border-color: linear-gradient(90deg, #9af0de 35%, #60d6ab 100%);
+      background: linear-gradient(90deg, #9af0de 35%, #60d6ab 100%);
+    }
+    
+    .styledSideNavButton:hover .fa,
+    .styledSideNavButton:hover span {
+      color: linear-gradient(90deg, #9af0de 35%, #60d6ab 100%);
+    }
+    
+  
